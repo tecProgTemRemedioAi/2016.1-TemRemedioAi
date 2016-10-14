@@ -1,3 +1,8 @@
+/**
+ * File: ViewHolderUBS.java
+ * Purpose: this file set and treats things referents to ubs information on cards of view.
+ */
+
 package com.gppmds.tra.temremdioa.controller.adapter.holder;
 
 import android.animation.Animator;
@@ -38,6 +43,10 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Class: ViewHolderUBS
+ * Purpose: this class set all things about ubs cards;
+ */
 public class ViewHolderUBS extends RecyclerView.ViewHolder{
     private TextView textViewUbsName;
     private TextView textViewUbsNeighborhood;
@@ -48,16 +57,21 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     private TextView textViewWithoutNotification;
     private RelativeLayout headerLayout;
     private RelativeLayout expandLayout;
-    private ValueAnimator mAnimator;
+    private ValueAnimator cardAnimation;
     private Button buttonSelectMedicine;
     private Button buttonViewUbsDescription;
     public Button buttonUbsInform;
     public String medicineSelectedName;
-    public String medicineSelectedDos;
+    public String medicineSelectedDosage;
     public ImageView imageViewArrow;
     private PieChart pieChart;
     public Boolean haveNotification;
 
+    /**
+     * Method: ViewHolderUBS
+     * Purpose: this method set all things that will be showed in a card of ubs.
+     * @param card
+     */
     public ViewHolderUBS(CardView card) {
         super(card);
         this.textViewUbsName = (TextView) card.findViewById(R.id.textViewUbsName);
@@ -91,7 +105,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                                                 View.MeasureSpec.UNSPECIFIED);
                         expandLayout.measure(widthSpec, heightSpec);
 
-                        mAnimator = slideAnimator(0, expandLayout.getMeasuredHeight());
+                        cardAnimation = slideAnimator(0, expandLayout.getMeasuredHeight());
                         return true;
                     }
                 });
@@ -156,8 +170,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 Intent intent = new Intent(v.getContext(), SelectMedicineActivity.class);
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
                                     .getAdapterPosition());
-                intent.putExtra("nomeUBS", selectItem.getUbsName());
-                intent.putExtra("nivelAtencao", selectItem.getUbsAttentionLevel());
+                intent.putExtra("UbsName", selectItem.getUbsName());
+                intent.putExtra("UbsAttentionLevel", selectItem.getUbsAttentionLevel());
                 v.getContext().startActivity(intent);
             }
         });
@@ -170,11 +184,11 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                                     .getAdapterPosition());
                 intent.putExtra("latitude", selectItem.getUbsLatitude());
                 intent.putExtra("longitude", selectItem.getUbsLongitude());
-                intent.putExtra("nomeUBS", selectItem.getUbsName());
-                intent.putExtra("descEnderecoUBS", selectItem.getUbsAddress());
-                intent.putExtra("descBairroUBS", selectItem.getUbsNeighborhood());
-                intent.putExtra("descCidadeUBS", selectItem.getUbsCity());
-                intent.putExtra("telefoneUBS", selectItem.getUbsPhone());
+                intent.putExtra("UbsName", selectItem.getUbsName());
+                intent.putExtra("UbsAddress", selectItem.getUbsAddress());
+                intent.putExtra("UbsNeighborhood", selectItem.getUbsNeighborhood());
+                intent.putExtra("UbsCity", selectItem.getUbsCity());
+                intent.putExtra("UbsPhone", selectItem.getUbsPhone());
                 v.getContext().startActivity(intent);
             }
         });
@@ -184,22 +198,31 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Inform.class);
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
-                intent.putExtra("UBSName", selectItem.getUbsName());
-                intent.putExtra("MedicineName", medicineSelectedName);
-                intent.putExtra("MedicineDos", medicineSelectedDos);
+                intent.putExtra("UbsName", selectItem.getUbsName());
+                intent.putExtra("medicineName", medicineSelectedName);
+                intent.putExtra("medicineDosage", medicineSelectedDosage);
 
                 view.getContext().startActivity(intent);
             }
         });
     }
 
+    /**
+     * Method: generateTextNotification
+     * Purpose: this method check the notification about medicine availabity and set the information
+     *          about which ubs the medicine is available.
+     * @param notification
+     * @return String
+     */
     private String generateTextNotification(Notification notification) {
         String textOfNotification = "";
+
         if (notification.getAvailable()) {
             textOfNotification = "Disponível em ";
         } else {
             textOfNotification = "Indisponível em ";
         }
+
         Calendar dayCalendar = Calendar.getInstance(new Locale("pt", "BR"));
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy");
 
@@ -209,17 +232,25 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         return textOfNotification;
     }
 
+    /**
+     * Method: getNotifications
+     * Purpose: this method get the notifications made by users about medicines in ubs.
+     * @param ubs
+     * @return listNotification
+     */
     private List<Notification> getNotifications(UBS ubs) {
         List<Notification> listNotification = null;
 
         ParseQuery<Notification> queryNotification = Notification.getQuery();
         queryNotification.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
-        if (!medicineSelectedDos.isEmpty()) {
-            queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDos);
+
+        if (!medicineSelectedDosage.isEmpty()) {
+            queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
         }
         if (!medicineSelectedName.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
         }
+
         queryNotification.orderByDescending(Notification.getTitleDateInform());
         queryNotification.setLimit(3);
 
@@ -232,6 +263,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         return listNotification;
     }
 
+    /**
+     * Method: setInformationOfChartWithoutNotification()
+     * Purpose: this method get the notifications about ubs that doenst have medicines.
+     */
     private void setInformationOfChartWithoutNotification() {
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
@@ -267,6 +302,11 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         pieChart.setData(pieData);
     }
 
+    /**
+     * Method: setInformationOfChart()
+     * Purpose: this method set ubs information of chart.
+     * @param ubs
+     */
     private void setInformationOfChart(UBS ubs) {
         pieChart.setDescription("");
         pieChart.setDrawHoleEnabled(true);
@@ -285,6 +325,12 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         pieChart.setData(getDataPie(ubs));
     }
 
+    /**
+     * Method: getDataPie()
+     * Purpose: this method set ubs information in data pie (update).
+     * @param ubs
+     * @return pieData
+     */
     public PieData getDataPie(UBS ubs) {
         PieData pieData = null;
 
@@ -295,8 +341,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         queryNotificationAvailable.fromLocalDatastore();
         queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
         queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
+
         if (medicineSelectedName != "") {
-            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDos);
+            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
             queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
         } else {
             // Nothing to do
@@ -312,8 +359,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         queryNotificationNotAvailable.fromLocalDatastore();
         queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
         queryNotificationNotAvailable.whereEqualTo(Notification.getTitleAvailable(), false);
+
         if (medicineSelectedName != "") {
-            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDos);
+            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
             queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
         } else {
             // Nothing to do
@@ -345,19 +393,26 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         return pieData;
     }
 
+    /**
+     * Method: expand()
+     * Purpose: this method set card visible.
+     */
     private void expand() {
-        /* set Visible */
         Log.i("LOG", "Expand enter, View.VISIBLE");
         expandLayout.setVisibility(View.VISIBLE);
-        mAnimator.start();
+        cardAnimation.start();
         imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
     }
 
+    /**
+     * Method: collapse()
+     * Purpose: this method set card 'not' visible.
+     */
     private void collapse() {
         int finalHeight = expandLayout.getHeight();
 
-        ValueAnimator mAnimator2 = slideAnimator(finalHeight, 0);
-        mAnimator2.addListener(new Animator.AnimatorListener(){
+        ValueAnimator cardAnimationCollapse = slideAnimator(finalHeight, 0);
+        cardAnimationCollapse.addListener(new Animator.AnimatorListener(){
             @Override
             public void onAnimationEnd(Animator animator) {
                 Log.i("LOG", "collapse onAnimationEnd enter, View.GONE");
@@ -379,10 +434,17 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 // Nothing to do
             }
         });
-        mAnimator2.start();
+        cardAnimationCollapse.start();
         imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
     }
 
+    /**
+     * Method: slideAnimator()
+     * Purpose: this method controls the beginning and end of the layout animation.
+     * @param start
+     * @param end
+     * @return animator
+     */
     private ValueAnimator slideAnimator(int start, int end) {
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
 
@@ -400,31 +462,83 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         return animator;
     }
 
+    /**
+     * Method: getTextViewUbsName()
+     * Purpose: set on view ubs name.
+     * @return textViewUbsName
+     */
     public TextView getTextViewUbsName(){
         return this.textViewUbsName;
     }
+
+    /**
+     * Method: getTextViewUbsNeighborhood()
+     * Purpose: set on view ubs neighborhood.
+     * @return textViewUbsNeighborhood
+     */
     public TextView getTextViewUbsNeighborhood(){
         return this.textViewUbsNeighborhood;
     }
+
+    /**
+     * Method: getTextViewWithoutNotification()
+     * Purpose: set on view.
+     * @return textViewWithoutNotification
+     */
     public TextView getTextViewWithoutNotification(){
         return this.textViewWithoutNotification;
     }
+
+    /**
+     * Method: getTextViewLastInformationTitle()
+     * Purpose: set on view.
+     * @return textViewLastInformationTitle
+     */
     public TextView getTextViewLastInformationTitle() {
         return this.textViewLastInformationTitle;
     }
+
+    /**
+     * Method: getTextViewLastInformation1()
+     * Purpose: set on view.
+     * @return textViewLastInformation1
+     */
     public TextView getTextViewLastInformation1() {
         return this.textViewLastInformation1;
     }
+
+    /**
+     * Method: getTextViewLastInformation2()
+     * Purpose: set on view.
+     * @return textViewLastInformation2
+     */
     public TextView getTextViewLastInformation2() {
         return this.textViewLastInformation2;
     }
+
+    /**
+     * Method: getTextViewLastInformation3()
+     * Purpose: set on view.
+     * @return textViewLastInformation3
+     */
     public TextView getTextViewLastInformation3() {
         return this.textViewLastInformation3;
     }
 
+    /**
+     * Method: getButtonSelectMedicine()
+     * Purpose: set on view medicine button.
+     * @return buttonSelectMedicine
+     */
     public Button getButtonSelectMedicine(){
         return this.buttonSelectMedicine;
     }
+
+    /**
+     * Method: getButtonUbsInform()
+     * Purpose: set on view inform ubs button.
+     * @return buttonUbsInform
+     */
     public Button getButtonUbsInform() {
         return this.buttonUbsInform;
     }
