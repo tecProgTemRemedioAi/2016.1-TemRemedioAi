@@ -1,3 +1,7 @@
+/**
+ * File: CardListAdapterUBS.java
+ * Purpose: this file set which ubs will be showed according to the search made by user.
+ */
 package com.gppmds.tra.temremdioa.controller.adapter;
 
 import android.content.Context;
@@ -23,7 +27,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     private Boolean showButtonMedicines;
     private Boolean showButtonInform;
     private String medicineName;
-    private String medicineDos;
+    private String medicineDosage;
 
     public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
         this.contextOpen = context;
@@ -32,9 +36,14 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         setShowButtonMedicines(true);
         setShowButtonInform(false);
         setMedicineName("");
-        setMedicineDos("");
+        setMedicineDosage("");
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     @Override
     public FilterSearchUBS getFilter() {
         if(filter == null) {
@@ -46,13 +55,24 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         return filter;
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     @Override
     public ViewHolderUBS onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView view = (CardView) inflater.inflate(R.layout.card_list_ubs, parent, false);
+
         return new ViewHolderUBS(view);
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     @Override
     public void onBindViewHolder(ViewHolderUBS holder, int position) {
         UBS rowData = this.dataUBS.get(position);
@@ -71,31 +91,53 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
             holder.medicineSelectedName = "";
         }
 
-        if(!getMedicineDos().isEmpty()){
-            holder.medicineSelectedDos = getMedicineDos();
+        if(!getMedicineDosage().isEmpty()){
+            holder.medicineSelectedDosage = getMedicineDosage();
         } else {
-            holder.medicineSelectedDos = "";
+            holder.medicineSelectedDosage = "";
         }
 
         if(!getShowButtonInform()){
             holder.buttonUbsInform.setVisibility(View.GONE);
+        } else {
+            // Nothing to do
         }
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     @Override
     public int getItemCount() {
 
         return dataUBS.size();
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     public void setShowButtonMedicines(Boolean showButtonMedicines) {
         this.showButtonMedicines = showButtonMedicines;
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     private Boolean getShowButtonMedicines() {
         return this.showButtonMedicines;
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     public void createFilter() {
         filter = new FilterSearchUBS(filterDataUBS, this);
         Boolean test = getShowButtonMedicines();
@@ -105,23 +147,49 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         this.showButtonInform = showButtonInform;
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     public boolean getShowButtonInform(){
         return this.showButtonInform;
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     public void setMedicineName(String medicineName) {
         this.medicineName = medicineName;
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     public String getMedicineName(){
         return this.medicineName;
     }
 
-    public void setMedicineDos(String medicineDos) {
-        this.medicineDos= medicineDos;
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
+    public void setMedicineDosage(String medicineDosage) {
+        this.medicineDosage = medicineDosage;
     }
 
-    public String getMedicineDos(){
-        return this.medicineDos;
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
+    public String getMedicineDosage(){
+        return this.medicineDosage;
     }
+
 }
