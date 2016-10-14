@@ -89,8 +89,11 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.headerLayout = (RelativeLayout) card.findViewById(R.id.header);
         this.pieChart = (PieChart) card.findViewById(R.id.pie_chart_ubs);
 
+        // Here the card is not expanded, it is collapsed.
         this.expandLayout.setVisibility(View.GONE);
 
+        // getViewTreeObserver returns the notifications about global events, in this case
+        // returns information about the card state, if it is expand or collapse.
         this.expandLayout.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
 
@@ -110,6 +113,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     }
                 });
 
+        // Here we check the card visibility and set users notifications about the last time they get
+        // medicine in UBS.
         this.headerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -151,12 +156,14 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     }
 
                     ParseUser getCurrentUser = ParseUser.getCurrentUser();
+
                     if (getCurrentUser != null && getButtonUbsInform().getVisibility() == View.VISIBLE) {
                         getButtonUbsInform().setVisibility(View.VISIBLE);
                     } else {
                         getButtonUbsInform().setVisibility(View.GONE);
                     }
                     expand();
+
                 } else {
                     Log.i("LOG", "Collapse Click");
                     collapse();
@@ -164,6 +171,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             }
         });
 
+        // Here we set the itens that will be showed on ubs card when user click on card.
         this.buttonSelectMedicine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +184,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             }
         });
 
+        // Here we set description about ubs.
         this.buttonViewUbsDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -193,6 +202,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             }
         });
 
+        // Here we set the itens that will be showed when user decide to inform about a medicine in a Ubs.
         this.buttonUbsInform.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
