@@ -1,3 +1,7 @@
+/**
+ * File: UBSFragment.java
+ * Purpose: this file set all ubs in fragment.
+ */
 package com.gppmds.tra.temremdioa.controller.fragment;
 
 import android.os.Bundle;
@@ -38,7 +42,7 @@ public class UBSFragment extends Fragment{
         ubsAdapter = new CardListAdapterUBS(UBSFragment.this.getContext(), getListOfUBS());
         ubsAdapter.setShowButtonInform(false);
         ubsAdapter.setMedicineName("");
-        ubsAdapter.setMedicineDos("");
+        ubsAdapter.setMedicineDosage("");
 
         ubsRecyclerView = (RecyclerView) rootView.findViewById(R.id.ubs_recycler_view);
         ubsRecyclerView.setHasFixedSize(true);
