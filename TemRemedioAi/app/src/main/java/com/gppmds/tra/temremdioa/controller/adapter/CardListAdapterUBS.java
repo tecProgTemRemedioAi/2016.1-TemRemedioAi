@@ -7,6 +7,7 @@ package com.gppmds.tra.temremdioa.controller.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.List;
 public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> implements Filterable{
     public static List<UBS> dataUBS;
     List<UBS> filterDataUBS;
+
     private static Context contextOpen;
     FilterSearchUBS filter;
 
@@ -40,36 +42,39 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     }
 
     /**
-     * Method:
+     * Method: getFilter()
      * Purpose:
-     * @return
+     * @return filter
      */
     @Override
     public FilterSearchUBS getFilter() {
         if(filter == null) {
+            Log.i("LOG", "\n" + "UBS filter is null");
             filter = new FilterSearchUBS(filterDataUBS, this);
         } else {
             // Nothing to do
+            Log.i("LOG", "\n" + "UBS filter is not null");
         }
 
         return filter;
     }
 
     /**
-     * Method:
+     * Method: onCreateViewHolder()
      * Purpose:
-     * @return
+     * @return new ViewHolderUBS
      */
     @Override
     public ViewHolderUBS onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView view = (CardView) inflater.inflate(R.layout.card_list_ubs, parent, false);
+        Log.i("LOG", "\n" + "blabla");
 
         return new ViewHolderUBS(view);
     }
 
     /**
-     * Method:
+     * Method: onBindViewHolder()
      * Purpose:
      * @return
      */
@@ -81,42 +86,50 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
         if (!getShowButtonMedicines()) {
             holder.getButtonSelectMedicine().setVisibility(View.GONE);
+            Log.i("LOG", "\n" + "Medicine button is not visible");
         } else {
             // Nothing to do
+            Log.i("LOG", "\n" + "Medicine button is visible");
         }
 
         if(!getMedicineName().isEmpty()){
             holder.medicineSelectedName = getMedicineName();
+            Log.i("LOG", "\n" + "Medicine selected name is not empty");
         } else {
             holder.medicineSelectedName = "";
+            Log.i("LOG", "\n" + "Medicine selected name is empty");
         }
 
         if(!getMedicineDosage().isEmpty()){
             holder.medicineSelectedDosage = getMedicineDosage();
+            Log.i("LOG", "\n" + "Medicine selected dosage is not empty");
         } else {
             holder.medicineSelectedDosage = "";
+            Log.i("LOG", "\n" + "Medicine selected dosage is empty");
         }
 
         if(!getShowButtonInform()){
             holder.buttonUbsInform.setVisibility(View.GONE);
+            Log.i("LOG", "\n" + "UBS inform button is not visible");
         } else {
             // Nothing to do
+            Log.i("LOG", "\n" + "UBS inform button is visible");
         }
     }
 
     /**
-     * Method:
+     * Method: getItemCount()
      * Purpose:
-     * @return
+     * @return dataUBS.size()
      */
     @Override
     public int getItemCount() {
-
+        Log.i("LOG", "\n" + "Counting how many UBS are in database");
         return dataUBS.size();
     }
 
     /**
-     * Method:
+     * Method: setShowButtonMedicines()
      * Purpose:
      * @return
      */
@@ -125,16 +138,16 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     }
 
     /**
-     * Method:
+     * Method: getShowButtonMedicines()
      * Purpose:
-     * @return
+     * @return showButtonMedicines
      */
     private Boolean getShowButtonMedicines() {
         return this.showButtonMedicines;
     }
 
     /**
-     * Method:
+     * Method: createFilter()
      * Purpose:
      * @return
      */
@@ -143,21 +156,26 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         Boolean test = getShowButtonMedicines();
     }
 
+    /**
+     * Method: setShowButtonInform()
+     * Purpose:
+     * @return
+     */
     public void setShowButtonInform(boolean showButtonInform) {
         this.showButtonInform = showButtonInform;
     }
 
     /**
-     * Method:
+     * Method: getShowButtonInform()
      * Purpose:
-     * @return
+     * @return showButtonInform
      */
     public boolean getShowButtonInform(){
         return this.showButtonInform;
     }
 
     /**
-     * Method:
+     * Method: setMedicineName()
      * Purpose:
      * @return
      */
@@ -166,16 +184,16 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     }
 
     /**
-     * Method:
+     * Method: getMedicineName()
      * Purpose:
-     * @return
+     * @return medicineName
      */
     public String getMedicineName(){
         return this.medicineName;
     }
 
     /**
-     * Method:
+     * Method: setMedicineDosage()
      * Purpose:
      * @return
      */
@@ -184,9 +202,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     }
 
     /**
-     * Method:
+     * Method: getMedicineDosage()
      * Purpose:
-     * @return
+     * @return medicineDosage
      */
     public String getMedicineDosage(){
         return this.medicineDosage;
