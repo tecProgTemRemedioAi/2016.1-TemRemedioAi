@@ -26,10 +26,10 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     private static Context contextOpen;
     FilterSearchUBS filter;
 
-    private Boolean showButtonMedicines;
-    private Boolean showButtonInform;
-    private String medicineName;
-    private String medicineDosage;
+    private Boolean showButtonMedicines;    // This button is for the user to select the desired medicine.
+    private Boolean showButtonInform;       // This button allows users to inform medicine in a ubs or not.
+    private String medicineName;            // This variable refers to the medicine name.
+    private String medicineDosage;          // This variable refers to the medicine dosage.
 
     public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
         this.contextOpen = context;
