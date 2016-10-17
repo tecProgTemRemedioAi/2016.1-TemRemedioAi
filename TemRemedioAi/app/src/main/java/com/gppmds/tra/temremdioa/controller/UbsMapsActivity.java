@@ -27,12 +27,12 @@ import com.tra.gppmds.temremdioa.R;
 
 public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    private Double latitude;
-    private Double longitude;
-    private String ubsName;
+    private GoogleMap mMap;     // This variable refers to the ubs map.
+    private Double latitude;    // This variable refers to the ubs latitude.
+    private Double longitude;   // This variable refers to the ubs longitude.
+    private String ubsName;     // This variable refers to the ubs name.
 
-    private static final int LATLNGZOOM = 13;
+    private static final int LATLNGZOOM = 13;   // This variable refers to the map zoom that is showed on the screen.
 
     /**
      * Method: onCreate()
