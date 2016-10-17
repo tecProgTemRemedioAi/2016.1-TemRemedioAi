@@ -22,8 +22,8 @@ import java.util.List;
 
 public class UBSFragment extends Fragment{
 
-    private RecyclerView ubsRecyclerView;
-    private static CardListAdapterUBS ubsAdapter;
+    private RecyclerView ubsRecyclerView;           // This component contains a list of ubs cards.
+    private static CardListAdapterUBS ubsAdapter;   // This class makes the management of ubs cards.
 
     public static UBSFragment newInstance(){
         return new UBSFragment();
@@ -33,6 +33,11 @@ public class UBSFragment extends Fragment{
         return ubsAdapter;
     }
 
+    /**
+     * Method: onCreateView()
+     * Purpose:
+     * @return rootView
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -52,8 +57,12 @@ public class UBSFragment extends Fragment{
         return rootView;
     }
 
+    /**
+     * Method: getListOfUBS()
+     * Purpose: query UBS data from parse
+     * @return ubsList
+     */
     public List<UBS> getListOfUBS(){
-        /* Query UBS data from parse */
         ParseQuery<UBS> queryUBS = UBS.getQuery();
         queryUBS.fromLocalDatastore();
         queryUBS.orderByAscending(UBS.getUbsNameTitle());
