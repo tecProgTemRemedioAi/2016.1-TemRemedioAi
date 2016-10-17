@@ -103,9 +103,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                         expandLayout.setVisibility(View.GONE);
 
                         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0,
-                                                View.MeasureSpec.UNSPECIFIED);
+                                View.MeasureSpec.UNSPECIFIED);
                         final int heightSpec = View.MeasureSpec.makeMeasureSpec(0,
-                                                View.MeasureSpec.UNSPECIFIED);
+                                View.MeasureSpec.UNSPECIFIED);
                         expandLayout.measure(widthSpec, heightSpec);
 
                         cardAnimation = slideAnimator(0, expandLayout.getMeasuredHeight());
@@ -118,9 +118,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.headerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("LOG", "onClickListener of headerLayout clicked");
+                Log.i("LOG", "\n" + "Clicked header");
                 if (expandLayout.getVisibility() == View.GONE) {
-                    Log.i("LOG", "Expand Click");
+                    Log.i("LOG", "\n" + "Card expanded");
 
                     UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
 
@@ -128,44 +128,64 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     notificationList = getNotifications(selectItem);
 
                     haveNotification = false;
+
                     if (notificationList.size() >= 1) {
                         haveNotification = true;
                         getTextViewLastInformation1().setText("1. " + generateTextNotification(notificationList.get(0)));
+                        Log.i("LOG", "\n" + "Latest information was found");
                     } else {
                         getTextViewLastInformation1().setText("");
+                        Log.i("LOG", "\n" + "Latest information does not exist");
                     }
 
                     if (notificationList.size() >= 2) {
                         getTextViewLastInformation2().setText("2. " + generateTextNotification(notificationList.get(1)));
+                        Log.i("LOG", "\n" + "Penultimate information was found");
                     } else {
                         getTextViewLastInformation2().setText("");
+                        Log.i("LOG", "\n" + "Penultimate information does not exist");
                     }
 
                     if (notificationList.size() >= 3) {
                         getTextViewLastInformation3().setText("3. " + generateTextNotification(notificationList.get(2)));
+                        Log.i("LOG", "\n" + "Antepenultimate information was found");
                     } else {
                         getTextViewLastInformation3().setText("");
+                        Log.i("LOG", "\n" + "Antepenultimate information does not exist");
                     }
 
                     if (haveNotification) {
+                        Log.i("LOG", "\n" + "\n" + "\n" + "UBS has notifications");
+
                         setInformationOfChart(selectItem);
+                        Log.i("LOG", "\n" + "\n" + "Informations are setted in pie chart ");
+
                         getTextViewWithoutNotification().setVisibility(View.GONE);
+                        Log.i("LOG", "\n" + "Have notifications");
                     } else {
+                        Log.i("LOG", "\n" + "\n" + "\n" + "UBS does not have notifications");
+
                         getTextViewLastInformationTitle().setText("");
+                        Log.i("LOG", "\n" + "Does not have any notifications");
+
                         setInformationOfChartWithoutNotification();
+                        Log.i("LOG", "\n" + "\n" + "Graphic setted as empty");
                     }
 
                     ParseUser getCurrentUser = ParseUser.getCurrentUser();
 
                     if (getCurrentUser != null && getButtonUbsInform().getVisibility() == View.VISIBLE) {
                         getButtonUbsInform().setVisibility(View.VISIBLE);
+                        Log.i("LOG", "\n" + "\n" + "\n" + "Button to inform ubs is visible");
                     } else {
                         getButtonUbsInform().setVisibility(View.GONE);
+                        Log.i("LOG", "\n" + "\n" + "Button to inform ubs is not visible");
                     }
+
                     expand();
 
                 } else {
-                    Log.i("LOG", "Collapse Click");
+                    Log.i("LOG", "\n" + "Card collapsed");
                     collapse();
                 }
             }
@@ -177,7 +197,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SelectMedicineActivity.class);
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
-                                    .getAdapterPosition());
+                        .getAdapterPosition());
                 intent.putExtra("UbsName", selectItem.getUbsName());
                 intent.putExtra("UbsAttentionLevel", selectItem.getUbsAttentionLevel());
                 v.getContext().startActivity(intent);
@@ -190,7 +210,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), UbsMapsActivity.class);
                 UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
-                                    .getAdapterPosition());
+                        .getAdapterPosition());
                 intent.putExtra("latitude", selectItem.getUbsLatitude());
                 intent.putExtra("longitude", selectItem.getUbsLongitude());
                 intent.putExtra("UbsName", selectItem.getUbsName());
@@ -229,8 +249,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         if (notification.getAvailable()) {
             textOfNotification = "Disponível em ";
+            Log.i("LOG", "\n" + "\n" + "Location information availability is visible");
         } else {
             textOfNotification = "Indisponível em ";
+            Log.i("LOG", "\n" + "\n" + "The unavailability of information is visible");
         }
 
         Calendar dayCalendar = Calendar.getInstance(new Locale("pt", "BR"));
@@ -256,9 +278,18 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         if (!medicineSelectedDosage.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
+            Log.i("LOG", "\n" + "\n" + "Medicine select is not empty");
+        } else {
+            // Nothing to do
+            Log.i("LOG", "\n" + "\n" + "Medicine select is empty");
         }
+
         if (!medicineSelectedName.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
+            Log.i("LOG", "\n" + "\n" + "Medicine select is not empty");
+        } else {
+            // Nothing to do
+            Log.i("LOG", "\n" + "\n" + "Medicine select is empty");
         }
 
         queryNotification.orderByDescending(Notification.getTitleDateInform());
