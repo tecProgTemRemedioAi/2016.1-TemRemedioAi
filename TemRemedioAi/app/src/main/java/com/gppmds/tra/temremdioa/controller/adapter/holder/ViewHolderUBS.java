@@ -48,26 +48,26 @@ import java.util.Locale;
  * Purpose: this class set all things about ubs cards;
  */
 public class ViewHolderUBS extends RecyclerView.ViewHolder{
-    private TextView textViewUbsName;
-    private TextView textViewUbsNeighborhood;
-    private TextView textViewLastInformation1;
-    private TextView textViewLastInformation2;
-    private TextView textViewLastInformation3;
-    private TextView textViewLastInformationTitle;
-    private TextView textViewWithoutNotification;
-    private RelativeLayout headerLayout;
-    private RelativeLayout expandLayout;
-    private ValueAnimator cardAnimation;
-    private Button buttonSelectMedicine;
-    private Button buttonViewUbsDescription;
-    public Button buttonUbsInform;
-    public String medicineSelectedName;
-    public String medicineSelectedDosage;
-    public ImageView imageViewArrow;
-    private PieChart pieChart;
-    public Boolean haveNotification;
+    private TextView textViewUbsName;               // This variable refers to the ubs name, the same existing in the system.
+    private TextView textViewUbsNeighborhood;       // This variable refers to ubs neighborhood.
+    private TextView textViewLastInformation1;      // This variable refers to latest information on availability of the drug, made by a users.
+    private TextView textViewLastInformation2;      // This variable refers to penultimate information on availability of the drug, made by a users.
+    private TextView textViewLastInformation3;      // This variable refers to antepenultimate information on availability of the drug, made by a users.
+    private TextView textViewLastInformationTitle;  // This variable refers to the title of the latest information, made by users.
+    private TextView textViewWithoutNotification;   // This variable refers to the text that appears when there are no notifications made by users.
+    private RelativeLayout headerLayout;            // This layout refers to the standard structure of the card when it is collapsed.
+    private RelativeLayout expandLayout;            // This layout refers to the standard structure of the card when it is expanded.
+    private ValueAnimator cardAnimation;            // This animator refers to the animation that occurs on the card when it is clicked.
+    private Button buttonSelectMedicine;            // This button is for the user to select the desired medicine.
+    private Button buttonViewUbsDescription;        // This button is for the user to keep more information about one ubs.
+    public Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
+    public String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
+    public String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
+    public ImageView imageViewArrow;                // This image refers to where the chart will be set.
+    private PieChart pieChart;                      // This chart is completed by information provided by users.
+    public Boolean haveNotification;                // This variable tells whether or not notification made by users.
 
-    /**
+     /**
      * Method: ViewHolderUBS
      * Purpose: this method set all things that will be showed in a card of ubs.
      * @param card
