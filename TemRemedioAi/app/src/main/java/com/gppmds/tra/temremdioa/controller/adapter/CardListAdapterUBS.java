@@ -20,11 +20,11 @@ import com.tra.gppmds.temremdioa.R;
 import java.util.List;
 
 public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> implements Filterable{
-    public static List<UBS> dataUBS;
-    List<UBS> filterDataUBS;
+    public static List<UBS> dataUBS;        // List of all ubs in database.
+    List<UBS> filterDataUBS;                // List of ubs filtered.
 
-    private static Context contextOpen;
-    FilterSearchUBS filter;
+    private static Context contextOpen;     // This context refers to activity that is open and calling this class.
+    FilterSearchUBS filter;                 // This variable refers to class that make filter search on ubs.
 
     private Boolean showButtonMedicines;    // This button is for the user to select the desired medicine.
     private Boolean showButtonInform;       // This button allows users to inform medicine in a ubs or not.
@@ -68,7 +68,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     public ViewHolderUBS onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView view = (CardView) inflater.inflate(R.layout.card_list_ubs, parent, false);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "Event of view holder ubs creation");
 
         return new ViewHolderUBS(view);
     }
