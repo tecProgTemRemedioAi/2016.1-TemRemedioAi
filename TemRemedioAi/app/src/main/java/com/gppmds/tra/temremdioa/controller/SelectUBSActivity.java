@@ -43,7 +43,7 @@ public class SelectUBSActivity extends AppCompatActivity {
         claUbs.setShowButtonMedicines(false);
         claUbs.setShowButtonInform(true);
         claUbs.setMedicineName(getMedicineName());
-        claUbs.setMedicineDos(getMedicineDosage());
+        claUbs.setMedicineDosage(getMedicineDosage());
 
         try {
             createRecyclerView(claUbs);
