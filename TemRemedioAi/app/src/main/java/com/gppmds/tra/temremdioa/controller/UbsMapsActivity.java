@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubs_maps);
+        Log.i("LOG", "\n" + "blabla");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
         obtainSupportMapFragment();
@@ -63,6 +65,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     private void obtainSupportMapFragment () {
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Log.i("LOG", "\n" + "blabla");
     };
 
     /**
@@ -73,6 +76,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     private void gettingLatitudeAndLongitude() {
         latitude = getIntent().getDoubleExtra("latitude", 0);
         longitude = getIntent().getDoubleExtra("longitude", 0);
+        Log.i("LOG", "\n" + "blabla");
     }
 
     /**
@@ -97,6 +101,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         ubsName = getIntent().getStringExtra("nomeUBS");
         TextView editName = (TextView) findViewById(R.id.textViewUbsName);
         editName.setText(ubsName);
+        Log.i("LOG", "\n" + "blabla");
     }
 
     /**
@@ -108,6 +113,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsAddress = getIntent().getStringExtra("descEnderecoUBS");
         TextView editDscAddress = (TextView) findViewById(R.id.textViewUbsAddress);
         editDscAddress.setText(descUbsAddress);
+        Log.i("LOG", "\n" + "blabla");
     }
 
     /**
@@ -119,6 +125,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsNeighborhood = getIntent().getStringExtra("descBairroUBS");
         TextView editDscNeighborhood = (TextView) findViewById(R.id.textViewUbsNeighborhood);
         editDscNeighborhood.setText(descUbsNeighborhood);
+        Log.i("LOG", "\n" + "blabla");
     }
 
     /**
@@ -130,6 +137,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsCity = getIntent().getStringExtra("descCidadeUBS");
         TextView editDscCity = (TextView) findViewById(R.id.textViewCityUbs);
         editDscCity.setText(descUbsCity);
+        Log.i("LOG", "\n" + "blabla");
     }
 
     /**
@@ -141,6 +149,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsPhone = getIntent().getStringExtra("telefoneUBS");
         TextView editDscPhone = (TextView) findViewById(R.id.textViewPhoneUbs);
         editDscPhone.setText(descUbsPhone);
+        Log.i("LOG", "\n" + "blabla");
     }
 
     /**
@@ -157,6 +166,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
                 setUpMapIfNeeded();
             }
         });
+        Log.i("LOG", "\n" + "Clicked generate trajetory button");
     }
 
     /**
@@ -170,7 +180,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
             String uri = "http://maps.google.com/maps?saddr="+"&daddr="+latitude+","+longitude;
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
             intent.setClassName("com.google.android.apps.maps",
-                                "com.google.android.maps.MapsActivity");
+                    "com.google.android.maps.MapsActivity");
             startActivity(intent);
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -188,7 +198,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     /**
      * Method: isGoogleMapsInstalled()
      * Purpose:
-     * @return
+     * @return true or false
      */
     public boolean isGoogleMapsInstalled() {
         try {
