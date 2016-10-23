@@ -113,13 +113,13 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         mFacebookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-//                info.setText(
-//                        "User ID: "
-//                                + loginResult.getAccessToken().getUserId()
-//                                + "\n" +
-//                                "Auth Token: "
-//                                + loginResult.getAccessToken().getToken()
-//                );
+                info.setText(
+                        "User ID: "
+                                + loginResult.getAccessToken().getUserId()
+                                + "\n" +
+                                "Auth Token: "
+                                + loginResult.getAccessToken().getToken()
+                );
                 finish();
             }
 

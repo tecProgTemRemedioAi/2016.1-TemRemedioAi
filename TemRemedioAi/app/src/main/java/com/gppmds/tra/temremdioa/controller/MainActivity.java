@@ -13,9 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-//import com.facebook.FacebookSdk;
-//import com.facebook.login.LoginManager;
-//import com.facebook.login.LoginResult;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.gppmds.tra.temremdioa.controller.adapter.TabsAdapter;
@@ -24,7 +24,7 @@ import com.gppmds.tra.temremdioa.controller.fragment.UBSFragment;
 import com.parse.ParseUser;
 import com.tra.gppmds.temremdioa.R;
 
-//import static com.facebook.AccessToken.getCurrentAccessToken;
+import static com.facebook.AccessToken.getCurrentAccessToken;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //FacebookSdk.sdkInitialize(getApplicationContext());
+        FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         overridePendingTransition(R.anim.activity_sun_enter, R.anim.activity_dad_exit);
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_login:
-                 ParseUser currentUser = ParseUser.getCurrentUser();
+                ParseUser currentUser = ParseUser.getCurrentUser();
                 if (currentUser != null) {
                     // do stuff with the user
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -109,8 +109,8 @@ public class MainActivity extends AppCompatActivity{
                     AlertDialog dialog = builder.create();
                     dialog.show();
 
-               // } else if (getCurrentAccessToken() != null){
-                 //   LoginManager.getInstance().logOut();
+                } else if (getCurrentAccessToken() != null){
+                    LoginManager.getInstance().logOut();
                 } else {
                     // show the signup or login screen
                     Intent loginActivity = new Intent(MainActivity.this,LogInActivity.class);
