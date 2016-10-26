@@ -11,15 +11,26 @@ public class FilterSearchUBS extends Filter {
     CardListAdapterUBS adapter;
     List<UBS> filterList;
 
+    /**
+     *
+     * @param filterList
+     * @param adapter
+     */
     public FilterSearchUBS(List<UBS> filterList, CardListAdapterUBS adapter) {
         this.adapter = adapter;
         this.filterList = filterList;
     }
 
+    /**
+     *
+     * @param constraint
+     * @return
+     */
     @Override
     public FilterResults performFiltering(CharSequence constraint) {
         FilterResults results = new FilterResults();
 
+        // This method takes the user's search string and checks if there is any Ubs q contains these characters.
         if(constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
             List<UBS> filteredUBSs = new ArrayList<>();
@@ -42,6 +53,11 @@ public class FilterSearchUBS extends Filter {
         return results;
     }
 
+    /**
+     *
+     * @param constraint
+     * @param results
+     */
     @Override
     public void publishResults(CharSequence constraint, FilterResults results) {
         adapter.dataUBS = (List<UBS>) results.values;
