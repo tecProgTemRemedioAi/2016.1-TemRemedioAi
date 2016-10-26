@@ -1,40 +1,61 @@
+/**
+ * File: FilterSearchMedicine.java
+ * Purpose: this file purpose is to filter search of medicines.
+ */
+
 package com.gppmds.tra.temremdioa.controller.adapter;
 
 import android.widget.Filter;
-
 import com.gppmds.tra.temremdioa.model.Medicine;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FilterSearchMedicine extends Filter{
 
-    CardListAdapterMedicine adapter;
-    List<Medicine> filterList;
+    private CardListAdapterMedicine adapter;
+    private List<Medicine> filterList;
 
+    /**
+     * Method: FilterSearchMedicine.
+     * Purpose: this method is used to create a medicine list filtered by name.
+     * @param filterList
+     * @param adapter
+     */
     public FilterSearchMedicine(List<Medicine> filterList, CardListAdapterMedicine adapter) {
+
         this.adapter = adapter;
         this.filterList = filterList;
+
     }
 
+    /**
+     * Method: performFiltering.
+     * Purpose: this method is used to perform filtered results.
+     * @param constraint
+     * @return FilterResutls
+     */
     @Override
     public FilterResults performFiltering(CharSequence constraint) {
-        FilterResults results = new FilterResults();
 
+        FilterResults results = new FilterResults();
+        
+        //This control structure is used to check the parameter exist, to be user after this.
         if(constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
             List<Medicine> filteredMedicines = new ArrayList<>();
 
             for (int i = 0; i < filterList.size(); i++) {
-                if(filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint)) {
+                boolean checkingContains = filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint);
+                //This control structure is used to check if current filterList element contains the constrains.
+                if(checkingContains) {
                     filteredMedicines.add(filterList.get(i));
                 } else {
                     /* Nothing to do */
                 }
             }
-
             results.count = filteredMedicines.size();
             results.values = filteredMedicines;
+
         } else {
             results.count = filterList.size();
             results.values = filterList;
@@ -43,9 +64,17 @@ public class FilterSearchMedicine extends Filter{
         return results;
     }
 
+    /**
+     * Method: publishResults.
+     * Purpose: this method is used to publish results of filtering medicines.
+     * @param constraint
+     * @param results
+     */
     @Override
     public void publishResults(CharSequence constraint, FilterResults results) {
+
         adapter.dataMedicine = (List<Medicine>) results.values;
         adapter.notifyDataSetChanged();
+
     }
 }
