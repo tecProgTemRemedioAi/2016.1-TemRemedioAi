@@ -93,19 +93,13 @@ public class SignUpActivity extends AppCompatActivity {
         mGenre.setError(null);
         mUsernameView.setError(null);
 
-        // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
-        String passwordConfirmation = mPasswordViewConfirmation.getText().toString();
-        String name = mNameView.getText().toString();
-        String username = mUsernameView.getText().toString();
-        int age = 0;
-        String genre = null;
-
         boolean cancel = false;
         View focusView = null;
 
+        // Store values at the time of the login attempt.
         /*Password*/
+        String password = mPasswordView.getText().toString();
+        String passwordConfirmation = mPasswordViewConfirmation.getText().toString();
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -123,6 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         /*Email*/
+        String email = mEmailView.getText().toString();
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -134,6 +129,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         /*Name*/
+        String name = mNameView.getText().toString();
         if (TextUtils.isEmpty(name)) {
             mNameView.setError(getString(R.string.error_field_required));
             focusView = mNameView;
@@ -145,6 +141,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         /*Age*/
+        int age = 0;
         if (TextUtils.isEmpty(mAgeView.getText().toString())) {
             mAgeView.setError(getString(R.string.error_field_required));
             focusView = mAgeView;
@@ -157,6 +154,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         /*Genre*/
+        String genre = null;
         if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
             mGenre.setError(getString(R.string.error_invalid_genre));
             focusView = mGenre;
@@ -166,6 +164,7 @@ public class SignUpActivity extends AppCompatActivity {
         else if (mGenreMaleView.isChecked()) genre = "Masculino";
 
         /*Username*/
+        String username = mUsernameView.getText().toString();
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
@@ -173,11 +172,9 @@ public class SignUpActivity extends AppCompatActivity {
         }
 
         if (cancel) {
-
             focusView.requestFocus();
 
         } else {
-
             user.setEmail(email);
             user.setPassword(password);
             user.setUsername(username);
