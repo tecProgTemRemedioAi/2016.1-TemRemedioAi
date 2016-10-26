@@ -3,6 +3,7 @@ package com.gppmds.tra.temremdioa.controller.adapter;
 import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,8 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     public ViewHolderMedicine onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView view = (CardView) inflater.inflate(R.layout.card_list_medicine, parent, false);
+        Log.i("LOG", "\n" + "CardView was inflated on onCreateViewHolder, line 48 on CardListAdapterMedicine");
+
         return new ViewHolderMedicine(view);
     }
 
@@ -71,12 +74,15 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
         if (!getUbsName().equalsIgnoreCase("")) {
             holder.ubsSelectedName = getUbsName();
+            Log.i("LOG", "\n" + "Set the Ubs name on holder if exists, on onBindViewHolder, line  77 on CardListAdapterMedicine");
         } else {
             holder.ubsSelectedName = "";
+            Log.i("LOG", "\n" + "Set the Ubs name on holder if its empty, on onBindViewHolder, line 80 on CardListAdapterMedicine");
         }
 
         if (!getShowButtonInform()) {
             holder.buttonMedicineInform.setVisibility(View.GONE);
+            Log.i("LOG", "\n" + "Set the off visilibity of Button Medicine Inform ,on onBindViewHolder, line 85 on CardListAdapterMedicine");
         }
     }
 
@@ -89,6 +95,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     public FilterSearchMedicine getFilter() {
         if(filter == null) {
             filter = new FilterSearchMedicine(filterDataMedicine, this );
+            Log.i("LOG", "\n" + "Set a new filter because doens't exist a filter,on FilterSearchMedicine , line 98 on CardListAdapterMedicine");
         } else {
             /* Nothing to do */
         }
@@ -166,6 +173,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
      */
     public void createFilter() {
         filter = new FilterSearchMedicine(filterDataMedicine, this);
+        Log.i("LOG", "\n" + "Create a new filter, on createFilter, line 176 on CardListAdapterMedicine");
         Boolean test = getShowButtonUBSs();
     }
 }
