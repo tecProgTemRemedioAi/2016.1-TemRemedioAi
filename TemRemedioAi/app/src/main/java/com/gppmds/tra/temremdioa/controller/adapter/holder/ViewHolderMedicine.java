@@ -118,7 +118,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 Log.i("LOG", "\n" + "Clicked header");
 
-                //
+                // This control structure refers to visibility of card when it expanded.
                 if (expandLayout.getVisibility() == View.GONE) {
                     Log.i("LOG", "\n" + "Card expanded");
                     Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
@@ -128,7 +128,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
                     haveNotification = false;
 
-                    //
+                    // This control structure refers to one or more notifications sent by users.
                     if (notificationList.size() >= 1) {
                         haveNotification = true;
                         getTextViewLatestInformation().setText("1. " + generateTextNotification(notificationList.get(0)));
@@ -138,7 +138,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                         Log.i("LOG", "\n" + "Latest information does not exist");
                     }
 
-                    //
+                    // This control structure refers to two or more notifications sent by users.
                     if (notificationList.size() >= 2) {
                         getTextViewPenultimateInformation().setText("2. " + generateTextNotification(notificationList.get(1)));
                         Log.i("LOG", "\n" + "Penultimate information was found");
@@ -147,7 +147,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                         Log.i("LOG", "\n" + "Penultimate information does not exist");
                     }
 
-                    //
+                    // This control structure refers to three or more notifications sent by users.
                     if (notificationList.size() >= 3) {
                         getTextViewAntepenultimateInformation().setText("3. " + generateTextNotification(notificationList.get(2)));
                         Log.i("LOG", "\n" + "Antepenultimate information was found");
@@ -156,7 +156,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                         Log.i("LOG", "\n" + "Antepenultimate information does not exist");
                     }
 
-                    //
+                    // This control structure refers to existêmcia or not notified and the card of the population with this information.
                     if (haveNotification) {
                         Log.i("LOG", "\n" + "\n" + "\n" + "Medicine has notifications");
 
@@ -177,7 +177,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
                     ParseUser getCurrentUser = ParseUser.getCurrentUser();
 
-                    //
+                    // This control structure checks whether or not logged in user, according to the response
+                    // shows the button to inform drug availability.
                     if (getCurrentUser != null && getButtonMedicineInform().getVisibility() == View.VISIBLE) {
                         getButtonMedicineInform().setVisibility(View.VISIBLE);
                         Log.i("LOG", "\n" + "\n" + "\n" + "Button to inform medicine is visible");
@@ -210,7 +211,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             }
         });
 
-        // Here we set the itens that will be showed when user decide to inform about a medicine in a Ubs.
+        // Here we set the itens that will be showed when user decide to inform about a medicine in
+        // a Ubs.
         this.buttonMedicineInform.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -237,7 +239,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     private String generateTextNotification(Notification notification) {
         String textOfNotification = "";
 
-        //
+        // This control structure set as information availability and location unavailability of
+        // medicine.
         if (notification.getAvailable()) {
             textOfNotification = "Disponível em ";
             Log.i("LOG", "\n" + "\n" + "Location information availability is visible");
@@ -268,7 +271,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         queryNotification.whereEqualTo(Notification.getTitleMedicineName(), medicine.getMedicineDescription());
         queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(), medicine.getMedicineDosage());
 
-        //
+        // This control structure checks that the research done by the user is not empty.
         if (!ubsSelectedName.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
             Log.i("LOG", "\n" + "\n" + "UBS empty search");
@@ -277,7 +280,6 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         queryNotification.orderByDescending(Notification.getTitleDateInform());
         queryNotification.setLimit(3);
 
-        //
         try {
             listNotification = queryNotification.find();
         } catch (ParseException e) {
@@ -389,7 +391,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicine.getMedicineDosage());
         queryNotificationNotAvailable.whereEqualTo(Notification.getTitleAvailable(), false);
 
-        //
+        // This control structure checks that the research of ubs done by the user is empty  or not.
         if (ubsSelectedName != "") {
             queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
             Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
@@ -398,7 +400,6 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
         }
 
-        //
         try {
             countNotificationNotAvailable = queryNotificationNotAvailable.count();
         } catch (ParseException e) {
