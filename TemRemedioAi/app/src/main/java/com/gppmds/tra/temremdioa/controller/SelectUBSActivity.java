@@ -19,9 +19,9 @@ import java.util.List;
 public class SelectUBSActivity extends AppCompatActivity {
 
     private ArrayList<String> filterAttentionLevel;
-    private String medicineName;
-    private String medicineAttentionLevel;
-    private String medicineDosage;
+    private String medicineName;            // This variable refers the name of medicine which will be shown on the card.
+    private String medicineAttentionLevel;  // This variable refers the attention level of medicine which will be shown on the card.
+    private String medicineDosage;          // This variable refers the dosage of medicine which will be shown on the card.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
