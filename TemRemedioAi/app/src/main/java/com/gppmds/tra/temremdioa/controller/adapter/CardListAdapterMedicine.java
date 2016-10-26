@@ -16,13 +16,13 @@ import com.tra.gppmds.temremdioa.R;
 import java.util.List;
 
 public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedicine> implements Filterable{
-    public static List<Medicine> dataMedicine;
-    List<Medicine> filterDataMedicine;
-    Context contextOpen;
-    FilterSearchMedicine filter;
-    private Boolean showButtonUBSs;
-    private Boolean showButtonInform;
-    private String ubsName;
+    public static List<Medicine> dataMedicine;  // This list refers to stores data to fill in the cards.
+    List<Medicine> filterDataMedicine;          // This list refers to stores filtered data to fill in the cards.
+    Context contextOpen;                        //
+    FilterSearchMedicine filter;                // This filter refers to medicines searched by users.
+    private Boolean showButtonUBSs;             // This variable refers to UBS button visibility.
+    private Boolean showButtonInform;           // This variable refers to Inform button visibility.
+    private String ubsName;                     // This varaible refers to UBS name.
 
     public CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
         this.contextOpen = context;
