@@ -1,3 +1,7 @@
+/**
+ * File: MedicineFragment.java
+ * Purpose: this file set all medicine in fragment.
+ */
 package com.gppmds.tra.temremdioa.controller.fragment;
 
 import android.os.Bundle;
@@ -16,7 +20,6 @@ import com.tra.gppmds.temremdioa.R;
 
 import java.util.List;
 
-
 public class MedicineFragment extends Fragment{
 
     private RecyclerView medicineRecyclerView;
@@ -25,6 +28,11 @@ public class MedicineFragment extends Fragment{
     public MedicineFragment(){
     }
 
+    /**
+     * Method: onCreateView()
+     * Purpose:
+     * @return rootView
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_medicine, container, false);
@@ -41,8 +49,12 @@ public class MedicineFragment extends Fragment{
         return rootView;
     }
 
+    /**
+     * Method: getListOfMedicines()
+     * Purpose: query medicine data from parse
+     * @return medicines
+     */
     public List<Medicine> getListOfMedicines() {
-        /* Query medicine data from parse */
         ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
         queryMedicine.fromLocalDatastore();
         queryMedicine.setLimit(1000);
