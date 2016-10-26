@@ -69,7 +69,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
             params.addRule(RelativeLayout.ALIGN_PARENT_END);
             holder.getButtonMedicineInform().setLayoutParams(params);
         } else {
-            /* Nothing to do */
+            // Nothing to do
         }
 
         if (!getUbsName().equalsIgnoreCase("")) {
@@ -83,6 +83,8 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         if (!getShowButtonInform()) {
             holder.buttonMedicineInform.setVisibility(View.GONE);
             Log.i("LOG", "\n" + "Set the off visilibity of Button Medicine Inform ,on onBindViewHolder, line 85 on CardListAdapterMedicine");
+        } else {
+            // Nothing to do
         }
     }
 
@@ -97,7 +99,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
             filter = new FilterSearchMedicine(filterDataMedicine, this );
             Log.i("LOG", "\n" + "Set a new filter because doens't exist a filter,on FilterSearchMedicine , line 98 on CardListAdapterMedicine");
         } else {
-            /* Nothing to do */
+            // Nothing to do
         }
 
         return filter;
