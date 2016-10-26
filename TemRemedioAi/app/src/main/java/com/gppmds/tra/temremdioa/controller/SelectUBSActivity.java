@@ -35,7 +35,7 @@ public class SelectUBSActivity extends AppCompatActivity {
         try {
             setTextViewSelectedMedicine(getMedicineName());
         } catch (Exception e) {
-
+            // exception was caught
         }
 
 
@@ -48,13 +48,13 @@ public class SelectUBSActivity extends AppCompatActivity {
         try {
             createRecyclerView(claUbs);
         } catch (Exception e) {
-
+            // exception was caught
         }
 
         try {
             setTextViewUbsQuantityFound(claUbs.getItemCount());
         } catch (Exception e) {
-
+            // exception was caught
         }
     }
 
