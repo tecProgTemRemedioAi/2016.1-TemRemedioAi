@@ -19,9 +19,9 @@ import java.util.List;
 public class SelectUBSActivity extends AppCompatActivity {
 
     private ArrayList<String> filterAttentionLevel;
-    private String medicineName;
-    private String medicineAttentionLevel;
-    private String medicineDosage;
+    private String medicineName;            // This variable refers the name of medicine which will be shown on the card.
+    private String medicineAttentionLevel;  // This variable refers the attention level of medicine which will be shown on the card.
+    private String medicineDosage;          // This variable refers the dosage of medicine which will be shown on the card.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class SelectUBSActivity extends AppCompatActivity {
         try {
             setTextViewSelectedMedicine(getMedicineName());
         } catch (Exception e) {
-
+            // exception was caught
         }
 
 
@@ -48,21 +48,32 @@ public class SelectUBSActivity extends AppCompatActivity {
         try {
             createRecyclerView(claUbs);
         } catch (Exception e) {
-
+            // exception was caught
         }
 
         try {
             setTextViewUbsQuantityFound(claUbs.getItemCount());
         } catch (Exception e) {
-
+            // exception was caught
         }
     }
 
+    /**
+     * Method: createLinearLayoutManager.
+     * Purpose: this method create a linear layout.
+     * @return
+     */
     public LinearLayoutManager createLinearLayoutManager() {
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         return llm;
     }
 
+    /**
+     * Method: createRecyclerView.
+     * Purpose: set all informations of cards.
+     * @param cardListAdapterUBS
+     * @throws Exception
+     */
     public void createRecyclerView(CardListAdapterUBS cardListAdapterUBS) throws Exception {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ubs_recycler_view);
         if (recyclerView != null) {
@@ -74,6 +85,12 @@ public class SelectUBSActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method: getListOfUbs.
+     * Purpose: this method get the list with all Ubs from parse.
+     * @param filterAttentionLevel
+     * @return
+     */
     public List<UBS> getListOfUbs(ArrayList<String> filterAttentionLevel) {
         /* Query ubs data from parse */
         ParseQuery<UBS> queryUBS = UBS.getQuery();
@@ -91,6 +108,12 @@ public class SelectUBSActivity extends AppCompatActivity {
         return ubsList;
     }
 
+    /**
+     * Method: setTextViewSelectedMedicine.
+     * Purpose: this method set name of selected medicine.
+     * @param medicineSelected
+     * @throws Exception
+     */
     private void setTextViewSelectedMedicine(String medicineSelected) throws Exception {
         TextView textViewMedicineSelected = (TextView) findViewById(R.id.textViewMedicineSelected);
         if (textViewMedicineSelected != null) {
@@ -100,6 +123,12 @@ public class SelectUBSActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method: setTextViewUbsQuantityFound.
+     * Purpose: this method set in how many Ubs found through research.
+     * @param quantityFound
+     * @throws Exception
+     */
     private void setTextViewUbsQuantityFound(int quantityFound) throws Exception {
         TextView textViewUbsQuantity = (TextView) findViewById(R.id.textViewUbsQuantity);
         if (textViewUbsQuantity != null) {
@@ -109,6 +138,10 @@ public class SelectUBSActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method: setMedicineInfo.
+     * Purpose: this method set all information about medicine.
+     */
     public void setMedicineInfo() {
         setMedicineName(getIntent().getStringExtra("nomeRemedio"));
         setMedicineDosage(getIntent().getStringExtra("medicineDos"));
@@ -116,6 +149,11 @@ public class SelectUBSActivity extends AppCompatActivity {
         setFilterAttentionLevel(getMedicineAttentionLevel());
     }
 
+    /**
+     * Method: setFilterAttentionLevel.
+     * Purpose: set an Array with attention level of medicines.
+     * @param medicineAttentionLevel
+     */
     public void setFilterAttentionLevel(String medicineAttentionLevel) {
         String[] attentionLevelFilters = medicineAttentionLevel.split(",");
 
@@ -131,29 +169,65 @@ public class SelectUBSActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method: getFilterAttentionLevel.
+     * Purpose: this method return an ArrayList filtrated according to level attention.
+     * @return
+     */
     public ArrayList<String> getFilterAttentionLevel() {
         return filterAttentionLevel;
     }
 
+    /**
+     * Method: setMedicineName.
+     * Purpose: set the medicine name.
+     * @param medicineName
+     */
     public void setMedicineName(String medicineName) {
         this.medicineName = medicineName;
     }
 
+    /**
+     * Method: setMedicineDosage.
+     * Purpose: set the dosage of medicine.
+     * @param medicineDosage
+     */
     public void setMedicineDosage(String medicineDosage) {
         this.medicineDosage = medicineDosage;
     }
 
+    /**
+     * Method: setMedicineAttentionLevel.
+     * Purpose: set the attention level of medicine.
+     * @param medicineAttentionLevel
+     */
     public void setMedicineAttentionLevel(String medicineAttentionLevel) {
         this.medicineAttentionLevel = medicineAttentionLevel;
     }
 
+    /**
+     * Method: getMedicineAttentionLevel.
+     * Purpose: get the string that reffers the medicine level attention.
+     * @return
+     */
     public String getMedicineAttentionLevel() {
         return this.medicineAttentionLevel;
     }
 
+    /**
+     * Method: getMedicineName.
+     * Purpose: get the medicine name.
+     * @return
+     */
     public String getMedicineName() {
         return this.medicineName;
     }
+
+    /**
+     * Method: getMedicineDosage.
+     * Purpose: get the value of medicine dosage.
+     * @return
+     */
     public String getMedicineDosage() {
         return this.medicineDosage;
     }
