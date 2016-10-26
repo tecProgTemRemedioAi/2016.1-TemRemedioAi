@@ -1,3 +1,8 @@
+/**
+ * File: TabsAdapter.java
+ * Purpose: this file set all paramters about the existing tabs on app.
+ */
+
 package com.gppmds.tra.temremdioa.controller.adapter;
 
 import android.support.v4.app.Fragment;
