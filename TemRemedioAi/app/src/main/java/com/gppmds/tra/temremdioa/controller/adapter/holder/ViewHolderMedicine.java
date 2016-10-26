@@ -369,7 +369,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicine.getMedicineDosage());
         queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
 
-        //
+        // This control structure refers to check if the name of Ubs was empty or not in the search.
         if (ubsSelectedName != "") {
             queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
             Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
@@ -378,7 +378,6 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
         }
 
-        //
         try {
             countNotificationAvailable = queryNotificationAvailable.count();
         } catch (ParseException e) {
