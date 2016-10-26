@@ -65,6 +65,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
     CallbackManager callbackManager;
 
+    /**
+     * Method: onCreate()
+     * Purpose: create the activity on the screen.
+     * @return dont have return.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,16 +82,31 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         setListener();
     }
 
+    /**
+     * Method: facebookSDKInitialize()
+     * Purpose:
+     * @return dont have return.
+     */
     protected void facebookSDKInitialize() {
         callbackManager = CallbackManager.Factory.create();
     }
 
+    /**
+     * Method: getCurrentUser()
+     * Purpose:
+     * @return currentUser
+     */
     public ParseUser getCurrentUser(){
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         return currentUser;
     }
 
+    /**
+     * Method: onActivityResult()
+     * Purpose:
+     * @return dont have return.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,6 +114,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         Log.e("data",data.toString());
     }
 
+    /**
+     * Method: setValues()
+     * Purpose:
+     * @return dont have return.
+     */
     public void setValues() {
         mUsernameView = (EditText) findViewById(R.id.log_in_username_field);
         mPasswordView = (EditText) findViewById(R.id.log_in_password_field);
@@ -107,6 +132,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
     }
 
+    /**
+     * Method: setListener()
+     * Purpose:
+     * @return dont have return.
+     */
     private void setListener() {
         mFacebookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -161,6 +191,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         });
     }
 
+    /**
+     * Method: attemptLogin()
+     * Purpose:
+     * @return dont have return.
+     */
     // Attempts to login in the system if the entries email and password are valid
     private void attemptLogin(){
         // Store values at the time of the login attempt
@@ -197,6 +232,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Method: validateError()
+     * Purpose:
+     * return ou param
+     */
     public boolean validateError(String word, String phrase, EditText text) {
         String phraseValited = TextUtils.isEmpty(word) ? phrase : null;
         text.setError(phraseValited);
@@ -205,6 +245,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         return TextUtils.isEmpty(word);
     }
 
+    /**
+     * Method: showProgress()
+     * Purpose:
+     * return ou param
+     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) { // Honeycombe api use to show progress bar
 
@@ -239,6 +284,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Method: UserLoginTask()
+     * Purpose:
+     * return ou param
+     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
         private final String mUsername;
         private final String mPassword;
@@ -248,6 +298,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
+        /**
+         * Method: ()
+         * Purpose:
+         * return ou param
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -271,6 +326,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
 
+        /**
+         * Method: onPostExecute()
+         * Purpose:
+         * return ou param
+         */
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
@@ -284,6 +344,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }
 
+        /**
+         * Method: onCancelled()
+         * Purpose:
+         * return ou param
+         */
         @Override
         protected void onCancelled() {
             mAuthTask = null;
@@ -291,6 +356,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Method: onCreateLoader()
+     * Purpose:
+     * return ou param
+     */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -308,6 +378,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
 
+    /**
+     * Method: ProfileQuery()
+     * Purpose:
+     * return ou param
+     */
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
@@ -318,11 +393,22 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
+    /**
+     * Method: onLoadFinished()
+     * Purpose:
+     * @param cursor
+     * @param loader
+     */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         finish();
     }
 
+    /**
+     * Method: onLoaderReset()
+     * Purpose:
+     * @param loader
+     */
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         finish();
