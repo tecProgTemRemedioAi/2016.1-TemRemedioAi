@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity{
     public SearchView searchView;
     private GoogleApiClient client;
 
+    /**
+     * Method:
+     * Purpose:
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,9 +57,15 @@ public class MainActivity extends AppCompatActivity{
         client = createClient();
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @param menu
+     * @return
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        /* Inflate the menu; this adds items to the action bar if it is present */
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
@@ -77,7 +88,11 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
+    /**
+     * Method:
+     * Purpose:
+     * @return
+     */
     public DialogInterface.OnClickListener logout() {
         return new DialogInterface.OnClickListener() {
 
@@ -86,19 +101,24 @@ public class MainActivity extends AppCompatActivity{
 
                 ParseUser.logOut();
                 Toast.makeText(getApplicationContext(), "Deslogado com sucesso!", Toast.LENGTH_SHORT).show();
-
-
             }
         };
     }
 
+    /**
+     * Method:
+     * Purpose:
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_login:
                 ParseUser currentUser = ParseUser.getCurrentUser();
+
+                // This control structure refers everything about login and logout by user.
                 if (currentUser != null) {
-                    // do stuff with the user
                     AlertDialog.Builder builder = new AlertDialog.Builder(this);
                     builder.setTitle("Aviso");
                     builder.setIcon(R.drawable.ic_warning_black_48dp);
@@ -112,7 +132,6 @@ public class MainActivity extends AppCompatActivity{
                 } else if (getCurrentAccessToken() != null){
                     LoginManager.getInstance().logOut();
                 } else {
-                    // show the signup or login screen
                     Intent loginActivity = new Intent(MainActivity.this,LogInActivity.class);
                     startActivity(loginActivity);
                 }
@@ -123,12 +142,17 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(aboutActivity);
                 break;
             default:
-                /* Nothing to do */
+                // Nothing to do.
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Mehtod:
+     * Purpose:
+     * @return
+     */
     public GoogleApiClient createClient(){
         return new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
