@@ -5,8 +5,11 @@
 
 package com.gppmds.tra.temremdioa.controller.adapter;
 
+import android.util.Log;
 import android.widget.Filter;
+
 import com.gppmds.tra.temremdioa.model.Medicine;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +24,7 @@ public class FilterSearchMedicine extends Filter{
      * @param filterList
      * @param adapter
      */
-    public FilterSearchMedicine(List<Medicine> filterList, CardListAdapterMedicine adapter) {
+    public FilterSearchMedicine(final List<Medicine> filterList, CardListAdapterMedicine adapter) {
 
         this.adapter = adapter;
         this.filterList = filterList;
@@ -37,8 +40,10 @@ public class FilterSearchMedicine extends Filter{
     @Override
     public FilterResults performFiltering(CharSequence constraint) {
 
+        Log.i("LOG", "\n" + "Starting to filtering results of search medicine");
+
         FilterResults results = new FilterResults();
-        
+
         //This control structure is used to check the parameter exist, to be user after this.
         if(constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
@@ -61,6 +66,7 @@ public class FilterSearchMedicine extends Filter{
             results.values = filterList;
         }
 
+        Log.d("LOG", "\n" + "Returning from performFiltering method");
         return results;
     }
 
@@ -71,10 +77,15 @@ public class FilterSearchMedicine extends Filter{
      * @param results
      */
     @Override
-    public void publishResults(CharSequence constraint, FilterResults results) {
+    public void publishResults(final CharSequence constraint, final FilterResults results) {
+
+        Log.i("LOG", "\n" + "CardListAdapter attribute filled by medicine lists");
 
         adapter.dataMedicine = (List<Medicine>) results.values;
         adapter.notifyDataSetChanged();
+
+        Log.d("LOG", "\n" + "Returning from publishResults method");
+
 
     }
 }
