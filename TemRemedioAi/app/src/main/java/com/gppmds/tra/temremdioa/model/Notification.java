@@ -1,7 +1,6 @@
 /**
  * Class: Notification
  * Purpose: this class set all things about medicine cards.
- *
  */
 
 package com.gppmds.tra.temremdioa.model;
@@ -15,13 +14,11 @@ import java.util.Date;
 @ParseClassName("Notification")
 public class Notification extends ParseObject {
 
-
     /**
      * Method: getMedicineName()
      * Purpose:
      * @return medicineName
      */
-
     public String getMedicineName(){
         return getString(getTitleMedicineName());
     }
@@ -31,7 +28,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @param medicine_name
      */
-
     public void setMedicineName(String medicine_name){
         put(getTitleMedicineName(), medicine_name);
     }
@@ -41,7 +37,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return medicineDosage
      */
-
     public String getMedicineDosage(){
         return getString(getTitleMedicineDosage());
     }
@@ -60,7 +55,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return UBSName
      */
-
     public String getUBSName(){
         return getString(getTitleUBSName());
     }
@@ -70,7 +64,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @param ubs_name
      */
-
     public void setUBSName(String ubs_name){
         put(getTitleUBSName(), ubs_name);
     }
@@ -98,7 +91,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return avaiable
      */
-
     public Boolean getAvailable(){
         return getBoolean(getTitleAvailable());
     }
@@ -108,7 +100,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @param available
      */
-
     public void setAvailable(Boolean available){
         put(getTitleAvailable(), available);
     }
@@ -118,7 +109,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return userInform
      */
-
     public String getUserInform(){
         return getString(getTitleUser());
     }
@@ -128,7 +118,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @param code
      */
-
     public void setUserInform(String code){
         put(getTitleUser(), code);
     }
@@ -138,7 +127,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return ParseQuery
      */
-
     public static ParseQuery<Notification> getQuery() {
         return ParseQuery.getQuery(Notification.class);
     }
@@ -148,7 +136,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return medicine_name
      */
-
     public static String getTitleMedicineName(){
         return "medicine_name";
     }
@@ -158,7 +145,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return medicine_dosage
      */
-
     public static String getTitleMedicineDosage(){
         return "medicine_dosage";
     }
@@ -168,7 +154,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return ubs_name
      */
-
     public static String getTitleUBSName(){
         return "ubs_name";
     }
@@ -178,7 +163,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return data_inform
      */
-
     public static String getTitleDateInform(){
         return "data_inform";
     }
@@ -188,7 +172,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return medicine_avaiable
      */
-
     public static String getTitleAvailable(){
         return "medicine_available";
     }
@@ -198,7 +181,6 @@ public class Notification extends ParseObject {
      * Purpose:
      * @return user_inform
      */
-
     public static String getTitleUser(){ return "user_inform"; }
 
     @Override
