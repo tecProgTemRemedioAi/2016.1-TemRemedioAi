@@ -36,14 +36,14 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
 
     /**
      * Method: onCreate()
-     * Purpose:
+     * Purpose: create the activity on the screen.
      * @return
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubs_maps);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "onCreate() activity ubs maps. Status: view. Line 46");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used
         obtainSupportMapFragment();
@@ -62,10 +62,10 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      * Purpose:
      * @return
      */
-    private void obtainSupportMapFragment () {
+    private void obtainSupportMapFragment() {
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "obtainSupportMapFragment(). Status: Ubs map visible. Line 68");
     };
 
     /**
@@ -76,7 +76,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
     private void gettingLatitudeAndLongitude() {
         latitude = getIntent().getDoubleExtra("latitude", 0);
         longitude = getIntent().getDoubleExtra("longitude", 0);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "gettingLatitudeAndLongitude(). Status: Ubs latitude and longitude visible. Line 79");
     }
 
     /**
@@ -101,7 +101,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         ubsName = getIntent().getStringExtra("nomeUBS");
         TextView editName = (TextView) findViewById(R.id.textViewUbsName);
         editName.setText(ubsName);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "gettingUbsName(). Status: Ubs name that was selected. Line 104");
     }
 
     /**
@@ -113,7 +113,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsAddress = getIntent().getStringExtra("descEnderecoUBS");
         TextView editDscAddress = (TextView) findViewById(R.id.textViewUbsAddress);
         editDscAddress.setText(descUbsAddress);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "gettingUbsAddress(). Status: Ubs address that was selected. Line 116");
     }
 
     /**
@@ -125,7 +125,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsNeighborhood = getIntent().getStringExtra("descBairroUBS");
         TextView editDscNeighborhood = (TextView) findViewById(R.id.textViewUbsNeighborhood);
         editDscNeighborhood.setText(descUbsNeighborhood);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "gettingUbsNeighborhood(). Status: Ubs neighborhood that was selected. Line 128");
     }
 
     /**
@@ -137,7 +137,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsCity = getIntent().getStringExtra("descCidadeUBS");
         TextView editDscCity = (TextView) findViewById(R.id.textViewCityUbs);
         editDscCity.setText(descUbsCity);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "gettingUbsCity(). Status: Ubs city that was selected. Line 140");
     }
 
     /**
@@ -149,7 +149,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         String descUbsPhone = getIntent().getStringExtra("telefoneUBS");
         TextView editDscPhone = (TextView) findViewById(R.id.textViewPhoneUbs);
         editDscPhone.setText(descUbsPhone);
-        Log.i("LOG", "\n" + "blabla");
+        Log.i("LOG", "\n" + "gettingUbsPhone(). Status: Ubs phone that was selected. Line 152");
     }
 
     /**
@@ -166,7 +166,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
                 setUpMapIfNeeded();
             }
         });
-        Log.i("LOG", "\n" + "Clicked generate trajetory button");
+        Log.i("LOG", "\n" + "generateTrajectory() enter. Status: Clicked generate trajetory button. Line 169");
     }
 
     /**
