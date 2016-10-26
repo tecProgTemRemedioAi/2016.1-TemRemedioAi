@@ -38,13 +38,15 @@ public class FilterSearchMedicine extends Filter{
     public FilterResults performFiltering(CharSequence constraint) {
 
         FilterResults results = new FilterResults();
-
+        
+        //This control structure is used to check the parameter exist, to be user after this.
         if(constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
             List<Medicine> filteredMedicines = new ArrayList<>();
 
             for (int i = 0; i < filterList.size(); i++) {
                 boolean checkingContains = filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint);
+                //This control structure is used to check if current filterList element contains the constrains.
                 if(checkingContains) {
                     filteredMedicines.add(filterList.get(i));
                 } else {
