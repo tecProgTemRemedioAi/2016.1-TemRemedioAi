@@ -38,50 +38,40 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         setValues();
-
         setListener();
-
     }
 
     private void setValues() {
-
         mNameView = (EditText) findViewById(R.id.name);
         mEmailView = (EditText) findViewById(R.id.email);
         mAgeView = (EditText) findViewById(R.id.ageText);
         mPasswordView = (EditText) findViewById(R.id.password);
         mUsernameView = (EditText) findViewById(R.id.username);
         mPasswordViewConfirmation = (EditText) findViewById(R.id.password2);
-
         mGenre = (TextView) findViewById(R.id.textViewGenre);
-
         mGenreFemView = (RadioButton) findViewById(R.id.femButton);
         mGenreMaleView = (RadioButton) findViewById(R.id.mascButton);
 
         mRegisterButton = (Button) findViewById(R.id.register_button);
         cancelButton = (Button) findViewById(R.id.register_cancel);
-
     }
 
     private void setListener() {
-
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptRegister();
             }
         });
-
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
-
     }
 
     private void attemptRegister() {
-
         // Reset errors.
         mNameView.setError(null);
         mEmailView.setError(null);
@@ -100,17 +90,16 @@ public class SignUpActivity extends AppCompatActivity {
         /*Password*/
         String password = mPasswordView.getText().toString();
         String passwordConfirmation = mPasswordViewConfirmation.getText().toString();
+
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
             cancel = true;
-        }
-        else if (password.length() < 6){
+        } else if (password.length() < 6){
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
-        }
-        else if (!password.equals(passwordConfirmation)) {
+        } else if (!password.equals(passwordConfirmation)) {
             mPasswordViewConfirmation.setError(getString(R.string.error_different_password));
             focusView = mPasswordViewConfirmation;
             cancel = true;
@@ -118,6 +107,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         /*Email*/
         String email = mEmailView.getText().toString();
+
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -130,6 +120,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         /*Name*/
         String name = mNameView.getText().toString();
+
         if (TextUtils.isEmpty(name)) {
             mNameView.setError(getString(R.string.error_field_required));
             focusView = mNameView;
@@ -142,6 +133,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         /*Age*/
         int age = 0;
+
         if (TextUtils.isEmpty(mAgeView.getText().toString())) {
             mAgeView.setError(getString(R.string.error_field_required));
             focusView = mAgeView;
@@ -150,11 +142,14 @@ public class SignUpActivity extends AppCompatActivity {
             age = Integer.parseInt(mAgeView.getText().toString());
             if (age < 0 || age > 100) {
                 mAgeView.setError(getString(R.string.error_invalid_age));
+            } else {
+                // Nothing to do.
             }
         }
 
         /*Genre*/
         String genre = null;
+
         if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
             mGenre.setError(getString(R.string.error_invalid_genre));
             focusView = mGenre;
@@ -165,15 +160,18 @@ public class SignUpActivity extends AppCompatActivity {
 
         /*Username*/
         String username = mUsernameView.getText().toString();
+
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
+        } else {
+            // Nothing to do
         }
 
+        // When user press cancel button.
         if (cancel) {
             focusView.requestFocus();
-
         } else {
             user.setEmail(email);
             user.setPassword(password);
@@ -199,6 +197,7 @@ public class SignUpActivity extends AppCompatActivity {
     public boolean getSpecialCharacter(String word) {
         Pattern pattern = Pattern.compile("[^A-Za-z0-9]");
         Matcher matcher = pattern.matcher(word);
+
         return matcher.find();
     }
 
