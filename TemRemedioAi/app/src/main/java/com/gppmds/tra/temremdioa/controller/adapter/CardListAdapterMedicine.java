@@ -33,6 +33,13 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         setUbsName("");
     }
 
+    /**
+     * Method: onCreateViewHolder.
+     * Purpose:
+     * @param parent
+     * @param viewType
+     * @return
+     */
     @Override
     public ViewHolderMedicine onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -40,6 +47,12 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         return new ViewHolderMedicine(view);
     }
 
+    /**
+     * Method: onBindViewHolder.
+     * Purpose:
+     * @param holder
+     * @param position
+     */
     @Override
     public void onBindViewHolder(ViewHolderMedicine holder, int position) {
         Medicine rowData = this.dataMedicine.get(position);
@@ -67,6 +80,11 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         }
     }
 
+    /**
+     * Method: getFilter.
+     * Purpose:
+     * @return
+     */
     @Override
     public FilterSearchMedicine getFilter() {
         if(filter == null) {
@@ -78,43 +96,74 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         return filter;
     }
 
+    /**
+     * Method: getItemCount.
+     * Purpose: this method refers to size of a List with medicine data.
+     * @return
+     */
     @Override
     public int getItemCount() {
         return dataMedicine.size();
     }
 
+    /**
+     * Method: setShowButtonUBSs.
+     * Purpose: this method set the boolean varaible about the status of Button Ubs.
+     * @param showButtonUBSs
+     */
     public void setShowButtonUBSs(Boolean showButtonUBSs) {
         this.showButtonUBSs = showButtonUBSs;
     }
 
+    /**
+     * Method: getShowButtonUBSs.
+     * Purpose: this method get the boolean varaible that refers the status of Ubs.
+     * @return
+     */
     private Boolean getShowButtonUBSs() {
         return this.showButtonUBSs;
     }
 
+    /**
+     * Method: setShowButtonInform.
+     * Purpose: this method set the boolean varaible about the status of Button Inform.
+     * @param showButtonInform
+     */
     public void setShowButtonInform(Boolean showButtonInform){
         this.showButtonInform = showButtonInform;
     }
 
+    /**
+     * Method: getShowButtonInform.
+     * Purpose: this method get the boolean varaible that refers the status of Button Inform.
+     * @return
+     */
     private Boolean getShowButtonInform(){
         return this.showButtonInform;
     }
 
+    /**
+     * Method: getUbsName.
+     * Purpose: this method get the Ubs name.
+     * @return
+     */
     public String getUbsName(){
         return this.ubsName;
     }
 
+    /**
+     * Method: setUbsName.
+     * Purpose: this method set the name of Ubs.
+     * @param ubsName
+     */
     public void setUbsName(String ubsName){
         this.ubsName = ubsName;
     }
 
-    private void showInformButtonIfThereIsACurrentUser(){
-        /* Checar se o usuario está logado antes de mostrar o botao
-        if (getCurrentUser() != null){
-            setShowButtonInform(true);
-        }
-        */
-    }
-
+    /**
+     * Method: createFilter.
+     * Purpose: this method create the filter to search a medicine.
+     */
     public void createFilter() {
         filter = new FilterSearchMedicine(filterDataMedicine, this);
         Boolean test = getShowButtonUBSs();
