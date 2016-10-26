@@ -118,10 +118,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.headerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("LOG", "\n" + "Clicked header");
+                Log.i("LOG", "\n" + "onClick() listener call of headerLayout. Status: clicked. Line: 121");
                 if (expandLayout.getVisibility() == View.GONE) {
-                    Log.i("LOG", "\n" + "Card expanded");
-
                     UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
 
                     List<Notification> notificationList = null;
@@ -132,44 +130,44 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     if (notificationList.size() >= 1) {
                         haveNotification = true;
                         getTextViewLastInformation1().setText("1. " + generateTextNotification(notificationList.get(0)));
-                        Log.i("LOG", "\n" + "Latest information was found");
+                        Log.i("LOG", "\n" + "getTextViewLastInformation1(). Latest information was found. Line 135");
                     } else {
                         getTextViewLastInformation1().setText("");
-                        Log.i("LOG", "\n" + "Latest information does not exist");
+                        Log.i("LOG", "\n" + "getTextViewLastInformation1(). Latest information does not exist. Line 138");
                     }
 
                     if (notificationList.size() >= 2) {
                         getTextViewLastInformation2().setText("2. " + generateTextNotification(notificationList.get(1)));
-                        Log.i("LOG", "\n" + "Penultimate information was found");
+                        Log.i("LOG", "\n" + "getTextViewLastInformation2(). Penultimate information was found. Line 143");
                     } else {
                         getTextViewLastInformation2().setText("");
-                        Log.i("LOG", "\n" + "Penultimate information does not exist");
+                        Log.i("LOG", "\n" + "getTextViewLastInformation2(). Penultimate information does not exist. Line 146");
                     }
 
                     if (notificationList.size() >= 3) {
                         getTextViewLastInformation3().setText("3. " + generateTextNotification(notificationList.get(2)));
-                        Log.i("LOG", "\n" + "Antepenultimate information was found");
+                        Log.i("LOG", "\n" + "getTextViewLastInformation3(). Antepenultimate information was found. Line 151");
                     } else {
                         getTextViewLastInformation3().setText("");
-                        Log.i("LOG", "\n" + "Antepenultimate information does not exist");
+                        Log.i("LOG", "\n" + "getTextViewLastInformation3(). Antepenultimate information does not exist. Line 154");
                     }
 
                     if (haveNotification) {
-                        Log.i("LOG", "\n" + "\n" + "\n" + "UBS has notifications");
+                        Log.i("LOG", "\n" + "\n" + "\n" + "UBS has notifications in database. Line 158");
 
                         setInformationOfChart(selectItem);
-                        Log.i("LOG", "\n" + "\n" + "Informations are setted in pie chart ");
+                        Log.i("LOG", "\n" + "\n" + "Informations about UBS are setted in pie chart. Line 161");
 
                         getTextViewWithoutNotification().setVisibility(View.GONE);
-                        Log.i("LOG", "\n" + "Have notifications");
+                        Log.i("LOG", "\n" + "Have notifications, so this method getTextViewWithoutNotification() is not called. Line 164");
                     } else {
-                        Log.i("LOG", "\n" + "\n" + "\n" + "UBS does not have notifications");
+                        Log.i("LOG", "\n" + "\n" + "\n" + "UBS does not have notifications. Line 166");
 
                         getTextViewLastInformationTitle().setText("");
-                        Log.i("LOG", "\n" + "Does not have any notifications");
+                        Log.i("LOG", "\n" + "Does not have any notifications. Line 169");
 
                         setInformationOfChartWithoutNotification();
-                        Log.i("LOG", "\n" + "\n" + "Graphic setted as empty");
+                        Log.i("LOG", "\n" + "\n" + "Graphic setted as empty. Line 171");
                     }
 
                     ParseUser getCurrentUser = ParseUser.getCurrentUser();
@@ -185,7 +183,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     expand();
 
                 } else {
-                    Log.i("LOG", "\n" + "Card collapsed");
+                    Log.i("LOG", "\n" + "onClick() listener call of headerLayout. Status: collapse. Line: 188");
                     collapse();
                 }
             }
@@ -249,10 +247,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         if (notification.getAvailable()) {
             textOfNotification = "Disponível em ";
-            Log.i("LOG", "\n" + "\n" + "Location information availability is visible");
+            Log.i("LOG", "\n" + "\n" + "Location information availability is visible. Line 250");
         } else {
             textOfNotification = "Indisponível em ";
-            Log.i("LOG", "\n" + "\n" + "The unavailability of information is visible");
+            Log.i("LOG", "\n" + "\n" + "The unavailability of information is visible. Line 253");
         }
 
         Calendar dayCalendar = Calendar.getInstance(new Locale("pt", "BR"));
@@ -278,18 +276,18 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         if (!medicineSelectedDosage.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
-            Log.i("LOG", "\n" + "\n" + "Medicine select is not empty");
+            Log.i("LOG", "\n" + "\n" + "Medicine select is not empty. Line 279");
         } else {
             // Nothing to do
-            Log.i("LOG", "\n" + "\n" + "Medicine select is empty");
+            Log.i("LOG", "\n" + "\n" + "Medicine select is empty. Line 282");
         }
 
         if (!medicineSelectedName.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
-            Log.i("LOG", "\n" + "\n" + "Medicine select is not empty");
+            Log.i("LOG", "\n" + "\n" + "Medicine select is not empty. Line 287");
         } else {
             // Nothing to do
-            Log.i("LOG", "\n" + "\n" + "Medicine select is empty");
+            Log.i("LOG", "\n" + "\n" + "Medicine select is empty. Line 290");
         }
 
         queryNotification.orderByDescending(Notification.getTitleDateInform());
@@ -439,7 +437,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * Purpose: this method set card visible.
      */
     private void expand() {
-        Log.i("LOG", "Expand enter, View.VISIBLE");
+        Log.i("LOG", "expand() enter. Status: visible. Line: 440");
         expandLayout.setVisibility(View.VISIBLE);
         cardAnimation.start();
         imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
@@ -456,7 +454,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         cardAnimationCollapse.addListener(new Animator.AnimatorListener(){
             @Override
             public void onAnimationEnd(Animator animator) {
-                Log.i("LOG", "collapse onAnimationEnd enter, View.GONE");
+                Log.i("LOG", "collapse onAnimationEnd() enter, Status: gone. Line 457");
                 expandLayout.setVisibility(View.GONE);
             }
 
