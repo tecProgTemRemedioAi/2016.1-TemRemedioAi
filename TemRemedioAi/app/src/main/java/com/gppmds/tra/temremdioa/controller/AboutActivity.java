@@ -19,7 +19,7 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         // Make visible the activity with information about the application, not editable
         setContentView(R.layout.activity_about);
     }

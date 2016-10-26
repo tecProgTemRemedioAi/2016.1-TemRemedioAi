@@ -34,18 +34,26 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
 
     private static final int LATLNGZOOM = 13;   // This variable refers to the map zoom that is showed on the screen.
 
+    /**
+     * Method: onCreate()
+     * Purpose: create the activity on the screen.
+     * @return
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubs_maps);
         Log.i("LOG", "\n" + "onCreate() activity ubs maps. Status: view. Line 46");
 
+        // Obtain the SupportMapFragment and get notified when the map is ready to be used
         obtainSupportMapFragment();
 
         gettingLatitudeAndLongitude();
 
+        // Getting UBS descriptions from UBS Holder class
         gettingUbsFromHolder();
 
+        // Ubs trajectory
         generateTrajectory();
     }
 
