@@ -1,3 +1,8 @@
+/**
+ * File: ViewHolderMedicine.java
+ * Purpose: this file set and treats things referents to medicine information on cards of view.
+ */
+
 package com.gppmds.tra.temremdioa.controller.adapter.holder;
 
 import android.animation.Animator;
