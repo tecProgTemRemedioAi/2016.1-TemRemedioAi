@@ -93,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorSecondText"
-                android:id="@+id/textViewLastInformationTitle"
+                android:id="@+id/textViewLatestInformationTitle"
                 android:textSize="14sp"
                 android:text="Últimas notificações enviadas:"
                 android:layout_marginLeft="15dp"
@@ -104,37 +104,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryText"
-                android:id="@+id/textViewLastInformation1"
+                android:id="@+id/textViewLatestInformation"
                 android:textSize="14sp"
                 android:text="Disponível - 23 Jun 2016"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="15dp"
-                android:layout_below="@+id/textViewLastInformationTitle"
+                android:layout_below="@+id/textViewLatInformationTitle"
                 android:layout_toRightOf="@+id/pie_chart_medicine" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryText"
-                android:id="@+id/textViewLastInformation2"
+                android:id="@+id/textViewPenultimateInformation"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 android:text="Indisponível - 20 Jun 2016"
                 android:layout_marginLeft="15dp"
-                android:layout_below="@+id/textViewLastInformation1"
+                android:layout_below="@+id/textViewLatestInformation"
                 android:layout_toRightOf="@+id/pie_chart_medicine" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/colorPrimaryText"
-                android:id="@+id/textViewLastInformation3"
+                android:id="@+id/textViewAntepenultimateInformation"
                 android:textAlignment="textStart"
                 android:textSize="14sp"
                 android:text="Disponível - 15 Mai 2016"
                 android:layout_marginLeft="15dp"
                 android:layout_marginBottom="24dp"
-                android:layout_below="@+id/textViewLastInformation2"
+                android:layout_below="@+id/textViewPenultimateInformation"
                 android:layout_toRightOf="@+id/pie_chart_medicine" />
 
             <TextView
@@ -145,7 +145,7 @@
                 android:textSize="14sp"
                 android:text="Nenhuma notificação enviada."
                 android:layout_marginLeft="15dp"
-                android:layout_below="@+id/textViewLastInformationTitle"
+                android:layout_below="@+id/textViewLatestInformationTitle"
                 android:layout_toRightOf="@+id/pie_chart_medicine" />
 
             <Button
@@ -163,7 +163,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginBottom="8dp"
                 android:layout_alignParentBottom="false"
-                android:layout_below="@+id/textViewLastInformation3" />
+                android:layout_below="@+id/textViewAntepenultimateInformation" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -177,7 +177,7 @@
                 android:singleLine="false"
                 android:elevation="0dp"
                 android:layout_marginBottom="8dp"
-                android:layout_below="@+id/textViewLastInformation3"
+                android:layout_below="@+id/textViewAntepenultimateInformation"
                 android:layout_alignParentEnd="false"
                 android:layout_toLeftOf="@+id/buttonSelectUbs" />
 
