@@ -1,3 +1,7 @@
+/**
+ * File: SelectMedicineActivity.java
+ * Purpose: this file set all medicine information that was selected.
+ */
 package com.gppmds.tra.temremdioa.controller;
 
 import android.os.Bundle;
@@ -22,6 +26,11 @@ public class SelectMedicineActivity extends AppCompatActivity {
     private String ubsName;
     private String ubsAttentionLevel;
 
+    /**
+     * Method: onCreate()
+     * Purpose: create the activity on the screen.
+     * @return
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +39,11 @@ public class SelectMedicineActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setInformationOfUBS();
+
         try {
             setTextViewSelectedUBS(getUbsName());
         } catch (Exception e) {
-            // Algo deve ser feito aqui
+
         }
 
         CardListAdapterMedicine claMedicine;
@@ -46,21 +56,31 @@ public class SelectMedicineActivity extends AppCompatActivity {
         try {
             createRecyclerView(claMedicine);
         } catch (Exception e) {
-            // Algo deve ser feito aqui
+
         }
 
         try {
             setTextViewMedicineQuantityFound(claMedicine.getItemCount());
         } catch (Exception e) {
-            // Algo deve ser feito aqui
+
         }
     }
 
+    /**
+     * Method: createNewLinearLayoutManager()
+     * Purpose:
+     * @return llm
+     */
     public LinearLayoutManager createNewLinearLayoutManager() {
         LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
         return llm;
     }
 
+    /**
+     * Method: createRecyclerView()
+     * Purpose:
+     * @param cardListAdapterMedicine
+     */
     public void createRecyclerView(CardListAdapterMedicine cardListAdapterMedicine) throws Exception {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.medicine_recycler_view);
         if (recyclerView != null) {
@@ -72,6 +92,11 @@ public class SelectMedicineActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method: getListOfMedicine()
+     * Purpose:
+     * @return medicines
+     */
     public List<Medicine> getListOfMedicine(ArrayList<String> filterAttentionLevel) {
         ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
         queryMedicine.setLimit(1000);
@@ -89,6 +114,11 @@ public class SelectMedicineActivity extends AppCompatActivity {
         return medicines;
     }
 
+    /**
+     * Method: setTextViewSelectedUBS()
+     * Purpose:
+     * @param ubsSelected
+     */
     private void setTextViewSelectedUBS(String ubsSelected) throws Exception {
         TextView textViewSelectedUBS = (TextView) findViewById(R.id.textViewSelectedUBS);
         if (textViewSelectedUBS != null) {
@@ -97,6 +127,12 @@ public class SelectMedicineActivity extends AppCompatActivity {
             throw new Exception("Fail to found textViewSelectedUBS");
         }
     }
+
+    /**
+     * Method: setTextViewMedicineQuantityFound()
+     * Purpose:
+     * @param quantityFound
+     */
     private void setTextViewMedicineQuantityFound(int quantityFound) throws Exception {
         TextView textViewMedicineQuantity = (TextView) findViewById(R.id.textViewMedicineQuantity);
         if (textViewMedicineQuantity != null) {
@@ -106,6 +142,10 @@ public class SelectMedicineActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method: setInformationOfUBS()
+     * Purpose:
+     */
     private void setInformationOfUBS() {
         setUbsName(getIntent().getStringExtra("nomeUBS"));
         setUbsAttentionLevel(getIntent().getStringExtra("nivelAtencao"));
@@ -113,6 +153,11 @@ public class SelectMedicineActivity extends AppCompatActivity {
         setFilterAttentionLevel(getUbsAttentionLevel());
     }
 
+    /**
+     * Method: setFilterAttentionLevel()
+     * Purpose:
+     * @param ubsAttentionLevel
+     */
     public void setFilterAttentionLevel(String ubsAttentionLevel) {
         String [] attentionLevelFilters = ubsAttentionLevel.split(",");
 
@@ -122,22 +167,48 @@ public class SelectMedicineActivity extends AppCompatActivity {
             filterAttentionLevel.add(attentionLevelFilters[i]);
         }
     }
+
+    /**
+     * Method: getFilterAttentionLevel()
+     * Purpose:
+     * @return filterAttentionLevel
+     */
     public ArrayList<String> getFilterAttentionLevel() {
         return filterAttentionLevel;
     }
 
+    /**
+     * Method: setUbsName()
+     * Purpose:
+     * @param ubsName
+     */
     public void setUbsName(String ubsName) {
         this.ubsName = ubsName;
     }
 
+    /**
+     * Method: setUbsAttentionLevel()
+     * Purpose:
+     * @param ubsAttentionLevel
+     */
     public void setUbsAttentionLevel(String ubsAttentionLevel) {
         this.ubsAttentionLevel = ubsAttentionLevel;
     }
 
+    /**
+     * Method: getUbsAttentionLevel()
+     * Purpose:
+     * @return ubsAttentionLevel
+     */
     public String getUbsAttentionLevel() {
         return this.ubsAttentionLevel;
     }
 
+    /**
+     * Method: getUbsName()
+     * Purpose:
+     * @return ubsName
+     */
     public String getUbsName() {
         return this.ubsName;
     }
