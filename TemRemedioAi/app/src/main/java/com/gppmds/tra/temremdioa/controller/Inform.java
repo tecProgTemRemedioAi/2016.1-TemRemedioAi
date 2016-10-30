@@ -1,3 +1,7 @@
+/**
+ * File: Inform.java
+ * Purpose: this file purpose inform about medicines and ubs.
+ */
 package com.gppmds.tra.temremdioa.controller;
 
 import android.os.Bundle;
@@ -32,8 +36,15 @@ public class Inform extends AppCompatActivity {
     private String medicineName;
     private String medicineDos;
 
+
+    /**
+     * Name: onCreate
+     * Purpose: send informations on create a new medicine
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inform);
 
@@ -60,6 +71,7 @@ public class Inform extends AppCompatActivity {
         });
 
         ubsName = getIntent().getStringExtra("UBSName");
+
         medicineName = getIntent().getStringExtra("MedicineName");
         medicineDos = getIntent().getStringExtra("MedicineDos");
 
@@ -67,14 +79,18 @@ public class Inform extends AppCompatActivity {
         textViewInformedMedicine.setText(medicineName);
         textViewInformedUbs = (TextView) findViewById(R.id.informed_ubs);
         textViewInformedUbs.setText(ubsName);
-//        textViewAvailableError = (TextView) findViewById(R.id.)
 
         radioButtonAvailable = (RadioButton) findViewById(R.id.available);
         radioButtonNotAvailable = (RadioButton) findViewById(R.id.not_available);
 
         datePickerInform = (DatePicker) findViewById(R.id.date_picker_inform);
+
     }
 
+    /**
+     * Name: attemptInform
+     * Purpose:
+     */
     private void attemptInform() {
 
         if (radioButtonAvailable.isChecked()) {
@@ -103,17 +119,27 @@ public class Inform extends AppCompatActivity {
         notification.setUserInform(getCurrentUser.getUsername());
         notification.pinInBackground();
         notification.saveInBackground();
+
     }
 
+    /**
+     * Name: vaidateInform
+     * Purpose: validate the information of medicine
+     * @return boolean
+     */
     private boolean validateInform() {
+
         boolean returnValidate = true;
         if (!radioButtonAvailable.isChecked() && !radioButtonNotAvailable.isChecked()) {
             radioButtonAvailable.setError("Disponibilidade não selecionada");
             returnValidate = false;
+        } else {
+            /* nothing to do */
         }
         // Validar data;
 
         return returnValidate;
+
     }
 
 }
