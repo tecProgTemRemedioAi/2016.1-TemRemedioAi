@@ -422,7 +422,6 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         pieDataSet.setSliceSpace(5);
         pieDataSet.setValueTextSize(10);
 
-
         pieData = new PieData(valuesLegend, pieDataSet);
 
         return pieData;
@@ -475,7 +474,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: slideAnimator.
-     * Purpose:
+     * Purpose: this method set params about layout animator of card.
      * @param start
      * @param end
      * @return animator.
@@ -499,7 +498,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewWithoutNotification
-     * Purpose:
+     * Purpose: this method get the text view when there is no notification made by users.
      * @return textViewWithoutNotification.
      */
     public TextView getTextViewWithoutNotification(){
@@ -508,7 +507,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewMedicineName.
-     * Purpose:
+     * Purpose: this method get the text view about the medicine name.
      * @return textViewMedicineName.
      */
     public TextView getTextViewMedicineName(){
@@ -517,7 +516,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewMedicineUnit.
-     * Purpose:
+     * Purpose: this method get the text view about medicine unit.
      * @return textViewMedicineUnit.
      */
     public TextView getTextViewMedicineUnit() {
@@ -526,7 +525,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewLatestInformationTitle.
-     * Purpose:
+     * Purpose: this method get the text view about the latest information title.
      * @return textViewLatestInformationTitle.
      */
     public TextView getTextViewLatestInformationTitle() {
@@ -535,7 +534,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewLatestInformation.
-     * Purpose:
+     * Purpose: this method get the text view about the latest information made by users.
      * @return extViewLatestInformation.
      */
     public TextView getTextViewLatestInformation() {
@@ -544,7 +543,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewPenultimateInformation.
-     * Purpose:
+     * Purpose: this method get the text view about the penultimate information made by users.
      * @return textViewPenultimateInformation.
      */
     public TextView getTextViewPenultimateInformation() {
@@ -553,7 +552,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewAntepenultimateInformation.
-     * Purpose:
+     * Purpose: this method get the text view about the antepenultimate information made by users.
      * @return textViewAntepenultimateInformation.
      */
     public TextView getTextViewAntepenultimateInformation() {
@@ -562,7 +561,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getTextViewMedicineDosage.
-     * Purpose:
+     * Purpose: this method get the text view about the medicine dosage.
      * @return textViewMedicineDosage.
      */
     public TextView getTextViewMedicineDosage() {
@@ -571,7 +570,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getButtonMedicineInform.
-     * Purpose:
+     * Purpose: this method get the button MedicineInform.
      * @return buttonMedicineInform.
      */
     public Button getButtonMedicineInform() {
@@ -580,7 +579,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
     /**
      * Method: getButtonSelectUbs;
-     * Purpose:
+     * Purpose: this method get the button SelectUbs.
      * @return buttonSelectUbs.
      */
     public Button getButtonSelectUbs() {
