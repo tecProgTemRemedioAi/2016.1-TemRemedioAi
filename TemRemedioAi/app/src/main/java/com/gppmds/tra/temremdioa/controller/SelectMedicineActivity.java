@@ -22,9 +22,12 @@ import java.util.List;
 
 public class SelectMedicineActivity extends AppCompatActivity {
 
-    private ArrayList<String> filterAttentionLevel;
-    private String ubsName;
-    private String ubsAttentionLevel;
+    private ArrayList<String> filterAttentionLevel;     // This variable refers to the filter list
+                                                        // of medicine.
+    private String ubsName;                             // This variable refers to the ubs name
+                                                        // that contains the medicine.
+    private String ubsAttentionLevel;                   // This variiable refers to the ubs
+                                                        // attention level.
 
     /**
      * Method: onCreate()
@@ -37,13 +40,12 @@ public class SelectMedicineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_medicine);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         setInformationOfUBS();
 
         try {
             setTextViewSelectedUBS(getUbsName());
         } catch (Exception e) {
-
+            // Exception was caught.
         }
 
         CardListAdapterMedicine claMedicine;
@@ -56,24 +58,25 @@ public class SelectMedicineActivity extends AppCompatActivity {
         try {
             createRecyclerView(claMedicine);
         } catch (Exception e) {
-
+            // Exception was caught.
         }
 
         try {
             setTextViewMedicineQuantityFound(claMedicine.getItemCount());
         } catch (Exception e) {
-
+            // Exception was caught.
         }
     }
 
     /**
      * Method: createNewLinearLayoutManager()
      * Purpose:
-     * @return llm
+     * @return linearLayoutManager
      */
     public LinearLayoutManager createNewLinearLayoutManager() {
-        LinearLayoutManager llm = new LinearLayoutManager(getApplicationContext());
-        return llm;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+
+        return linearLayoutManager;
     }
 
     /**
@@ -83,6 +86,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
      */
     public void createRecyclerView(CardListAdapterMedicine cardListAdapterMedicine) throws Exception {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.medicine_recycler_view);
+
         if (recyclerView != null) {
             recyclerView.setLayoutManager(createNewLinearLayoutManager());
             recyclerView.setAdapter(cardListAdapterMedicine);
@@ -121,6 +125,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
      */
     private void setTextViewSelectedUBS(String ubsSelected) throws Exception {
         TextView textViewSelectedUBS = (TextView) findViewById(R.id.textViewSelectedUBS);
+
         if (textViewSelectedUBS != null) {
             textViewSelectedUBS.setText(ubsSelected);
         } else {
@@ -135,6 +140,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
      */
     private void setTextViewMedicineQuantityFound(int quantityFound) throws Exception {
         TextView textViewMedicineQuantity = (TextView) findViewById(R.id.textViewMedicineQuantity);
+
         if (textViewMedicineQuantity != null) {
             textViewMedicineQuantity.setText("Encontrado(s): " + quantityFound);
         } else{
@@ -149,7 +155,6 @@ public class SelectMedicineActivity extends AppCompatActivity {
     private void setInformationOfUBS() {
         setUbsName(getIntent().getStringExtra("nomeUBS"));
         setUbsAttentionLevel(getIntent().getStringExtra("nivelAtencao"));
-
         setFilterAttentionLevel(getUbsAttentionLevel());
     }
 
@@ -160,8 +165,8 @@ public class SelectMedicineActivity extends AppCompatActivity {
      */
     public void setFilterAttentionLevel(String ubsAttentionLevel) {
         String [] attentionLevelFilters = ubsAttentionLevel.split(",");
-
         filterAttentionLevel = new ArrayList<String>();
+
         for(int i = 0; i < attentionLevelFilters.length; i++) {
             Log.i("CLAUS WHERE", "Nível de atenção da UBS " + i + ": " + attentionLevelFilters[i]);
             filterAttentionLevel.add(attentionLevelFilters[i]);

@@ -1,3 +1,7 @@
+/**
+ * File: LogInActivity.java
+ * Purpose: this file set all information about user for login.
+ */
 package com.gppmds.tra.temremdioa.controller;
 
 import android.animation.Animator;
@@ -49,9 +53,6 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
     //Keep track of the login task to ensure we can cancel it if requested.
     private UserLoginTask mAuthTask = null;
-
-    CallbackManager callbackManager;
-    // res references
     private TextView info;
     private EditText mUsernameView;
     private EditText mPasswordView;
@@ -61,6 +62,14 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private Button mUsernameSignInButton;
     private Button mRegisterButton;
     private LoginButton mFacebookButton;
+
+    CallbackManager callbackManager;
+
+    /**
+     * Method: onCreate()
+     * Purpose: create the activity on the screen.
+     * @return dont have return.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,23 +79,34 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setValues();
-
         setListener();
-
     }
 
+    /**
+     * Method: facebookSDKInitialize()
+     * Purpose:
+     * @return dont have return.
+     */
     protected void facebookSDKInitialize() {
         callbackManager = CallbackManager.Factory.create();
     }
 
+    /**
+     * Method: getCurrentUser()
+     * Purpose:
+     * @return currentUser
+     */
     public ParseUser getCurrentUser(){
-
         ParseUser currentUser = ParseUser.getCurrentUser();
 
         return currentUser;
-
     }
 
+    /**
+     * Method: onActivityResult()
+     * Purpose:
+     * @return dont have return.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -94,8 +114,12 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         Log.e("data",data.toString());
     }
 
+    /**
+     * Method: setValues()
+     * Purpose:
+     * @return dont have return.
+     */
     public void setValues() {
-
         mUsernameView = (EditText) findViewById(R.id.log_in_username_field);
         mPasswordView = (EditText) findViewById(R.id.log_in_password_field);
 
@@ -106,9 +130,13 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = (View) findViewById(R.id.log_in_form);
         mProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
-
     }
 
+    /**
+     * Method: setListener()
+     * Purpose:
+     * @return dont have return.
+     */
     private void setListener() {
         mFacebookButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -116,8 +144,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 info.setText(
                         "User ID: "
                                 + loginResult.getAccessToken().getUserId()
-                                + "\n" +
-                                "Auth Token: "
+                                + "\n" + "Auth Token: "
                                 + loginResult.getAccessToken().getToken()
                 );
                 finish();
@@ -133,12 +160,15 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 info.setText("Login attempt failed.");
             }
         });
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
                     attemptLogin();
                     return true;
+                } else {
+                    // Nothing to do.
                 }
                 return false;
             }
@@ -161,6 +191,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         });
     }
 
+    /**
+     * Method: attemptLogin()
+     * Purpose:
+     * @return dont have return.
+     */
     // Attempts to login in the system if the entries email and password are valid
     private void attemptLogin(){
         // Store values at the time of the login attempt
@@ -169,25 +204,25 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         if (mAuthTask != null){
             return;
+        } else {
+            // Nothing do to.
         }
 
         if ((validateError(username, "Ops! Campo de username esta vazio.", mUsernameView) ||
                 validateError(password, "Ops! Campo do password esta vazio.", mPasswordView))) {
-
             focusView.requestFocus();
-
         } else {
             showProgress(true);
             ParseUser.logInInBackground(username, password, new LogInCallback() {
                 @Override
                 public void done(ParseUser parseUser, ParseException e) {
                     if (parseUser != null) {
-
-                        Toast.makeText(getApplicationContext(), "Logado com sucesso, seja bem vindo " + username +"!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Logado com sucesso, seja bem " +
+                                "vindo " + username +"!", Toast.LENGTH_LONG).show();
                         finish();
-
                     } else {
-                        Toast.makeText(getApplicationContext(), "Nome de usuário e/ou senha não existente!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Nome de usuário e/ou senha não "
+                                + "existente!", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(LogInActivity.this, LogInActivity.class);
                         startActivity(intent);
                         finish();
@@ -197,13 +232,24 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Method: validateError()
+     * Purpose:
+     * return ou param
+     */
     public boolean validateError(String word, String phrase, EditText text) {
         String phraseValited = TextUtils.isEmpty(word) ? phrase : null;
         text.setError(phraseValited);
         focusView = phraseValited != null ? text : null;
+
         return TextUtils.isEmpty(word);
     }
 
+    /**
+     * Method: showProgress()
+     * Purpose:
+     * return ou param
+     */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) { // Honeycombe api use to show progress bar
 
@@ -238,8 +284,12 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Method: UserLoginTask()
+     * Purpose:
+     * return ou param
+     */
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-
         private final String mUsername;
         private final String mPassword;
 
@@ -248,6 +298,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             mPassword = password;
         }
 
+        /**
+         * Method: ()
+         * Purpose:
+         * return ou param
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -271,6 +326,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             return true;
         }
 
+        /**
+         * Method: onPostExecute()
+         * Purpose:
+         * return ou param
+         */
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
@@ -284,6 +344,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         }
 
+        /**
+         * Method: onCancelled()
+         * Purpose:
+         * return ou param
+         */
         @Override
         protected void onCancelled() {
             mAuthTask = null;
@@ -291,6 +356,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Method: onCreateLoader()
+     * Purpose:
+     * return ou param
+     */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -308,6 +378,11 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
 
+    /**
+     * Method: ProfileQuery()
+     * Purpose:
+     * return ou param
+     */
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
@@ -318,11 +393,22 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
+    /**
+     * Method: onLoadFinished()
+     * Purpose:
+     * @param cursor
+     * @param loader
+     */
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
         finish();
     }
 
+    /**
+     * Method: onLoaderReset()
+     * Purpose:
+     * @param loader
+     */
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         finish();
