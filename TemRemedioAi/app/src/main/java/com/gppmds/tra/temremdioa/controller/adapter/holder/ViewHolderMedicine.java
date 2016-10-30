@@ -275,6 +275,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         if (!ubsSelectedName.isEmpty()) {
             queryNotification.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
             Log.i("LOG", "\n" + "\n" + "UBS empty search");
+        } else {
+            // Nothing to do.
         }
 
         queryNotification.orderByDescending(Notification.getTitleDateInform());
@@ -374,7 +376,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
             Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
         } else {
-            // Nothing to do
+            // Nothing to do.
             Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
         }
 
@@ -395,7 +397,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
             Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
         } else {
-            // Nothing to do
+            // Nothing to do.
             Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
         }
 
