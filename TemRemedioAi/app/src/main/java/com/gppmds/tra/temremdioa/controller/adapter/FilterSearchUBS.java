@@ -1,5 +1,11 @@
+/**
+ * File: FilterSearchUBS.java
+ * Purpose: this file purpose is to filter search of UBS.
+ */
+
 package com.gppmds.tra.temremdioa.controller.adapter;
 
+import android.util.Log;
 import android.widget.Filter;
 
 import com.gppmds.tra.temremdioa.model.UBS;
@@ -34,6 +40,8 @@ public class FilterSearchUBS extends Filter {
     @Override
     public FilterResults performFiltering(CharSequence constraint) {
 
+        Log.i("LOG", "\n" + "Starting to filtering results of search UBS");
+
         FilterResults results = new FilterResults();
 
         // This method takes the user's search string and checks if there is any Ubs q contains these characters.
@@ -58,6 +66,7 @@ public class FilterSearchUBS extends Filter {
             results.values = filterList;
         }
 
+        Log.d("LOG", "\n" + "Returning from performFiltering method");
         return results;
     }
 
@@ -70,8 +79,12 @@ public class FilterSearchUBS extends Filter {
     @Override
     public void publishResults(final CharSequence constraint, final FilterResults results) {
 
+        Log.i("LOG", "\n" + "CardListAdapter attribute filled by UBS lists");
+
         adapter.dataUBS = (List<UBS>) results.values;
         adapter.notifyDataSetChanged();
+
+        Log.d("LOG", "\n" + "Returning from publishResults method");
 
     }
 
