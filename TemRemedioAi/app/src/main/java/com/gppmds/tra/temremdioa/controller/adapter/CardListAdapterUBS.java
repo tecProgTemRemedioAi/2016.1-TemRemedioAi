@@ -90,7 +90,16 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
             Log.i("LOG", "\n" + "Medicine button is visible");
         }
 
-        if(!getMedicineName().isEmpty()){
+        boolean nameMedicineValid = true;
+
+        if(getMedicineName().length() > 0){
+            nameMedicineValid = true;
+        }
+        else{
+            nameMedicineValid = false;
+        }
+
+        if(nameMedicineValid){
             holder.medicineSelectedName = getMedicineName();
             Log.i("LOG", "\n" + "Medicine selected name is not empty");
         } else {
@@ -98,7 +107,16 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
             Log.i("LOG", "\n" + "Medicine selected name is empty");
         }
 
-        if(!getMedicineDosage().isEmpty()){
+        boolean medicineDosageValid = true;
+
+        if(getMedicineDosage().length() > 0){
+            medicineDosageValid = true;
+        }
+        else{
+            medicineDosageValid = false;
+        }
+
+        if(medicineDosageValid){
             holder.medicineSelectedDosage = getMedicineDosage();
             Log.i("LOG", "\n" + "Medicine selected dosage is not empty");
         } else {
