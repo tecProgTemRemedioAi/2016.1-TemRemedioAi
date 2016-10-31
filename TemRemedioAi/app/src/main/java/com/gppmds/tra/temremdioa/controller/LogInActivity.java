@@ -240,7 +240,12 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     public boolean validateError(String word, String phrase, EditText text) {
         String phraseValited = TextUtils.isEmpty(word) ? phrase : null;
         text.setError(phraseValited);
-        focusView = phraseValited != null ? text : null;
+
+        if(phraseValited != null)
+            focusView = text;
+        else {
+            focusView = null;
+        }
 
         return TextUtils.isEmpty(word);
     }
