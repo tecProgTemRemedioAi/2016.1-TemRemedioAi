@@ -117,9 +117,9 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         this.headerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                private final Integer LATESTINFORMATION =  1;
-                private final Integer PENULTIMATEINFORMATION = 2;
-                private final Integer ANTEPENULTIMATEINFORMATION = 3;
+                final Integer LATESTINFORMATION =  1;
+                final Integer PENULTIMATEINFORMATION = 2;
+                final Integer ANTEPENULTIMATEINFORMATION = 3;
 
                 Log.i("LOG", "\n" + "Clicked header");
 
