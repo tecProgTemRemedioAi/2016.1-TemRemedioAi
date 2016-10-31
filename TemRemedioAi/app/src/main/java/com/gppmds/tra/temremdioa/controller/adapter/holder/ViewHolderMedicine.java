@@ -48,6 +48,7 @@ import java.util.Locale;
  */
 
 public class ViewHolderMedicine extends RecyclerView.ViewHolder {
+
     private TextView textViewMedicineName;                  // This variable refers to the name of the drug, the same existing in the system.
     private TextView textViewLatestInformation;             // This variable refers to latest information on availability of the drug, made by a users.
     private TextView textViewPenultimateInformation;        // This variable refers to the penultimate information on availability of the drug, made by a users.
@@ -116,6 +117,10 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         this.headerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                private final Integer LATESTINFORMATION =  1;
+                private final Integer PENULTIMATEINFORMATION = 2;
+                private final Integer ANTEPENULTIMATEINFORMATION = 3;
+
                 Log.i("LOG", "\n" + "Clicked header");
 
                 // This control structure refers to visibility of card when it expanded.
@@ -129,7 +134,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     haveNotification = false;
 
                     // This control structure refers to one or more notifications sent by users.
-                    if (notificationList.size() >= 1) {
+                    if (notificationList.size() >= LATESTINFORMATION) {
                         haveNotification = true;
                         getTextViewLatestInformation().setText("1. " + generateTextNotification(notificationList.get(0)));
                         Log.i("LOG", "\n" + "Latest information was found");
@@ -139,7 +144,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     }
 
                     // This control structure refers to two or more notifications sent by users.
-                    if (notificationList.size() >= 2) {
+                    if (notificationList.size() >= PENULTIMATEINFORMATION) {
                         getTextViewPenultimateInformation().setText("2. " + generateTextNotification(notificationList.get(1)));
                         Log.i("LOG", "\n" + "Penultimate information was found");
                     } else {
@@ -148,7 +153,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     }
 
                     // This control structure refers to three or more notifications sent by users.
-                    if (notificationList.size() >= 3) {
+                    if (notificationList.size() >= ANTEPENULTIMATEINFORMATION) {
                         getTextViewAntepenultimateInformation().setText("3. " + generateTextNotification(notificationList.get(2)));
                         Log.i("LOG", "\n" + "Antepenultimate information was found");
                     } else {
