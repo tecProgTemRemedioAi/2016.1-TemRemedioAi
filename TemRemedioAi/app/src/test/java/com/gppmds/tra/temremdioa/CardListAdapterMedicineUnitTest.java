@@ -34,7 +34,6 @@ public class CardListAdapterMedicineUnitTest {
     private ViewHolderMedicine viewHolderMedicine;
     private Context context;
     private ViewGroup viewGroup;
-    private CardView view;
     private TextView textView;
 
     @Before
