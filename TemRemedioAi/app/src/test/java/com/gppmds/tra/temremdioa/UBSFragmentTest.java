@@ -26,7 +26,7 @@ import static junit.framework.Assert.assertTrue;
 public class UBSFragmentTest {
 
     FragmentActivity fragmentActivity;
-    UBSFragment ubsFragment;
+    private UBSFragment ubsFragment;
 
     @Before
     public void setup() throws Exception {
