@@ -44,7 +44,7 @@ public class FilterSearchUBSUnitTest extends Filter {
     }
 
     @Test
-    public void FilterSearchUBSTest() {
+    public void filterSearchUBSTest() {
         filterSearchUBS = new FilterSearchUBS(filterList, adapter);
 
         Assert.assertEquals(filterSearchUBS.getClass(), FilterSearchUBS.class);
