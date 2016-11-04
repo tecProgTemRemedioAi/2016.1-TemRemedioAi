@@ -41,14 +41,23 @@ public class TabsAdapter extends FragmentPagerAdapter{
 
     @Override
     public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "Remédio";
-            case 1:
-                return "UBS";
-            default:
-                /* Nothing to do */
-                break;
+        final int DOWN_LIMIT = 0;
+        final int UP_LIMIT = 1;
+
+        assert(position >= DOWN_LIMIT && position <= UP_LIMIT);
+
+        try {
+            switch (position) {
+                case 0:
+                    return "Remédio";
+                case 1:
+                    return "UBS";
+                default:
+                    /* Nothing to do */
+                    break;
+            }
+        }catch (Throwable exception){
+            exception.printStackTrace();
         }
         return null;
     }
