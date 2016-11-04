@@ -75,6 +75,8 @@ public class SelectUBSActivity extends AppCompatActivity {
      * @throws Exception
      */
     public void createRecyclerView(CardListAdapterUBS cardListAdapterUBS) throws Exception {
+        assert(cardListAdapterUBS != null);
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ubs_recycler_view);
         if (recyclerView != null) {
             recyclerView.setLayoutManager(createLinearLayoutManager());
@@ -115,6 +117,8 @@ public class SelectUBSActivity extends AppCompatActivity {
      * @throws Exception
      */
     private void setTextViewSelectedMedicine(String medicineSelected) throws Exception {
+        assert(medicineSelected != null);
+
         TextView textViewMedicineSelected = (TextView) findViewById(R.id.textViewMedicineSelected);
         if (textViewMedicineSelected != null) {
             textViewMedicineSelected.setText(medicineSelected);
@@ -130,6 +134,9 @@ public class SelectUBSActivity extends AppCompatActivity {
      * @throws Exception
      */
     private void setTextViewUbsQuantityFound(int quantityFound) throws Exception {
+        final int LIMIT = 0;
+        assert(quantityFound >= LIMIT);
+
         TextView textViewUbsQuantity = (TextView) findViewById(R.id.textViewUbsQuantity);
         if (textViewUbsQuantity != null) {
             textViewUbsQuantity.setText("Encontrada(s): " + quantityFound);
@@ -155,17 +162,28 @@ public class SelectUBSActivity extends AppCompatActivity {
      * @param medicineAttentionLevel
      */
     public void setFilterAttentionLevel(String medicineAttentionLevel) {
-        String[] attentionLevelFilters = medicineAttentionLevel.split(",");
+        assert(medicineAttentionLevel != null);
 
-        /* Getting attention level count */
-        filterAttentionLevel = new ArrayList<String>();
-        for(int i = 0; i < attentionLevelFilters.length; i++) {
-            if ("HO".equalsIgnoreCase(attentionLevelFilters[i])) {
-                attentionLevelFilters[i] = "HO,AB";
+        try {
+            String[] attentionLevelFilters = medicineAttentionLevel.split(",");
+
+
+            /* Getting attention level count */
+            filterAttentionLevel = new ArrayList<String>();
+            for (int i = 0; i < attentionLevelFilters.length; i++) {
+                if ("HO".equalsIgnoreCase(attentionLevelFilters[i])) {
+                    attentionLevelFilters[i] = "HO,AB";
+                }
+                else {
+                    // Nothing to do.
+                }
+                Log.i("CLAUS WHERE", "Nível de atenção do Remédio " + i + ": "
+                        + attentionLevelFilters[i]);
+                filterAttentionLevel.add(attentionLevelFilters[i]);
             }
-            Log.i("CLAUS WHERE", "Nível de atenção do Remédio " + i + ": "
-                    + attentionLevelFilters[i]);
-            filterAttentionLevel.add(attentionLevelFilters[i]);
+
+        } catch (Throwable exception){
+            exception.printStackTrace();
         }
     }
 
