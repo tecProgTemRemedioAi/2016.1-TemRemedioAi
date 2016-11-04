@@ -37,23 +37,31 @@ public class MainActivity extends AppCompatActivity{
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        setContentView(R.layout.activity_main);
+        // check the parameter value.
+        assert(savedInstanceState != null);
 
-        overridePendingTransition(R.anim.activity_sun_enter, R.anim.activity_dad_exit);
+        try {
+            super.onCreate(savedInstanceState);
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            setContentView(R.layout.activity_main);
 
-        TabsAdapter tabAdapter = new TabsAdapter(getSupportFragmentManager());
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(tabAdapter);
+            overridePendingTransition(R.anim.activity_sun_enter, R.anim.activity_dad_exit);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+            TabsAdapter tabAdapter = new TabsAdapter(getSupportFragmentManager());
+            ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+            mViewPager.setAdapter(tabAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        client = createClient();
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(mViewPager);
+
+            client = createClient();
+        } catch (Throwable e){
+            // exception was caught.
+            e.printStackTrace();
+        }
     }
 
     /**
