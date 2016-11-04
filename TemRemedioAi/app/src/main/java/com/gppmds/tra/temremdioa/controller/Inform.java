@@ -44,47 +44,54 @@ public class Inform extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // check the parameter value.
+        assert(savedInstanceState != null);
 
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.inform);
+        try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.inform);
 
-        cancelButton= (Button) findViewById(R.id.cancel_button);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-
-        informButton = (Button) findViewById(R.id.inform_button);
-        informButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (validateInform()) {
-                    attemptInform();
-                    Toast.makeText(view.getContext(), "Informação enviada com sucesso.", Toast.LENGTH_LONG).show();
+            cancelButton = (Button) findViewById(R.id.cancel_button);
+            cancelButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
                     finish();
-                } else {
-                    Toast.makeText(view.getContext(), "Não foi possível completar a ação.", Toast.LENGTH_LONG).show();
                 }
-            }
-        });
+            });
 
-        ubsName = getIntent().getStringExtra("UBSName");
+            informButton = (Button) findViewById(R.id.inform_button);
+            informButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (validateInform()) {
+                        attemptInform();
+                        Toast.makeText(view.getContext(), "Informação enviada com sucesso.", Toast.LENGTH_LONG).show();
+                        finish();
+                    } else {
+                        Toast.makeText(view.getContext(), "Não foi possível completar a ação.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
-        medicineName = getIntent().getStringExtra("MedicineName");
-        medicineDos = getIntent().getStringExtra("MedicineDos");
+            ubsName = getIntent().getStringExtra("UBSName");
 
-        textViewInformedMedicine = (TextView) findViewById(R.id.informed_medicine);
-        textViewInformedMedicine.setText(medicineName);
-        textViewInformedUbs = (TextView) findViewById(R.id.informed_ubs);
-        textViewInformedUbs.setText(ubsName);
+            medicineName = getIntent().getStringExtra("MedicineName");
+            medicineDos = getIntent().getStringExtra("MedicineDos");
 
-        radioButtonAvailable = (RadioButton) findViewById(R.id.available);
-        radioButtonNotAvailable = (RadioButton) findViewById(R.id.not_available);
+            textViewInformedMedicine = (TextView) findViewById(R.id.informed_medicine);
+            textViewInformedMedicine.setText(medicineName);
+            textViewInformedUbs = (TextView) findViewById(R.id.informed_ubs);
+            textViewInformedUbs.setText(ubsName);
 
-        datePickerInform = (DatePicker) findViewById(R.id.date_picker_inform);
+            radioButtonAvailable = (RadioButton) findViewById(R.id.available);
+            radioButtonNotAvailable = (RadioButton) findViewById(R.id.not_available);
 
+            datePickerInform = (DatePicker) findViewById(R.id.date_picker_inform);
+
+        } catch (Throwable e){
+            // exception was caught.
+            e.printStackTrace();
+        }
     }
 
     /**
