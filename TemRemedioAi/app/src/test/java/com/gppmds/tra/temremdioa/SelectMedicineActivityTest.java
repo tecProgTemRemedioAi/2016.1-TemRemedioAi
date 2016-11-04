@@ -31,7 +31,7 @@ public class SelectMedicineActivityTest {
     private Medicine medicine;
 
     @Before
-    public void setup() {
+    public void setUp() {
         bundle = Mockito.mock(Bundle.class);
         view = Mockito.mock(View.class);
         selectMedicineActivity = Mockito.mock(SelectMedicineActivity.class);
