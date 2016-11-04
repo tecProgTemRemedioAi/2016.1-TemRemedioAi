@@ -101,6 +101,6 @@ public class FilterSearchUBSUnitTest extends Filter {
 
     @Override
     protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-
+        // This constructor is empty because it is necessary for Filter Results.
     }
 }
