@@ -23,7 +23,7 @@ import java.util.GregorianCalendar;
 public class Inform extends AppCompatActivity {
 
     TextView textViewInformedMedicine;
-    TextView textViewInformedUbs;
+    private TextView textViewInformedUbs;
     TextView textViewAvailableError;
     RadioButton radioButtonAvailable;
     RadioButton radioButtonNotAvailable;
