@@ -91,6 +91,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password = mPasswordView.getText().toString();
         String passwordConfirmation = mPasswordViewConfirmation.getText().toString();
 
+        // conditions to validate the integrity of the password on register.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
             focusView = mPasswordView;
@@ -103,11 +104,14 @@ public class SignUpActivity extends AppCompatActivity {
             mPasswordViewConfirmation.setError(getString(R.string.error_different_password));
             focusView = mPasswordViewConfirmation;
             cancel = true;
+        }else {
+            // Nothing to do.
         }
 
         /*Email*/
         String email = mEmailView.getText().toString();
 
+        // checking if the user's email is valid to register on database.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
             focusView = mEmailView;
@@ -116,11 +120,14 @@ public class SignUpActivity extends AppCompatActivity {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
             cancel = true;
+        }else {
+            // Nothing to do.
         }
 
         /*Name*/
         String name = mNameView.getText().toString();
 
+        // checking if the user's name is valid to pursue a user registration.
         if (TextUtils.isEmpty(name)) {
             mNameView.setError(getString(R.string.error_field_required));
             focusView = mNameView;
@@ -129,11 +136,14 @@ public class SignUpActivity extends AppCompatActivity {
             mNameView.setError(getString(R.string.error_character));
             focusView = mNameView;
             cancel = true;
+        }else {
+            // Nothing to do.
         }
 
         /*Age*/
         int age = 0;
 
+        // conditions to validate the user's age to continue registration.
         if (TextUtils.isEmpty(mAgeView.getText().toString())) {
             mAgeView.setError(getString(R.string.error_field_required));
             focusView = mAgeView;
@@ -150,23 +160,31 @@ public class SignUpActivity extends AppCompatActivity {
         /*Genre*/
         String genre = null;
 
+        //
         if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
             mGenre.setError(getString(R.string.error_invalid_genre));
             focusView = mGenre;
             cancel = true;
         }
-        else if (mGenreFemView.isChecked()) genre = "Feminino";
-        else if (mGenreMaleView.isChecked()) genre = "Masculino";
+        else if (mGenreFemView.isChecked()){
+            genre = "Feminino";
+        }
+        else if (mGenreMaleView.isChecked()){
+            genre = "Masculino";
+        } else {
+            // Nothing to do.
+        }
 
         /*Username*/
         String username = mUsernameView.getText().toString();
 
+        // conditions to validate the user name and proceed to registration.
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
             focusView = mUsernameView;
             cancel = true;
         } else {
-            // Nothing to do
+            // Nothing to do.
         }
 
         // When user press cancel button.
