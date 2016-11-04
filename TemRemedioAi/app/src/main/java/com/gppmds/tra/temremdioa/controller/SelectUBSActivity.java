@@ -25,17 +25,22 @@ public class SelectUBSActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_ubs);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        setMedicineInfo();
+        // check the parameter value.
+        assert(savedInstanceState != null);
 
         try {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_select_ubs);
+
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+            setMedicineInfo();
+
             setTextViewSelectedMedicine(getMedicineName());
-        } catch (Exception e) {
+
+        } catch (Throwable e) {
             // exception was caught
+            e.printStackTrace();
         }
 
 
