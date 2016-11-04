@@ -55,7 +55,7 @@ public class CardListAdapterUBSTest extends ActivityInstrumentationTestCase2<Mai
     public void testIfShowButtonMedicinesIsTrue() {
         onView(withId(R.id.container)).perform(swipeLeft());
         RecyclerView rv = (RecyclerView) getActivity().findViewById(R.id.ubs_recycler_view);
-        CardListAdapterUBS card = (CardListAdapterUBS) rv.getAdapter();
+        
 
         // The method getShowButtonUBSs() need to be private.
         // For run the test, set this method to public.
