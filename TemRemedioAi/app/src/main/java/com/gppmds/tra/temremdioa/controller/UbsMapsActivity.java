@@ -25,6 +25,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.tra.gppmds.temremdioa.R;
 
+import org.mockito.internal.matchers.Null;
+
 public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;     // This variable refers to the ubs map.
@@ -237,11 +239,18 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        assert(googleMap != null);
 
-        // Get latitude and longitude to create a marker on map
-        LatLng latLngValues = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(latLngValues).title(ubsName));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngValues, LATLNGZOOM));
+        try {
+            mMap = googleMap;
+
+            // Get latitude and longitude to create a marker on map
+            LatLng latLngValues = new LatLng(latitude, longitude);
+            mMap.addMarker(new MarkerOptions().position(latLngValues).title(ubsName));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngValues, LATLNGZOOM));
+
+        } catch (Throwable exception){
+            exception.printStackTrace();
+        }
     }
 }
