@@ -204,6 +204,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         this.buttonSelectUbs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(v.getContext(), SelectUBSActivity.class);
 
                 Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
@@ -221,6 +222,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         this.buttonMedicineInform.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(view.getContext(), Inform.class);
 
                 Medicine selectedItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
@@ -270,6 +272,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return List<Notification>
      */
     private List<Notification> getNotifications(Medicine medicine) {
+
         List<Notification> listNotification = null;
 
         ParseQuery<Notification> queryNotification = Notification.getQuery();
@@ -289,8 +292,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
         try {
             listNotification = queryNotification.find();
-        } catch (ParseException e) {
-            e.printStackTrace();
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
         }
 
         return listNotification;
@@ -324,13 +327,15 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         valuesAvailable.add(new Entry((float) 1, 0));
 
         PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
-        int color [] = {Color.parseColor("#F0F0F0")};
+        final int color [] = {Color.parseColor("#F0F0F0")};
         pieDataSet.setColors(color);
         pieDataSet.setSliceSpace(5);
 
         PieData pieData = new PieData(valuesLegend, pieDataSet);
-        for (IDataSet<?> set : pieData.getDataSets())
+        for (IDataSet<?> set : pieData.getDataSets()) {
             set.setDrawValues(!set.isDrawValuesEnabled());
+        }
+
 
         pieChart.setData(pieData);
     }
