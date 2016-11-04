@@ -28,7 +28,7 @@ public class Inform extends AppCompatActivity {
     RadioButton radioButtonAvailable;
     RadioButton radioButtonNotAvailable;
     Button informButton;
-    Button cancelButton;
+    private Button cancelButton;
     DatePicker datePickerInform;
 
     private Boolean availability;
