@@ -23,6 +23,8 @@ import com.gppmds.tra.temremdioa.controller.fragment.UBSFragment;
 import com.parse.ParseUser;
 import com.tra.gppmds.temremdioa.R;
 
+import org.mockito.internal.matchers.Null;
+
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
 public class MainActivity extends AppCompatActivity{
@@ -161,6 +163,9 @@ public class MainActivity extends AppCompatActivity{
      * @return
      */
     public GoogleApiClient createClient(){
-        return new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        GoogleApiClient apiClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        return apiClient;
+
     }
 }
