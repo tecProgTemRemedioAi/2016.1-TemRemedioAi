@@ -512,7 +512,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewWithoutNotification.
      */
     public TextView getTextViewWithoutNotification(){
-        return this.textViewWithoutNotification;
+        TextView newViewNotification = this.textViewWithoutNotification;
+        return newViewNotification;
     }
 
     /**
@@ -521,7 +522,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewMedicineName.
      */
     public TextView getTextViewMedicineName(){
-        return this.textViewMedicineName;
+        TextView newViewMedicineName = this.textViewMedicineName;
+        return newViewMedicineName;
     }
 
     /**
@@ -530,7 +532,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewMedicineUnit.
      */
     public TextView getTextViewMedicineUnit() {
-        return this.textViewMedicineUnit;
+        TextView newViewMedicineUnit = this.textViewMedicineUnit;
+        return newViewMedicineUnit;
     }
 
     /**
@@ -539,7 +542,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewLatestInformationTitle.
      */
     public TextView getTextViewLatestInformationTitle() {
-        return this.textViewLatestInformationTitle;
+        TextView newViewLatestInformationTitle = this.textViewLatestInformationTitle;
+        return newViewLatestInformationTitle;
     }
 
     /**
@@ -548,7 +552,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return extViewLatestInformation.
      */
     public TextView getTextViewLatestInformation() {
-        return this.textViewLatestInformation;
+        TextView newViewLatestInformation = this.textViewLatestInformation;
+        return newViewLatestInformation;
     }
 
     /**
@@ -557,7 +562,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewPenultimateInformation.
      */
     public TextView getTextViewPenultimateInformation() {
-        return this.textViewPenultimateInformation;
+        TextView newViewPenultimateInformation = this.textViewPenultimateInformation;
+        return newViewPenultimateInformation;
     }
 
     /**
@@ -566,7 +572,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewAntepenultimateInformation.
      */
     public TextView getTextViewAntepenultimateInformation() {
-        return this.textViewAntepenultimateInformation;
+        TextView newViewAntepenultimateInformation = this.textViewAntepenultimateInformation;
+        return newViewAntepenultimateInformation;
     }
 
     /**
@@ -575,7 +582,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewMedicineDosage.
      */
     public TextView getTextViewMedicineDosage() {
-        return this.textViewMedicineDosage;
+        TextView newViewMedicineDosage = this.textViewMedicineDosage;
+        return newViewMedicineDosage;
     }
 
     /**
@@ -584,7 +592,8 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return buttonMedicineInform.
      */
     public Button getButtonMedicineInform() {
-        return this.buttonMedicineInform;
+        Button newButtonMedicineInform =this.buttonMedicineInform;
+        return newButtonMedicineInform;
     }
 
     /**
@@ -593,6 +602,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return buttonSelectUbs.
      */
     public Button getButtonSelectUbs() {
-        return this.buttonSelectUbs;
+        Button newButtonSelectUbs = this.buttonSelectUbs;
+        return newButtonSelectUbs;
     }
 }
