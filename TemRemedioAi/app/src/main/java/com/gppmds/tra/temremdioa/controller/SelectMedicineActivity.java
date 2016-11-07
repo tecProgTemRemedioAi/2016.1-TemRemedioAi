@@ -92,7 +92,9 @@ public class SelectMedicineActivity extends AppCompatActivity {
             recyclerView.setAdapter(cardListAdapterMedicine);
             recyclerView.setHasFixedSize(true);
         } else {
-            throw new Exception("Fail to found medicine_recycler_view");
+            Exception textUBSException = new Exception("Fail to found medicine_recycler_view");
+
+            throw textUBSException;
         }
     }
 
@@ -129,7 +131,9 @@ public class SelectMedicineActivity extends AppCompatActivity {
         if (textViewSelectedUBS != null) {
             textViewSelectedUBS.setText(ubsSelected);
         } else {
-            throw new Exception("Fail to found textViewSelectedUBS");
+            Exception textUBSException = new Exception("Fail to found textViewSelectedUBS");
+
+            throw textUBSException;
         }
     }
 
@@ -144,7 +148,9 @@ public class SelectMedicineActivity extends AppCompatActivity {
         if (textViewMedicineQuantity != null) {
             textViewMedicineQuantity.setText("Encontrado(s): " + quantityFound);
         } else{
-            throw new Exception("Fail to found textViewMedicineQuantity");
+            Exception textUBSException = new Exception("Fail to found textViewMedicineQuantity");
+
+            throw textUBSException;
         }
     }
 
