@@ -36,11 +36,6 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.parse.LogInCallback;
@@ -62,7 +57,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private Button mRegisterButton;
     private LoginButton mFacebookButton;
 
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
 
     /**
      * Method: onCreate()
