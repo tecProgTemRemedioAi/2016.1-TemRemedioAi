@@ -81,7 +81,9 @@ public class SelectUBSActivity extends AppCompatActivity {
             recyclerView.setAdapter(cardListAdapterUBS);
             recyclerView.setHasFixedSize(true);
         } else {
-            throw new Exception("Fail to found ubs_recycler_view");
+            Exception exceptionUbsRecyclerView= new Exception("Fail to found ubs_recycler_view");
+
+            throw exceptionUbsRecyclerView;
         }
     }
 
