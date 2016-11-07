@@ -17,7 +17,7 @@ import com.tra.gppmds.temremdioa.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    ParseUser user = new ParseUser();
+    private ParseUser user = new ParseUser();
 
     /*Variaveis para o User*/
     private EditText mEmailView;
