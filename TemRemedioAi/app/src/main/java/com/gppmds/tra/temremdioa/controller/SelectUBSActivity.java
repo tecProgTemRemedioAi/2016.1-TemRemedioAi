@@ -121,7 +121,8 @@ public class SelectUBSActivity extends AppCompatActivity {
         if (textViewMedicineSelected != null) {
             textViewMedicineSelected.setText(medicineSelected);
         } else {
-            throw new Exception("Fail to found textViewMedicineSelected");
+            Exception exceptionOnTextViewMedicineSlected = new Exception("Fail to found textViewMedicineSelected");
+            throw exceptionOnTextViewMedicineSlected;
         }
     }
 
@@ -136,7 +137,8 @@ public class SelectUBSActivity extends AppCompatActivity {
         if (textViewUbsQuantity != null) {
             textViewUbsQuantity.setText("Encontrada(s): " + quantityFound);
         } else {
-            throw new Exception("Fail to found textViewUbsQuantity");
+            Exception exceptionOntTextViewUbsQuantity = new Exception("Fail to found textViewUbsQuantity");
+            throw exceptionOntTextViewUbsQuantity;
         }
     }
 
