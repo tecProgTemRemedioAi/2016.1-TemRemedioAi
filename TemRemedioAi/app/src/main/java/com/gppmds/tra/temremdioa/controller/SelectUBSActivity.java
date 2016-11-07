@@ -166,6 +166,8 @@ public class SelectUBSActivity extends AppCompatActivity {
         for(int i = 0; i < attentionLevelFilters.length; i++) {
             if ("HO".equalsIgnoreCase(attentionLevelFilters[i])) {
                 attentionLevelFilters[i] = "HO,AB";
+            } else {
+                // Nothing to do.
             }
             Log.i("CLAUS WHERE", "Nível de atenção do Remédio " + i + ": "
                     + attentionLevelFilters[i]);
