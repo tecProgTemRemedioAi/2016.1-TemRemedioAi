@@ -57,16 +57,16 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     private TextView textViewLastInformation3;      // This variable refers to antepenultimate information on availability of the drug, made by a users.
     private TextView textViewLastInformationTitle;  // This variable refers to the title of the latest information, made by users.
     private TextView textViewWithoutNotification;   // This variable refers to the text that appears when there are no notifications made by users.
-    private RelativeLayout headerLayout;            // This layout refers to the standard structure of the card when it is collapsed.
-    private RelativeLayout expandLayout;            // This layout refers to the standard structure of the card when it is expanded.
+    private final RelativeLayout headerLayout;            // This layout refers to the standard structure of the card when it is collapsed.
+    private final RelativeLayout expandLayout;            // This layout refers to the standard structure of the card when it is expanded.
     private ValueAnimator cardAnimation;            // This animator refers to the animation that occurs on the card when it is clicked.
-    private Button buttonSelectMedicine;            // This button is for the user to select the desired medicine.
-    private Button buttonViewUbsDescription;        // This button is for the user to keep more information about one ubs.
+    private final Button buttonSelectMedicine;            // This button is for the user to select the desired medicine.
+    private final Button buttonViewUbsDescription;        // This button is for the user to keep more information about one ubs.
     public Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
     public String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
     public String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
-    public ImageView imageViewArrow;                // This image refers to where the chart will be set.
-    private PieChart pieChart;                      // This chart is completed by information provided by users.
+    public final ImageView imageViewArrow;                // This image refers to where the chart will be set.
+    private final PieChart pieChart;                      // This chart is completed by information provided by users.
     public Boolean haveNotification;                // This variable tells whether or not notification made by users.
 
      /**
