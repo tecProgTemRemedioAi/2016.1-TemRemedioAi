@@ -37,6 +37,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.tra.gppmds.temremdioa.R;
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -507,7 +509,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewUbsName
      */
     public TextView getTextViewUbsName(){
-        return this.textViewUbsName;
+        TextView newViewUbsName = this.textViewUbsName;
+        return newViewUbsName;
     }
 
     /**
@@ -525,7 +528,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewWithoutNotification
      */
     public TextView getTextViewWithoutNotification(){
-        return this.textViewWithoutNotification;
+        TextView newViewNotification = this.textViewWithoutNotification;
+        return newViewNotification;
     }
 
     /**
@@ -534,7 +538,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformationTitle
      */
     public TextView getTextViewLastInformationTitle() {
-        return this.textViewLastInformationTitle;
+        TextView newViewLatestInformationTitle = this.textViewLastInformationTitle;
+        return newViewLatestInformationTitle;
     }
 
     /**
@@ -543,7 +548,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformation1
      */
     public TextView getTextViewLastInformation1() {
-        return this.textViewLastInformation1;
+        TextView newViewLastInformation1 = this.textViewLastInformation1;
+        return newViewLastInformation1;
     }
 
     /**
@@ -552,7 +558,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformation2
      */
     public TextView getTextViewLastInformation2() {
-        return this.textViewLastInformation2;
+        TextView newViewLastInformation2 = this.textViewLastInformation2;
+        return newViewLastInformation2;
     }
 
     /**
@@ -561,7 +568,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformation3
      */
     public TextView getTextViewLastInformation3() {
-        return this.textViewLastInformation3;
+        TextView newViewLastInformation3 = this.textViewLastInformation3;
+        return newViewLastInformation3;
     }
 
     /**
@@ -570,7 +578,8 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return buttonSelectMedicine
      */
     public Button getButtonSelectMedicine(){
-        return this.buttonSelectMedicine;
+        Button newButtonSelectMedicine = this.buttonSelectMedicine;
+        return newButtonSelectMedicine;
     }
 
     /**
@@ -579,6 +588,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return buttonUbsInform
      */
     public Button getButtonUbsInform() {
-        return this.buttonUbsInform;
+        Button newButtonUbsInform = this.buttonUbsInform;
+        return newButtonUbsInform;
     }
 }
