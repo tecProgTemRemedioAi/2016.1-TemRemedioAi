@@ -49,6 +49,7 @@ public class FilterSearchUBS extends Filter {
             constraint = constraint.toString().toUpperCase();
             List<UBS> filteredUBSs = new ArrayList<>();
 
+            // this paragraph should add UBS objects of a complete list of UBSs into a filtered list, to result the current search
             for (int i = 0; i < filterList.size(); i++) {
                 boolean findContains = filterList.get(i).getUbsName().toUpperCase().contains(constraint);
 
