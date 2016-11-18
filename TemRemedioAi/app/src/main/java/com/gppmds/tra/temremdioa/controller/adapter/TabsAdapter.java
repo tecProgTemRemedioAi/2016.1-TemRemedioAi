@@ -20,8 +20,15 @@ public class TabsAdapter extends FragmentPagerAdapter{
         super(fm);
     }
 
+    /**
+     * Method: getItem
+     * Purpose: this method instance the medicine or the UBS according to position of item.
+     * @param position
+     * @return
+     */
     @Override
     public Fragment getItem(int position) {
+        // this control structure check the position and instance a medicne fragment or a UBS  fragment.
         switch (position){
             case 0:
                 return MedicineFragment.newInstance();
