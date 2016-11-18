@@ -45,6 +45,180 @@ import com.tra.gppmds.temremdioa.R;
 
 public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+    /**
+     * Method: onLoadFinished()
+     * Purpose:
+     * @param cursor
+     * @param loader
+     */
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+        finish();
+    }
+
+    /**
+     * Method: onLoaderReset()
+     * Purpose:
+     * @param loader
+     */
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        finish();
+    }
+
+    /**
+     * Method: onCreateLoader()
+     * Purpose:
+     * return ou param
+     */
+    @Override
+    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
+        return new CursorLoader(this,
+                // Retrieve data rows for the device user's 'profile' contact.
+                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
+                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
+
+                // Select only email addresses.
+                ContactsContract.Contacts.Data.MIMETYPE +
+                        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
+                .CONTENT_ITEM_TYPE},
+
+                // Show primary email addresses first. Note that there won't be
+                // a primary email address if the user hasn't specified one.
+                ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
+    }
+
+    /**
+     * Method: getCurrentUser()
+     * Purpose:
+     * @return currentUser
+     */
+    public ParseUser getCurrentUser(){
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        return currentUser;
+    }
+
+    /**
+     * Method: setValues()
+     * Purpose:
+     * @return dont have return.
+     */
+    public void setValues() {
+        mUsernameView = (EditText) findViewById(R.id.log_in_username_field);
+        mPasswordView = (EditText) findViewById(R.id.log_in_password_field);
+
+        mUsernameSignInButton = (Button) findViewById(R.id.log_in_button);
+        mRegisterButton = (Button) findViewById(R.id.log_in_sign_in_button);
+        info = (TextView)findViewById(R.id.info);
+        mFacebookButton = (LoginButton) findViewById(R.id.login_button_fb);
+
+        mLoginFormView = (View) findViewById(R.id.log_in_form);
+        mProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
+    }
+
+    /**
+     * Method: validateError()
+     * Purpose:
+     * return ou param
+     */
+    public boolean validateError(String word, String phrase, EditText text) {
+        String phraseValited = TextUtils.isEmpty(word) ? phrase : null;
+        text.setError(phraseValited);
+
+        if(phraseValited != null)
+            focusView = text;
+        else {
+            focusView = null;
+        }
+
+        return TextUtils.isEmpty(word);
+    }
+
+    /**
+     * Method: UserLoginTask()
+     * Purpose:
+     * return ou param
+     */
+    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+        private final String mUsername;
+        private final String mPassword;
+
+        UserLoginTask(String username, String password) {
+            mUsername = username;
+            mPassword = password;
+        }
+
+        /**
+         * Method: ()
+         * Purpose:
+         * return ou param
+         */
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            try {
+                // Simulate network access.
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                return false;
+            }
+
+            //for (String credential : DUMMY_CREDENTIALS) {
+            //  String[] pieces = credential.split(":");
+            //  if (pieces[0].equals(mEmail)) {
+            //      Account exists, return true if the password matches.
+            //      return pieces[1].equals(mPassword);
+            //   }
+            //}
+
+            // TODO: register the new account here.
+            return true;
+        }
+
+        /**
+         * Method: onPostExecute()
+         * Purpose:
+         * return ou param
+         */
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mAuthTask = null;
+            showProgress(false);
+
+            if (success) {
+                finish();
+            } else {
+                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.requestFocus();
+            }
+        }
+
+        /**
+         * Method: onCancelled()
+         * Purpose:
+         * return ou param
+         */
+        @Override
+        protected void onCancelled() {
+            mAuthTask = null;
+            showProgress(false);
+        }
+    }
+
+    /**
+     * Method: onActivityResult()
+     * Purpose:
+     * @return dont have return.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.e("data",data.toString());
+    }
+
     //Keep track of the login task to ensure we can cancel it if requested.
     private UserLoginTask mAuthTask = null;
     private TextView info;
@@ -84,47 +258,6 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     protected void facebookSDKInitialize() {
         callbackManager = CallbackManager.Factory.create();
-    }
-
-    /**
-     * Method: getCurrentUser()
-     * Purpose:
-     * @return currentUser
-     */
-    public ParseUser getCurrentUser(){
-        ParseUser currentUser = ParseUser.getCurrentUser();
-
-        return currentUser;
-    }
-
-    /**
-     * Method: onActivityResult()
-     * Purpose:
-     * @return dont have return.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-        Log.e("data",data.toString());
-    }
-
-    /**
-     * Method: setValues()
-     * Purpose:
-     * @return dont have return.
-     */
-    public void setValues() {
-        mUsernameView = (EditText) findViewById(R.id.log_in_username_field);
-        mPasswordView = (EditText) findViewById(R.id.log_in_password_field);
-
-        mUsernameSignInButton = (Button) findViewById(R.id.log_in_button);
-        mRegisterButton = (Button) findViewById(R.id.log_in_sign_in_button);
-        info = (TextView)findViewById(R.id.info);
-        mFacebookButton = (LoginButton) findViewById(R.id.login_button_fb);
-
-        mLoginFormView = (View) findViewById(R.id.log_in_form);
-        mProgressView = (ProgressBar) findViewById(R.id.log_in_progress_bar);
     }
 
     /**
@@ -191,6 +324,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
      * Purpose:
      * @return dont have return.
      */
+
     // Attempts to login in the system if the entries email and password are valid
     private void attemptLogin(){
         // Store values at the time of the login attempt
@@ -228,24 +362,6 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * Method: validateError()
-     * Purpose:
-     * return ou param
-     */
-    public boolean validateError(String word, String phrase, EditText text) {
-        String phraseValited = TextUtils.isEmpty(word) ? phrase : null;
-        text.setError(phraseValited);
-
-        if(phraseValited != null)
-            focusView = text;
-        else {
-            focusView = null;
-        }
-
-        return TextUtils.isEmpty(word);
-    }
-
-    /**
      * Method: showProgress()
      * Purpose:
      * return ou param
@@ -254,7 +370,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private void showProgress(final boolean show) { // Honeycombe api use to show progress bar
 
         mProgressView.getIndeterminateDrawable().setColorFilter(Color.RED,
-                                                            android.graphics.PorterDuff.Mode.SRC_IN);
+                android.graphics.PorterDuff.Mode.SRC_IN);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
@@ -285,100 +401,6 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * Method: UserLoginTask()
-     * Purpose:
-     * return ou param
-     */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
-        private final String mUsername;
-        private final String mPassword;
-
-        UserLoginTask(String username, String password) {
-            mUsername = username;
-            mPassword = password;
-        }
-
-        /**
-         * Method: ()
-         * Purpose:
-         * return ou param
-         */
-        @Override
-        protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-//            for (String credential : DUMMY_CREDENTIALS) {
-//                String[] pieces = credential.split(":");
-//                if (pieces[0].equals(mEmail)) {
-//                    // Account exists, return true if the password matches.
-//                    return pieces[1].equals(mPassword);
-//                }
-//            }
-
-            // TODO: register the new account here.
-            return true;
-        }
-
-        /**
-         * Method: onPostExecute()
-         * Purpose:
-         * return ou param
-         */
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
-
-            if (success) {
-                finish();
-            } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
-            }
-        }
-
-        /**
-         * Method: onCancelled()
-         * Purpose:
-         * return ou param
-         */
-        @Override
-        protected void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
-        }
-    }
-
-    /**
-     * Method: onCreateLoader()
-     * Purpose:
-     * return ou param
-     */
-    @Override
-    public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        return new CursorLoader(this,
-                // Retrieve data rows for the device user's 'profile' contact.
-                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
-                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
-
-                // Select only email addresses.
-                ContactsContract.Contacts.Data.MIMETYPE +
-                        " = ?", new String[]{ContactsContract.CommonDataKinds.Email
-                .CONTENT_ITEM_TYPE},
-
-                // Show primary email addresses first. Note that there won't be
-                // a primary email address if the user hasn't specified one.
-                ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
-    }
-
-    /**
      * Method: ProfileQuery()
      * Purpose:
      * return ou param
@@ -391,26 +413,5 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
-    }
-
-    /**
-     * Method: onLoadFinished()
-     * Purpose:
-     * @param cursor
-     * @param loader
-     */
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
-        finish();
-    }
-
-    /**
-     * Method: onLoaderReset()
-     * Purpose:
-     * @param loader
-     */
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        finish();
     }
 }
