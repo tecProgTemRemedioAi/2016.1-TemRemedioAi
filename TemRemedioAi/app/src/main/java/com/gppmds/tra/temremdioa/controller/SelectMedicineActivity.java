@@ -30,45 +30,6 @@ public class SelectMedicineActivity extends AppCompatActivity {
                                                         // attention level.
 
     /**
-     * Method: onCreate()
-     * Purpose: create the activity on the screen.
-     * @return
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_medicine);
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setInformationOfUBS();
-
-        try {
-            setTextViewSelectedUBS(getUbsName());
-        } catch (Exception e) {
-            // Exception was caught.
-        }
-
-        CardListAdapterMedicine claMedicine;
-        claMedicine = new CardListAdapterMedicine(SelectMedicineActivity.this,
-                getListOfMedicine(getFilterAttentionLevel()));
-        claMedicine.setShowButtonUBSs(false);
-        claMedicine.setShowButtonInform(true);
-        claMedicine.setUbsName(getUbsName());
-
-        try {
-            createRecyclerView(claMedicine);
-        } catch (Exception e) {
-            // Exception was caught.
-        }
-
-        try {
-            setTextViewMedicineQuantityFound(claMedicine.getItemCount());
-        } catch (Exception e) {
-            // Exception was caught.
-        }
-    }
-
-    /**
      * Method: createNewLinearLayoutManager()
      * Purpose:
      * @return linearLayoutManager
@@ -118,50 +79,6 @@ public class SelectMedicineActivity extends AppCompatActivity {
         }
 
         return medicines;
-    }
-
-    /**
-     * Method: setTextViewSelectedUBS()
-     * Purpose:
-     * @param ubsSelected
-     */
-    private void setTextViewSelectedUBS(String ubsSelected) throws Exception {
-        TextView textViewSelectedUBS = (TextView) findViewById(R.id.textViewSelectedUBS);
-
-        if (textViewSelectedUBS != null) {
-            textViewSelectedUBS.setText(ubsSelected);
-        } else {
-            Exception textUBSException = new Exception("Fail to found textViewSelectedUBS");
-
-            throw textUBSException;
-        }
-    }
-
-    /**
-     * Method: setTextViewMedicineQuantityFound()
-     * Purpose:
-     * @param quantityFound
-     */
-    private void setTextViewMedicineQuantityFound(int quantityFound) throws Exception {
-        TextView textViewMedicineQuantity = (TextView) findViewById(R.id.textViewMedicineQuantity);
-
-        if (textViewMedicineQuantity != null) {
-            textViewMedicineQuantity.setText("Encontrado(s): " + quantityFound);
-        } else{
-            Exception textUBSException = new Exception("Fail to found textViewMedicineQuantity");
-
-            throw textUBSException;
-        }
-    }
-
-    /**
-     * Method: setInformationOfUBS()
-     * Purpose:
-     */
-    private void setInformationOfUBS() {
-        setUbsName(getIntent().getStringExtra("nomeUBS"));
-        setUbsAttentionLevel(getIntent().getStringExtra("nivelAtencao"));
-        setFilterAttentionLevel(getUbsAttentionLevel());
     }
 
     /**
@@ -222,5 +139,88 @@ public class SelectMedicineActivity extends AppCompatActivity {
      */
     public String getUbsName() {
         return this.ubsName;
+    }
+
+    /**
+     * Method: onCreate()
+     * Purpose: create the activity on the screen.
+     * @return
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_select_medicine);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setInformationOfUBS();
+
+        try {
+            setTextViewSelectedUBS(getUbsName());
+        } catch (Exception e) {
+            // Exception was caught.
+        }
+
+        CardListAdapterMedicine claMedicine;
+        claMedicine = new CardListAdapterMedicine(SelectMedicineActivity.this,
+                getListOfMedicine(getFilterAttentionLevel()));
+        claMedicine.setShowButtonUBSs(false);
+        claMedicine.setShowButtonInform(true);
+        claMedicine.setUbsName(getUbsName());
+
+        try {
+            createRecyclerView(claMedicine);
+        } catch (Exception e) {
+            // Exception was caught.
+        }
+
+        try {
+            setTextViewMedicineQuantityFound(claMedicine.getItemCount());
+        } catch (Exception e) {
+            // Exception was caught.
+        }
+    }
+
+    /**
+     * Method: setTextViewSelectedUBS()
+     * Purpose:
+     * @param ubsSelected
+     */
+    private void setTextViewSelectedUBS(String ubsSelected) throws Exception {
+        TextView textViewSelectedUBS = (TextView) findViewById(R.id.textViewSelectedUBS);
+
+        if (textViewSelectedUBS != null) {
+            textViewSelectedUBS.setText(ubsSelected);
+        } else {
+            Exception textUBSException = new Exception("Fail to found textViewSelectedUBS");
+
+            throw textUBSException;
+        }
+    }
+
+    /**
+     * Method: setTextViewMedicineQuantityFound()
+     * Purpose:
+     * @param quantityFound
+     */
+    private void setTextViewMedicineQuantityFound(int quantityFound) throws Exception {
+        TextView textViewMedicineQuantity = (TextView) findViewById(R.id.textViewMedicineQuantity);
+
+        if (textViewMedicineQuantity != null) {
+            textViewMedicineQuantity.setText("Encontrado(s): " + quantityFound);
+        } else{
+            Exception textUBSException = new Exception("Fail to found textViewMedicineQuantity");
+
+            throw textUBSException;
+        }
+    }
+
+    /**
+     * Method: setInformationOfUBS()
+     * Purpose:
+     */
+    private void setInformationOfUBS() {
+        setUbsName(getIntent().getStringExtra("nomeUBS"));
+        setUbsAttentionLevel(getIntent().getStringExtra("nivelAtencao"));
+        setFilterAttentionLevel(getUbsAttentionLevel());
     }
 }
