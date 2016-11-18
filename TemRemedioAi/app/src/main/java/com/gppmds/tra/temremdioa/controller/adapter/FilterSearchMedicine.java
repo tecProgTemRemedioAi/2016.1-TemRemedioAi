@@ -15,8 +15,8 @@ import java.util.List;
 
 public class FilterSearchMedicine extends Filter{
 
-    private CardListAdapterMedicine adapter;
-    private List<Medicine> filterList;
+    private CardListAdapterMedicine adapter; // adapt card list by search result
+    private List<Medicine> filterList; // a filtered list for search result
 
     /**
      * Method: FilterSearchMedicine.
@@ -42,7 +42,7 @@ public class FilterSearchMedicine extends Filter{
 
         Log.i("LOG", "\n" + "Starting to filtering results of search medicine");
 
-        FilterResults results = new FilterResults();
+        FilterResults results = new FilterResults(); // filtered list for return the result of search
 
         //This control structure is used to check the parameter exist, to be user after this.
         if(constraint != null && constraint.length() > 0) {
@@ -50,7 +50,7 @@ public class FilterSearchMedicine extends Filter{
             List<Medicine> filteredMedicines = new ArrayList<>();
 
             for (int i = 0; i < filterList.size(); i++) {
-                boolean checkingContains = filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint);
+                boolean checkingContains = filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint); // checks the contains of constraints into filtered list
                 //This control structure is used to check if current filterList element contains the constrains.
                 if(checkingContains) {
                     filteredMedicines.add(filterList.get(i));
