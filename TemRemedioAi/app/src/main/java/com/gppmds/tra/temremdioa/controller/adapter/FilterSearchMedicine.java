@@ -46,19 +46,8 @@ public class FilterSearchMedicine extends Filter{
 
         //This control structure is used to check the parameter exist, to be user after this.
         if(constraint != null && constraint.length() > 0) {
-            constraint = constraint.toString().toUpperCase();
-            List<Medicine> filteredMedicines = new ArrayList<>();
-            
-            // this paragraph should add medicine objects of a complete list of medicines into a filtered list, to result the current search
-            for (int i = 0; i < filterList.size(); i++) {
-                boolean checkingContains = filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint); // checks the contains of constraints into filtered list
-                //This control structure is used to check if current filterList element contains the constrains.
-                if(checkingContains) {
-                    filteredMedicines.add(filterList.get(i));
-                } else {
-                    /* Nothing to do */
-                }
-            }
+            List<Medicine> filteredMedicines = createFilteredMedicineList(constraint);
+
             results.count = filteredMedicines.size();
             results.values = filteredMedicines;
 
@@ -69,6 +58,36 @@ public class FilterSearchMedicine extends Filter{
 
         Log.d("LOG", "\n" + "Returning from performFiltering method");
         return results;
+    }
+
+    /**
+     * Name:
+     * Purpose: 
+     * @param constraint
+     * @return filteredMedicines
+     */
+    private List<Medicine> createFilteredMedicineList(CharSequence constraint) {
+
+        constraint = constraint.toString().toUpperCase();
+        List<Medicine> filteredMedicines = new ArrayList<>();
+
+        // this paragraph should add medicine objects of a complete list of medicines into a filtered list, to result the current search
+        for (int i = 0; i < filterList.size(); i++) {
+            boolean checkingContains = filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint); // checks the contains of constraints into filtered list
+            //This control structure is used to check if current filterList element contains the constrains.
+            if(checkingContains) {
+                try {
+                    filteredMedicines.add(filterList.get(i));
+                }catch(Exception exception){
+                    exception.notify();
+                    System.out.println("Impossible to add element of medicines into filtered list.");
+                }
+            } else {
+                    /* Nothing to do */
+            }
+        }
+
+        return filteredMedicines;
     }
 
     /**
