@@ -61,8 +61,27 @@ public class FilterSearchMedicine extends Filter{
     }
 
     /**
+     * Method: publishResults.
+     * Purpose: this method is used to publish results of filtering medicines.
+     * @param constraint
+     * @param results
+     */
+    @Override
+    public void publishResults(final CharSequence constraint, final FilterResults results) {
+
+        Log.i("LOG", "\n" + "CardListAdapter attribute filled by medicine lists");
+
+        adapter.dataMedicine = (List<Medicine>) results.values;
+        adapter.notifyDataSetChanged();
+
+        Log.d("LOG", "\n" + "Returning from publishResults method");
+
+
+    }
+
+    /**
      * Name:
-     * Purpose: 
+     * Purpose:
      * @param constraint
      * @return filteredMedicines
      */
@@ -88,24 +107,5 @@ public class FilterSearchMedicine extends Filter{
         }
 
         return filteredMedicines;
-    }
-
-    /**
-     * Method: publishResults.
-     * Purpose: this method is used to publish results of filtering medicines.
-     * @param constraint
-     * @param results
-     */
-    @Override
-    public void publishResults(final CharSequence constraint, final FilterResults results) {
-
-        Log.i("LOG", "\n" + "CardListAdapter attribute filled by medicine lists");
-
-        adapter.dataMedicine = (List<Medicine>) results.values;
-        adapter.notifyDataSetChanged();
-
-        Log.d("LOG", "\n" + "Returning from publishResults method");
-
-
     }
 }

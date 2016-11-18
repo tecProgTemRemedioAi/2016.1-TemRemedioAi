@@ -2,6 +2,7 @@ package com.gppmds.tra.temremdioa.controller;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -15,7 +16,9 @@ import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.gppmds.tra.temremdioa.controller.adapter.TabsAdapter;
 import com.gppmds.tra.temremdioa.controller.fragment.MedicineFragment;
@@ -27,20 +30,26 @@ import org.mockito.internal.matchers.Null;
 
 import static com.facebook.AccessToken.getCurrentAccessToken;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity {
 
     public SearchView searchView;
     private GoogleApiClient client;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client2;
 
     /**
      * Method:
      * Purpose:
+     *
      * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // check the parameter value.
-        assert(savedInstanceState != null);
+        assert (savedInstanceState != null);
 
         try {
             super.onCreate(savedInstanceState);
@@ -60,15 +69,19 @@ public class MainActivity extends AppCompatActivity{
             tabLayout.setupWithViewPager(mViewPager);
 
             client = createClient();
-        } catch (Throwable e){
+        } catch (Throwable e) {
             // exception was caught.
             e.printStackTrace();
         }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     /**
      * Method:
      * Purpose:
+     *
      * @param menu
      * @return
      */
@@ -87,7 +100,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public boolean onQueryTextChange(String query) {
-                UBSFragment.getUbsAdapter().getFilter().filter( query );
+                UBSFragment.getUbsAdapter().getFilter().filter(query);
                 MedicineFragment.getMedicineAdapter().getFilter().filter(query);
                 return false;
             }
@@ -100,6 +113,7 @@ public class MainActivity extends AppCompatActivity{
     /**
      * Method:
      * Purpose:
+     *
      * @return
      */
     public DialogInterface.OnClickListener logout() {
@@ -117,6 +131,7 @@ public class MainActivity extends AppCompatActivity{
     /**
      * Method:
      * Purpose:
+     *
      * @param item
      * @return
      */
@@ -125,23 +140,16 @@ public class MainActivity extends AppCompatActivity{
         switch (item.getItemId()) {
             case R.id.action_login:
                 ParseUser currentUser = ParseUser.getCurrentUser();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
                 // This control structure refers everything about login and logout by user.
                 if (currentUser != null) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("Aviso");
-                    builder.setIcon(R.drawable.ic_warning_black_48dp);
-                    builder.setMessage("Usuario logado como " + currentUser.getUsername() + ", deseja sair dessa conta?");
-                    builder.setCancelable(true);
-                    builder.setNegativeButton("Cancelar",null);
-                    builder.setPositiveButton("Sair", logout());
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-
-                } else if (getCurrentAccessToken() != null){
+                    mountDialogWindow(currentUser, builder);
+                    mountAlertWindow(builder);
+                } else if (getCurrentAccessToken() != null) {
                     LoginManager.getInstance().logOut();
                 } else {
-                    Intent loginActivity = new Intent(MainActivity.this,LogInActivity.class);
+                    Intent loginActivity = new Intent(MainActivity.this, LogInActivity.class);
                     startActivity(loginActivity);
                 }
 
@@ -157,15 +165,66 @@ public class MainActivity extends AppCompatActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    public void mountDialogWindow(ParseUser currentUser, AlertDialog.Builder builder) {
+        builder.setTitle("Aviso");
+        builder.setIcon(R.drawable.ic_warning_black_48dp);
+        builder.setMessage("Usuario logado como " + currentUser.getUsername() + ", deseja sair dessa conta?");
+        builder.setCancelable(true);
+        builder.setNegativeButton("Cancelar", null);
+        builder.setPositiveButton("Sair", logout());
+    }
+
+    public void mountAlertWindow(AlertDialog.Builder builder) {
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
     /**
      * Mehtod:
      * Purpose:
+     *
      * @return
      */
-    public GoogleApiClient createClient(){
+    public GoogleApiClient createClient() {
 
         GoogleApiClient apiClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
         return apiClient;
 
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("Main Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2.connect();
+        AppIndex.AppIndexApi.start(client2, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client2, getIndexApiAction());
+        client2.disconnect();
     }
 }
