@@ -25,11 +25,11 @@ public class UBSFragment extends Fragment{
     private RecyclerView ubsRecyclerView;           // This component contains a list of ubs cards.
     private static CardListAdapterUBS ubsAdapter;   // This class makes the management of ubs cards.
 
-    public static UBSFragment newInstance(){
+    public static final  UBSFragment newInstance(){
         return new UBSFragment();
     }
 
-    public static CardListAdapterUBS getUbsAdapter() {
+    public static final CardListAdapterUBS getUbsAdapter() {
         return ubsAdapter;
     }
 
