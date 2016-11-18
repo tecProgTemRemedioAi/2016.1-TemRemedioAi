@@ -48,7 +48,8 @@ public class FilterSearchMedicine extends Filter{
         if(constraint != null && constraint.length() > 0) {
             constraint = constraint.toString().toUpperCase();
             List<Medicine> filteredMedicines = new ArrayList<>();
-
+            
+            // this paragraph should add medicine objects of a complete list of medicines into a filtered list, to result the current search
             for (int i = 0; i < filterList.size(); i++) {
                 boolean checkingContains = filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint); // checks the contains of constraints into filtered list
                 //This control structure is used to check if current filterList element contains the constrains.
