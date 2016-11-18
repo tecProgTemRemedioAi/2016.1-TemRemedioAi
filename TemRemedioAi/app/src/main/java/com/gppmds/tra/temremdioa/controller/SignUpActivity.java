@@ -17,7 +17,25 @@ import com.tra.gppmds.temremdioa.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private ParseUser user = new ParseUser();
+    public boolean getSpecialCharacter(String word) {
+        Pattern pattern = Pattern.compile("[^A-Za-z0-9]");
+        Matcher matcher = pattern.matcher(word);
+
+        return matcher.find();
+    }
+
+    public boolean isContainValid(String email) {
+        return email.contains("@");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sign_up);
+
+        setValues();
+        setListener();
+    }
 
     /*Variaveis para o User*/
     private EditText mEmailView;
@@ -31,15 +49,6 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView mGenre;
     private Button mRegisterButton;
     private Button cancelButton;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
-
-        setValues();
-        setListener();
-    }
 
     private void setValues() {
         mNameView = (EditText) findViewById(R.id.name);
@@ -90,7 +99,37 @@ public class SignUpActivity extends AppCompatActivity {
         /*Password*/
         String password = mPasswordView.getText().toString();
         String passwordConfirmation = mPasswordViewConfirmation.getText().toString();
+        validatePassword(password, passwordConfirmation, cancel, focusView);
 
+        /*Email*/
+        String email = mEmailView.getText().toString();
+        validateEmail(email, cancel, focusView);
+
+        /*Name*/
+        String name = mNameView.getText().toString();
+        validateName(name, cancel, focusView);
+
+        /*Age*/
+        int age = 0;
+        validateAge(age, cancel, focusView);
+
+        /*Genre*/
+        String genre = null;
+        validateGenre(genre, cancel, focusView);
+
+        /*Username*/
+        String username = mUsernameView.getText().toString();
+        validateUsername(username, cancel, focusView);
+
+        // When user press cancel button.
+        if (cancel) {
+            focusView.requestFocus();
+        } else {
+            mountUser(user, email, password, username, name, age, genre);
+        }
+    }
+
+    private void validatePassword(String password, String passwordConfirmation, boolean cancel, View focusView){
         // conditions to validate the integrity of the password on register.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
@@ -107,10 +146,9 @@ public class SignUpActivity extends AppCompatActivity {
         }else {
             // Nothing to do.
         }
+    }
 
-        /*Email*/
-        String email = mEmailView.getText().toString();
-
+    private void validateEmail(String email, boolean cancel, View focusView){
         // checking if the user's email is valid to register on database.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
@@ -123,10 +161,9 @@ public class SignUpActivity extends AppCompatActivity {
         }else {
             // Nothing to do.
         }
+    }
 
-        /*Name*/
-        String name = mNameView.getText().toString();
-
+    private void validateName(String name, boolean cancel, View focusView){
         // checking if the user's name is valid to pursue a user registration.
         if (TextUtils.isEmpty(name)) {
             mNameView.setError(getString(R.string.error_field_required));
@@ -139,10 +176,9 @@ public class SignUpActivity extends AppCompatActivity {
         }else {
             // Nothing to do.
         }
+    }
 
-        /*Age*/
-        int age = 0;
-
+    private void validateAge(int age, boolean cancel, View focusView){
         // conditions to validate the user's age to continue registration.
         if (TextUtils.isEmpty(mAgeView.getText().toString())) {
             mAgeView.setError(getString(R.string.error_field_required));
@@ -156,11 +192,9 @@ public class SignUpActivity extends AppCompatActivity {
                 // Nothing to do.
             }
         }
+    }
 
-        /*Genre*/
-        String genre = null;
-
-        //
+    private void validateGenre(String genre, boolean cancel, View focusView){
         if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
             mGenre.setError(getString(R.string.error_invalid_genre));
             focusView = mGenre;
@@ -174,10 +208,9 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             // Nothing to do.
         }
+    }
 
-        /*Username*/
-        String username = mUsernameView.getText().toString();
-
+    private void validateUsername(String username, boolean cancel, View focusView){
         // conditions to validate the user name and proceed to registration.
         if (TextUtils.isEmpty(username)) {
             mUsernameView.setError(getString(R.string.error_field_required));
@@ -186,40 +219,28 @@ public class SignUpActivity extends AppCompatActivity {
         } else {
             // Nothing to do.
         }
+    }
 
-        // When user press cancel button.
-        if (cancel) {
-            focusView.requestFocus();
-        } else {
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setUsername(username);
-            user.put("Name", name);
-            user.put("Age" , age);
-            user.put("Genre" , genre);
-            user.signUpInBackground ( new SignUpCallback() {
-                @Override
-                public void done(com.parse.ParseException e) {
-                    if (e == null ) {
-                        Toast.makeText(getApplicationContext(), "Cadastrado efetuado com sucesso", Toast.LENGTH_SHORT).show();
-                        finish();
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Erro no cadastro, tente novamente!", Toast.LENGTH_SHORT).show();
-                    }
+    private ParseUser user = new ParseUser();
+
+    private void mountUser(ParseUser user, String email, String password, String username, String name, int age, String genre){
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setUsername(username);
+        user.put("Name", name);
+        user.put("Age" , age);
+        user.put("Genre" , genre);
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(com.parse.ParseException e) {
+                if (e == null) {
+                    Toast.makeText(getApplicationContext(), "Cadastrado efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Erro no cadastro, tente novamente!", Toast.LENGTH_SHORT).show();
                 }
-            });
-            finish();
-        }
-    }
-
-    public boolean getSpecialCharacter(String word) {
-        Pattern pattern = Pattern.compile("[^A-Za-z0-9]");
-        Matcher matcher = pattern.matcher(word);
-
-        return matcher.find();
-    }
-
-    public boolean isContainValid(String email) {
-        return email.contains("@");
+            }
+        });
+        finish();
     }
 }
