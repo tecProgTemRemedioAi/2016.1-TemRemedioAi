@@ -236,6 +236,250 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         });
     }
 
+
+    /**
+     * Method: getDataPie.
+     * Purpose: this method get data informations made user to next step set in a pie chart.
+     * @param medicine
+     * @return
+     */
+    public PieData getDataPie(Medicine medicine) {
+        PieData pieData = null;
+
+        Integer countNotificationAvailable = 0;
+        Integer countNotificationNotAvailable = 0;
+
+        ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
+        queryNotificationAvailable.fromLocalDatastore();
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicine.getMedicineDescription());
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicine.getMedicineDosage());
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
+
+        // This control structure refers to check if the name of Ubs was empty or not in the search.
+        if (ubsSelectedName != "") {
+            queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
+            Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
+        } else {
+            // Nothing to do.
+            Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
+        }
+
+        try {
+            countNotificationAvailable = queryNotificationAvailable.count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ParseQuery<Notification> queryNotificationNotAvailable = Notification.getQuery();
+        queryNotificationNotAvailable.fromLocalDatastore();
+        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicine.getMedicineDescription());
+        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicine.getMedicineDosage());
+        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleAvailable(), false);
+
+        // This control structure checks that the research of ubs done by the user is empty  or not.
+        if (ubsSelectedName != "") {
+            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
+            Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
+        } else {
+            // Nothing to do.
+            Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
+        }
+
+        try {
+            countNotificationNotAvailable = queryNotificationNotAvailable.count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
+        ArrayList<String> valuesLegend = new ArrayList<String>();
+
+        valuesLegend.add("Sim");
+        valuesLegend.add("Não");
+
+        valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
+        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
+
+        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
+        int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
+        pieDataSet.setColors(color);
+        pieDataSet.setSliceSpace(5);
+        pieDataSet.setValueTextSize(10);
+
+        pieData = new PieData(valuesLegend, pieDataSet);
+
+        return pieData;
+    }
+
+    /**
+     * Method: getTextViewWithoutNotification
+     * Purpose: this method get the text view when there is no notification made by users.
+     * @return textViewWithoutNotification.
+     */
+    public TextView getTextViewWithoutNotification(){
+        TextView newViewNotification = this.textViewWithoutNotification;
+        return newViewNotification;
+    }
+
+    /**
+     * Method: getTextViewMedicineName.
+     * Purpose: this method get the text view about the medicine name.
+     * @return textViewMedicineName.
+     */
+    public TextView getTextViewMedicineName(){
+        TextView newViewMedicineName = this.textViewMedicineName;
+        return newViewMedicineName;
+    }
+
+    /**
+     * Method: getTextViewMedicineUnit.
+     * Purpose: this method get the text view about medicine unit.
+     * @return textViewMedicineUnit.
+     */
+    public TextView getTextViewMedicineUnit() {
+        TextView newViewMedicineUnit = this.textViewMedicineUnit;
+        return newViewMedicineUnit;
+    }
+
+    /**
+     * Method: getTextViewLatestInformationTitle.
+     * Purpose: this method get the text view about the latest information title.
+     * @return textViewLatestInformationTitle.
+     */
+    public TextView getTextViewLatestInformationTitle() {
+        TextView newViewLatestInformationTitle = this.textViewLatestInformationTitle;
+        return newViewLatestInformationTitle;
+    }
+
+    /**
+     * Method: getTextViewLatestInformation.
+     * Purpose: this method get the text view about the latest information made by users.
+     * @return extViewLatestInformation.
+     */
+    public TextView getTextViewLatestInformation() {
+        TextView newViewLatestInformation = this.textViewLatestInformation;
+        return newViewLatestInformation;
+    }
+
+    /**
+     * Method: getTextViewPenultimateInformation.
+     * Purpose: this method get the text view about the penultimate information made by users.
+     * @return textViewPenultimateInformation.
+     */
+    public TextView getTextViewPenultimateInformation() {
+        TextView newViewPenultimateInformation = this.textViewPenultimateInformation;
+        return newViewPenultimateInformation;
+    }
+
+    /**
+     * Method: getTextViewAntepenultimateInformation.
+     * Purpose: this method get the text view about the antepenultimate information made by users.
+     * @return textViewAntepenultimateInformation.
+     */
+    public TextView getTextViewAntepenultimateInformation() {
+        TextView newViewAntepenultimateInformation = this.textViewAntepenultimateInformation;
+        return newViewAntepenultimateInformation;
+    }
+
+    /**
+     * Method: getTextViewMedicineDosage.
+     * Purpose: this method get the text view about the medicine dosage.
+     * @return textViewMedicineDosage.
+     */
+    public TextView getTextViewMedicineDosage() {
+        TextView newViewMedicineDosage = this.textViewMedicineDosage;
+        return newViewMedicineDosage;
+    }
+
+    /**
+     * Method: getButtonMedicineInform.
+     * Purpose: this method get the button MedicineInform.
+     * @return buttonMedicineInform.
+     */
+    public Button getButtonMedicineInform() {
+        Button newButtonMedicineInform =this.buttonMedicineInform;
+        return newButtonMedicineInform;
+    }
+
+    /**
+     * Method: getButtonSelectUbs;
+     * Purpose: this method get the button SelectUbs.
+     * @return buttonSelectUbs.
+     */
+    public Button getButtonSelectUbs() {
+        Button newButtonSelectUbs = this.buttonSelectUbs;
+        return newButtonSelectUbs;
+    }
+
+    /**
+     * Method: expand.
+     * Purpose: this method controls when card is expanded, set the visibility.
+     */
+    private void expand() {
+        Log.i("LOG", "Expand enter, View.VISIBLE");
+        expandLayout.setVisibility(View.VISIBLE);
+        cardAnimation.start();
+        imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
+    }
+
+    /**
+     * Method: collapse.
+     * Purpose: this method controls when card is collapsed, when user click in card.
+     */
+    private void collapse() {
+        int finalHeight = expandLayout.getHeight();
+
+        ValueAnimator cardAnimationCollapse = slideAnimator(finalHeight, 0);
+        cardAnimationCollapse.addListener(new Animator.AnimatorListener(){
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                Log.i("LOG", "collapse onAnimationEnd enter, View.GONE");
+                expandLayout.setVisibility(View.GONE);
+            }
+
+            // Method declared empty because the override is mandatory.
+            @Override
+            public void onAnimationStart(Animator animator) {
+            }
+
+            // Method declared empty because the override is mandatory.
+            @Override
+            public void onAnimationCancel(Animator animator) {
+            }
+
+            // Method declared empty because the override is mandatory.
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+            }
+        });
+        cardAnimationCollapse.start();
+        imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
+    }
+
+    /**
+     * Method: slideAnimator.
+     * Purpose: this method set params about layout animator of card.
+     * @param start
+     * @param end
+     * @return animator.
+     */
+    private ValueAnimator slideAnimator(int start, int end) {
+        ValueAnimator animator = ValueAnimator.ofInt(start, end);
+
+        // Here we update the height value of card when it expand.
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int value = (Integer) valueAnimator.getAnimatedValue();
+
+                ViewGroup.LayoutParams layoutParams = expandLayout.getLayoutParams();
+                layoutParams.height = value;
+                expandLayout.setLayoutParams(layoutParams);
+            }
+        });
+        return animator;
+    }
+
     /**
      * Method: generateTextNotification.
      * Purpose: this method check the notification about medicine availabity and set the information
@@ -363,246 +607,4 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         pieChart.setData(getDataPie(medicine));
     }
 
-    /**
-     * Method: getDataPie.
-     * Purpose: this method get data informations made user to next step set in a pie chart.
-     * @param medicine
-     * @return
-     */
-    public PieData getDataPie(Medicine medicine) {
-        PieData pieData = null;
-
-        Integer countNotificationAvailable = 0;
-        Integer countNotificationNotAvailable = 0;
-
-        ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
-        queryNotificationAvailable.fromLocalDatastore();
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicine.getMedicineDescription());
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicine.getMedicineDosage());
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
-
-        // This control structure refers to check if the name of Ubs was empty or not in the search.
-        if (ubsSelectedName != "") {
-            queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
-            Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
-        } else {
-            // Nothing to do.
-            Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
-        }
-
-        try {
-            countNotificationAvailable = queryNotificationAvailable.count();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        ParseQuery<Notification> queryNotificationNotAvailable = Notification.getQuery();
-        queryNotificationNotAvailable.fromLocalDatastore();
-        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicine.getMedicineDescription());
-        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicine.getMedicineDosage());
-        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleAvailable(), false);
-
-        // This control structure checks that the research of ubs done by the user is empty  or not.
-        if (ubsSelectedName != "") {
-            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
-            Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
-        } else {
-            // Nothing to do.
-            Log.i("LOG", "\n" + "\n" + "UBS name select is empty");
-        }
-
-        try {
-            countNotificationNotAvailable = queryNotificationNotAvailable.count();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
-        ArrayList<String> valuesLegend = new ArrayList<String>();
-
-        valuesLegend.add("Sim");
-        valuesLegend.add("Não");
-
-        valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
-        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
-
-        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
-        int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
-        pieDataSet.setColors(color);
-        pieDataSet.setSliceSpace(5);
-        pieDataSet.setValueTextSize(10);
-
-        pieData = new PieData(valuesLegend, pieDataSet);
-
-        return pieData;
-    }
-
-    /**
-     * Method: expand.
-     * Purpose: this method controls when card is expanded, set the visibility.
-     */
-    private void expand() {
-        Log.i("LOG", "Expand enter, View.VISIBLE");
-        expandLayout.setVisibility(View.VISIBLE);
-        cardAnimation.start();
-        imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
-    }
-
-    /**
-     * Method: collapse.
-     * Purpose: this method controls when card is collapsed, when user click in card.
-     */
-    private void collapse() {
-        int finalHeight = expandLayout.getHeight();
-
-        ValueAnimator cardAnimationCollapse = slideAnimator(finalHeight, 0);
-        cardAnimationCollapse.addListener(new Animator.AnimatorListener(){
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                Log.i("LOG", "collapse onAnimationEnd enter, View.GONE");
-                expandLayout.setVisibility(View.GONE);
-            }
-
-            // Method declared empty because the override is mandatory.
-            @Override
-            public void onAnimationStart(Animator animator) {
-            }
-
-            // Method declared empty because the override is mandatory.
-            @Override
-            public void onAnimationCancel(Animator animator) {
-            }
-
-            // Method declared empty because the override is mandatory.
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-            }
-        });
-        cardAnimationCollapse.start();
-        imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
-    }
-
-    /**
-     * Method: slideAnimator.
-     * Purpose: this method set params about layout animator of card.
-     * @param start
-     * @param end
-     * @return animator.
-     */
-    private ValueAnimator slideAnimator(int start, int end) {
-        ValueAnimator animator = ValueAnimator.ofInt(start, end);
-
-        // Here we update the height value of card when it expand.
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                int value = (Integer) valueAnimator.getAnimatedValue();
-
-                ViewGroup.LayoutParams layoutParams = expandLayout.getLayoutParams();
-                layoutParams.height = value;
-                expandLayout.setLayoutParams(layoutParams);
-            }
-        });
-        return animator;
-    }
-
-    /**
-     * Method: getTextViewWithoutNotification
-     * Purpose: this method get the text view when there is no notification made by users.
-     * @return textViewWithoutNotification.
-     */
-    public TextView getTextViewWithoutNotification(){
-        TextView newViewNotification = this.textViewWithoutNotification;
-        return newViewNotification;
-    }
-
-    /**
-     * Method: getTextViewMedicineName.
-     * Purpose: this method get the text view about the medicine name.
-     * @return textViewMedicineName.
-     */
-    public TextView getTextViewMedicineName(){
-        TextView newViewMedicineName = this.textViewMedicineName;
-        return newViewMedicineName;
-    }
-
-    /**
-     * Method: getTextViewMedicineUnit.
-     * Purpose: this method get the text view about medicine unit.
-     * @return textViewMedicineUnit.
-     */
-    public TextView getTextViewMedicineUnit() {
-        TextView newViewMedicineUnit = this.textViewMedicineUnit;
-        return newViewMedicineUnit;
-    }
-
-    /**
-     * Method: getTextViewLatestInformationTitle.
-     * Purpose: this method get the text view about the latest information title.
-     * @return textViewLatestInformationTitle.
-     */
-    public TextView getTextViewLatestInformationTitle() {
-        TextView newViewLatestInformationTitle = this.textViewLatestInformationTitle;
-        return newViewLatestInformationTitle;
-    }
-
-    /**
-     * Method: getTextViewLatestInformation.
-     * Purpose: this method get the text view about the latest information made by users.
-     * @return extViewLatestInformation.
-     */
-    public TextView getTextViewLatestInformation() {
-        TextView newViewLatestInformation = this.textViewLatestInformation;
-        return newViewLatestInformation;
-    }
-
-    /**
-     * Method: getTextViewPenultimateInformation.
-     * Purpose: this method get the text view about the penultimate information made by users.
-     * @return textViewPenultimateInformation.
-     */
-    public TextView getTextViewPenultimateInformation() {
-        TextView newViewPenultimateInformation = this.textViewPenultimateInformation;
-        return newViewPenultimateInformation;
-    }
-
-    /**
-     * Method: getTextViewAntepenultimateInformation.
-     * Purpose: this method get the text view about the antepenultimate information made by users.
-     * @return textViewAntepenultimateInformation.
-     */
-    public TextView getTextViewAntepenultimateInformation() {
-        TextView newViewAntepenultimateInformation = this.textViewAntepenultimateInformation;
-        return newViewAntepenultimateInformation;
-    }
-
-    /**
-     * Method: getTextViewMedicineDosage.
-     * Purpose: this method get the text view about the medicine dosage.
-     * @return textViewMedicineDosage.
-     */
-    public TextView getTextViewMedicineDosage() {
-        TextView newViewMedicineDosage = this.textViewMedicineDosage;
-        return newViewMedicineDosage;
-    }
-
-    /**
-     * Method: getButtonMedicineInform.
-     * Purpose: this method get the button MedicineInform.
-     * @return buttonMedicineInform.
-     */
-    public Button getButtonMedicineInform() {
-        Button newButtonMedicineInform =this.buttonMedicineInform;
-        return newButtonMedicineInform;
-    }
-
-    /**
-     * Method: getButtonSelectUbs;
-     * Purpose: this method get the button SelectUbs.
-     * @return buttonSelectUbs.
-     */
-    public Button getButtonSelectUbs() {
-        Button newButtonSelectUbs = this.buttonSelectUbs;
-        return newButtonSelectUbs;
-    }
 }
