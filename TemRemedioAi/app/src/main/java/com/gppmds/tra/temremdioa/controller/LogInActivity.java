@@ -56,7 +56,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private Button mUsernameSignInButton;
     private Button mRegisterButton;
     private LoginButton mFacebookButton;
-
+    private String errorMessageUsername = "Ops! Campo de username esta vazio.";
+    private String errorMessagePassword = "Ops! Campo do password esta vazio.";
     private CallbackManager callbackManager;
 
     /**
@@ -202,8 +203,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             // Nothing do to.
         }
 
-        if ((validateError(username, "Ops! Campo de username esta vazio.", mUsernameView) ||
-                validateError(password, "Ops! Campo do password esta vazio.", mPasswordView))) {
+        if ((validateError(username, errorMessageUsername, mUsernameView) ||
+                validateError(password, errorMessagePassword, mPasswordView))) {
             focusView.requestFocus();
         } else {
             showProgress(true);
