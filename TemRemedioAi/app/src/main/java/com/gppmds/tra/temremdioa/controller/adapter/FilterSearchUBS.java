@@ -54,7 +54,12 @@ public class FilterSearchUBS extends Filter {
                 boolean findContains = filterList.get(i).getUbsName().toUpperCase().contains(constraint);
 
                 if(findContains) {
-                    filteredUBSs.add(filterList.get(i));
+                    try {
+                        filteredUBSs.add(filterList.get(i));
+                    }catch(Exception exception){
+                        exception.notify();
+                        System.out.println("Impossible to add element on list.");
+                    }
                 } else {
                     /* Nothing to do */
                 }
