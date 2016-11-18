@@ -129,30 +129,12 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     }
 
     /**
-     * Method: getShowButtonUBSs.
-     * Purpose: this method get the boolean varaible that refers the status of Ubs.
-     * @return
-     */
-    private Boolean getShowButtonUBSs() {
-        return this.showButtonUBSs;
-    }
-
-    /**
      * Method: setShowButtonInform.
      * Purpose: this method set the boolean varaible about the status of Button Inform.
      * @param showButtonInform
      */
     public void setShowButtonInform(Boolean showButtonInform){
         this.showButtonInform = showButtonInform;
-    }
-
-    /**
-     * Method: getShowButtonInform.
-     * Purpose: this method get the boolean varaible that refers the status of Button Inform.
-     * @return
-     */
-    private Boolean getShowButtonInform(){
-        return this.showButtonInform;
     }
 
     /**
@@ -181,5 +163,23 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         filter = new FilterSearchMedicine(filterDataMedicine, this);
         Log.i("LOG", "\n" + "Create a new filter, on createFilter, line 176 on CardListAdapterMedicine");
         Boolean test = getShowButtonUBSs();
+    }
+
+    /**
+     * Method: getShowButtonUBSs.
+     * Purpose: this method get the boolean varaible that refers the status of Ubs.
+     * @return
+     */
+    private Boolean getShowButtonUBSs() {
+        return this.showButtonUBSs;
+    }
+
+    /**
+     * Method: getShowButtonInform.
+     * Purpose: this method get the boolean varaible that refers the status of Button Inform.
+     * @return
+     */
+    private Boolean getShowButtonInform(){
+        return this.showButtonInform;
     }
 }
