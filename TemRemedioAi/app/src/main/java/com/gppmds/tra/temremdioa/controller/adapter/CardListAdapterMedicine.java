@@ -63,6 +63,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         holder.getTextViewMedicineUnit().setText(rowData.getUnityMedicineFormatted());
         holder.getTextViewMedicineDosage().setText(rowData.getMedicineDosage());
 
+        // this control structure refers to the  visibility and params of Button UBS.
         if (!getShowButtonUBSs()) {
             holder.getButtonSelectUbs().setVisibility(View.GONE);
             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.getButtonMedicineInform().getLayoutParams();
@@ -72,6 +73,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
             // Nothing to do
         }
 
+        // this control structures refers verification of the UBS name to be saved.
         if (!getUbsName().equalsIgnoreCase("")) {
             holder.ubsSelectedName = getUbsName();
             Log.i("LOG", "\n" + "Set the Ubs name on holder if exists, on onBindViewHolder, line  77 on CardListAdapterMedicine");
@@ -80,6 +82,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
             Log.i("LOG", "\n" + "Set the Ubs name on holder if its empty, on onBindViewHolder, line 80 on CardListAdapterMedicine");
         }
 
+        // this control structure refers to the visibility of Button Inform according to the state returned by the function getShowButtonInform().
         if (!getShowButtonInform()) {
             holder.buttonMedicineInform.setVisibility(View.GONE);
             Log.i("LOG", "\n" + "Set the off visilibity of Button Medicine Inform ,on onBindViewHolder, line 85 on CardListAdapterMedicine");
@@ -90,11 +93,12 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
     /**
      * Method: getFilter.
-     * Purpose:
+     * Purpose: this is a get method for the filter used to medicine research.
      * @return
      */
     @Override
     public FilterSearchMedicine getFilter() {
+        // this control structure check the if the filter exist, if not a filter is create.
         if(filter == null) {
             filter = new FilterSearchMedicine(filterDataMedicine, this );
             Log.i("LOG", "\n" + "Set a new filter because doens't exist a filter,on FilterSearchMedicine , line 98 on CardListAdapterMedicine");
