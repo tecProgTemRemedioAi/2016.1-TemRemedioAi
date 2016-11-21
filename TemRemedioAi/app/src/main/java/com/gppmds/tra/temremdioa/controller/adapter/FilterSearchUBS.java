@@ -63,6 +63,24 @@ public class FilterSearchUBS extends Filter {
      * Name:
      * Purpose:
      * @param constraint
+     * @param results
+     */
+    @Override
+    public void publishResults(final CharSequence constraint, final FilterResults results) {
+
+        Log.i("LOG", "\n" + "CardListAdapter attribute filled by UBS lists");
+
+        adapter.dataUBS = (List<UBS>) results.values;
+        adapter.notifyDataSetChanged();
+
+        Log.d("LOG", "\n" + "Returning from publishResults method");
+
+    }
+
+    /**
+     * Name:
+     * Purpose:
+     * @param constraint
      * @return filteredUBSs
      */
     private List<UBS> createFilteredList(CharSequence constraint){
@@ -86,24 +104,6 @@ public class FilterSearchUBS extends Filter {
             }
         }
         return filteredUBSs;
-    }
-
-    /**
-     * Name:
-     * Purpose:
-     * @param constraint
-     * @param results
-     */
-    @Override
-    public void publishResults(final CharSequence constraint, final FilterResults results) {
-
-        Log.i("LOG", "\n" + "CardListAdapter attribute filled by UBS lists");
-
-        adapter.dataUBS = (List<UBS>) results.values;
-        adapter.notifyDataSetChanged();
-
-        Log.d("LOG", "\n" + "Returning from publishResults method");
-
     }
 
 }
