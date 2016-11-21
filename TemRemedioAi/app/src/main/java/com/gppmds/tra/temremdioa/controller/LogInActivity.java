@@ -127,7 +127,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         text.setError(phraseValited);
 
         if(phraseValited != null)
-            focusView = text;
+            focusView = (EditText) text;
         else {
             focusView = null;
         }
@@ -145,8 +145,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mPassword;
 
         UserLoginTask(String username, String password) {
-            mUsername = username;
-            mPassword = password;
+            mUsername = (String) username;
+            mPassword = (String) password;
         }
 
         /**
@@ -230,8 +230,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     private Button mUsernameSignInButton;
     private Button mRegisterButton;
     private LoginButton mFacebookButton;
-    private String errorMessageUsername = "Ops! Campo de username esta vazio.";
-    private String errorMessagePassword = "Ops! Campo do password esta vazio.";
+    private String errorMessageUsername = (String) "Ops! Campo de username esta vazio.";
+    private String errorMessagePassword = (String) "Ops! Campo do password esta vazio.";
     private CallbackManager callbackManager;
 
     /**
@@ -257,7 +257,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
      * @return dont have return.
      */
     protected void facebookSDKInitialize() {
-        callbackManager = CallbackManager.Factory.create();
+        callbackManager = (CallbackManager) CallbackManager.Factory.create();
     }
 
     /**
@@ -328,8 +328,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
     // Attempts to login in the system if the entries email and password are valid
     private void attemptLogin(){
         // Store values at the time of the login attempt
-        final String username = mUsernameView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String username = (String) mUsernameView.getText().toString();
+        String password = (String) mPasswordView.getText().toString();
 
         if (mAuthTask != null){
             return;
@@ -373,7 +373,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 android.graphics.PorterDuff.Mode.SRC_IN);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+            int shortAnimTime = (int) getResources().getInteger(android.R.integer.config_shortAnimTime);
 
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             mLoginFormView.animate().setDuration(shortAnimTime).alpha(
