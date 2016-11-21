@@ -76,8 +76,8 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      * @return
      */
     private void gettingLatitudeAndLongitude() {
-        latitude = getIntent().getDoubleExtra("latitude", 0);
-        longitude = getIntent().getDoubleExtra("longitude", 0);
+        latitude = (Double) getIntent().getDoubleExtra("latitude", 0);
+        longitude = (Double) getIntent().getDoubleExtra("longitude", 0);
         Log.i("LOG", "\n" + "gettingLatitudeAndLongitude(). Status: Ubs latitude and longitude visible. Line 79");
     }
 
@@ -100,7 +100,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      * @return
      */
     private void gettingUbsName() {
-        ubsName = getIntent().getStringExtra("nomeUBS");
+        ubsName = (String) getIntent().getStringExtra("nomeUBS");
         TextView editName = (TextView) findViewById(R.id.textViewUbsName);
         editName.setText(ubsName);
         Log.i("LOG", "\n" + "gettingUbsName(). Status: Ubs name that was selected. Line 104");
@@ -112,7 +112,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      * @return
      */
     private void gettingUbsAddress () {
-        String descUbsAddress = getIntent().getStringExtra("descEnderecoUBS");
+        String descUbsAddress = (String) getIntent().getStringExtra("descEnderecoUBS");
         TextView editDscAddress = (TextView) findViewById(R.id.textViewUbsAddress);
         editDscAddress.setText(descUbsAddress);
         Log.i("LOG", "\n" + "gettingUbsAddress(). Status: Ubs address that was selected. Line 116");
@@ -124,7 +124,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      * @return
      */
     private void gettingUbsNeighborhood() {
-        String descUbsNeighborhood = getIntent().getStringExtra("descBairroUBS");
+        String descUbsNeighborhood = (String) getIntent().getStringExtra("descBairroUBS");
         TextView editDscNeighborhood = (TextView) findViewById(R.id.textViewUbsNeighborhood);
         editDscNeighborhood.setText(descUbsNeighborhood);
         Log.i("LOG", "\n" + "gettingUbsNeighborhood(). Status: Ubs neighborhood that was selected. Line 128");
@@ -136,7 +136,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      * @return
      */
     private void gettingUbsCity() {
-        String descUbsCity = getIntent().getStringExtra("descCidadeUBS");
+        String descUbsCity = (String) getIntent().getStringExtra("descCidadeUBS");
         TextView editDscCity = (TextView) findViewById(R.id.textViewCityUbs);
         editDscCity.setText(descUbsCity);
         Log.i("LOG", "\n" + "gettingUbsCity(). Status: Ubs city that was selected. Line 140");
@@ -148,7 +148,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      * @return
      */
     private void gettingUbsPhone() {
-        String descUbsPhone = getIntent().getStringExtra("telefoneUBS");
+        String descUbsPhone = (String) getIntent().getStringExtra("telefoneUBS");
         TextView editDscPhone = (TextView) findViewById(R.id.textViewPhoneUbs);
         editDscPhone.setText(descUbsPhone);
         Log.i("LOG", "\n" + "gettingUbsPhone(). Status: Ubs phone that was selected. Line 152");
@@ -192,7 +192,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
             builder.setCancelable(true);
             builder.setNegativeButton("Cancelar",null);
             builder.setPositiveButton("Instalar", getGoogleMapsListener());
-            AlertDialog dialog = builder.create();
+            AlertDialog dialog = (AlertDialog) builder.create();
             dialog.show();
         }
     }
@@ -204,7 +204,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      */
     public boolean isGoogleMapsInstalled() {
         try {
-            ApplicationInfo info = getPackageManager()
+            ApplicationInfo info = (ApplicationInfo) getPackageManager()
                     .getApplicationInfo("com.google.android.apps.maps", 0);
             return true;
         } catch(PackageManager.NameNotFoundException e) {
@@ -242,7 +242,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         assert(googleMap != null);
 
         try {
-            mMap = googleMap;
+            mMap = (GoogleMap) googleMap;
 
             // Get latitude and longitude to create a marker on map
             LatLng latLngValues = new LatLng(latitude, longitude);
