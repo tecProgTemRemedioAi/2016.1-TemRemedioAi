@@ -100,18 +100,36 @@ public class SelectUBSActivity extends AppCompatActivity {
      * @param filterAttentionLevel
      * @return
      */
-    public List<UBS> getListOfUbs(ArrayList<String> filterAttentionLevel) {
+    public List<UBS> getListOfUbs(ArrayList<String> filterAttentionLevel) throws AssertionError {
+        /* Verify the integrity of data structure List */
+        assert(filterAttentionLevel != null): "The ArrayList filter can't be null";
+        if (filterAttentionLevel == null) {
+            throw new AssertionError("The ArrayList filter can't be null");
+        } else {
+            // Nothing to do.
+        }
+
         /* Query ubs data from parse */
         ParseQuery<UBS> queryUBS = UBS.getQuery();
         queryUBS.whereContainedIn(UBS.getUbsAttentionLevelTitle(), filterAttentionLevel);
         queryUBS.orderByAscending(UBS.getUbsNameTitle());
         queryUBS.fromLocalDatastore();
+
+        /* Create a ubs list */
         List<UBS> ubsList = null;
 
         try {
             ubsList = queryUBS.find();
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        /* Checking return value */
+        assert(ubsList != null);
+        if (filterAttentionLevel == null) {
+            throw new AssertionError("The List ubsList can't be null");
+        } else {
+            // Nothing to do.
         }
 
         return ubsList;
