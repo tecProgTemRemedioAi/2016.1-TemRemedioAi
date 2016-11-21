@@ -161,6 +161,8 @@ public class SelectUBSActivity extends AppCompatActivity {
      */
     private void setTextViewUbsQuantityFound(int quantityFound) throws Exception {
         final int LIMIT = 0;
+        assert(quantityFound <= Integer.MAX_VALUE);
+        assert(quantityFound >= Integer.MIN_VALUE);
         assert(quantityFound >= LIMIT);
 
         TextView textViewUbsQuantity = (TextView) findViewById(R.id.textViewUbsQuantity);
