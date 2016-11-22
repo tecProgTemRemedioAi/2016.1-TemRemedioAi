@@ -5,6 +5,7 @@
 package com.gppmds.tra.temremdioa.controller;
 
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -75,8 +76,8 @@ public class Inform extends AppCompatActivity {
 
             ubsName = getIntent().getStringExtra("UBSName");
 
-            medicineName = getIntent().getStringExtra("MedicineName");
-            medicineDos = getIntent().getStringExtra("MedicineDos");
+            medicineName = (String) getIntent().getStringExtra("MedicineName");
+            medicineDos = (String) getIntent().getStringExtra("MedicineDos");
 
             textViewInformedMedicine = (TextView) findViewById(R.id.informed_medicine);
             textViewInformedMedicine.setText(medicineName);
@@ -101,21 +102,21 @@ public class Inform extends AppCompatActivity {
     private void attemptInform() {
 
         if (radioButtonAvailable.isChecked()) {
-            availability = true;
+            availability = (boolean) true;
         } else if (radioButtonNotAvailable.isChecked()) {
-            availability = false;
+            availability = (boolean) false;
         } else {
-            availability = false;
+            availability = (boolean) false;
         }
 
-        Integer selectedYear = datePickerInform.getYear();
-        Integer selectedMonth = datePickerInform.getMonth();
-        Integer selectedDay = datePickerInform.getDayOfMonth();
+        Integer selectedYear = (Integer) datePickerInform.getYear();
+        Integer selectedMonth = (Integer) datePickerInform.getMonth();
+        Integer selectedDay = (Integer) datePickerInform.getDayOfMonth();
 
         Calendar calendar = new GregorianCalendar();
         calendar.set(selectedYear, selectedMonth, selectedDay);
 
-        ParseUser getCurrentUser = ParseUser.getCurrentUser();
+        ParseUser getCurrentUser = (ParseUser) ParseUser.getCurrentUser();
 
         Notification notification = new Notification();
         notification.setMedicineDosage(medicineDos);
@@ -136,14 +137,16 @@ public class Inform extends AppCompatActivity {
      */
     private boolean validateInform() {
 
-        boolean returnValidate = true;
+        boolean returnValidate = (boolean) true;
         if (!radioButtonAvailable.isChecked() && !radioButtonNotAvailable.isChecked()) {
+
             radioButtonAvailable.setError("Disponibilidade não selecionada");
-            returnValidate = false;
+
+            returnValidate = (boolean) false;
+
         } else {
             /* nothing to do */
         }
-        // Validar data;
 
         return returnValidate;
 
