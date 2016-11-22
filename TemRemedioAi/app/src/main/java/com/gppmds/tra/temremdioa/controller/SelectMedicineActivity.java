@@ -24,9 +24,9 @@ public class SelectMedicineActivity extends AppCompatActivity {
 
     private ArrayList<String> filterAttentionLevel;     // This variable refers to the filter list
                                                         // of medicine.
-    private String ubsName;                             // This variable refers to the ubs name
+    private static String ubsName;                      // This variable refers to the ubs name
                                                         // that contains the medicine.
-    private String ubsAttentionLevel;                   // This variiable refers to the ubs
+    private static String ubsAttentionLevel;            // This variiable refers to the ubs
                                                         // attention level.
 
     /**
@@ -35,7 +35,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
      * @return linearLayoutManager
      */
     public LinearLayoutManager createNewLinearLayoutManager() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
         return linearLayoutManager;
     }
@@ -46,7 +46,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
      * @param cardListAdapterMedicine
      */
     public void createRecyclerView(CardListAdapterMedicine cardListAdapterMedicine) throws Exception {
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.medicine_recycler_view);
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.medicine_recycler_view);
 
         if (recyclerView != null) {
             recyclerView.setLayoutManager(createNewLinearLayoutManager());
@@ -160,12 +160,11 @@ public class SelectMedicineActivity extends AppCompatActivity {
             // Exception was caught.
         }
 
-        CardListAdapterMedicine claMedicine;
-        claMedicine = new CardListAdapterMedicine(SelectMedicineActivity.this,
-                getListOfMedicine(getFilterAttentionLevel()));
-        claMedicine.setShowButtonUBSs(false);
-        claMedicine.setShowButtonInform(true);
-        claMedicine.setUbsName(getUbsName());
+        final CardListAdapterMedicine claMedicine = new CardListAdapterMedicine(SelectMedicineActivity.this,
+            getListOfMedicine(getFilterAttentionLevel()));
+            claMedicine.setShowButtonUBSs(false);
+            claMedicine.setShowButtonInform(true);
+            claMedicine.setUbsName(getUbsName());
 
         try {
             createRecyclerView(claMedicine);
@@ -186,7 +185,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
      * @param ubsSelected
      */
     private void setTextViewSelectedUBS(String ubsSelected) throws Exception {
-        TextView textViewSelectedUBS = (TextView) findViewById(R.id.textViewSelectedUBS);
+        final TextView textViewSelectedUBS = (TextView) findViewById(R.id.textViewSelectedUBS);
 
         if (textViewSelectedUBS != null) {
             textViewSelectedUBS.setText(ubsSelected);
@@ -203,7 +202,7 @@ public class SelectMedicineActivity extends AppCompatActivity {
      * @param quantityFound
      */
     private void setTextViewMedicineQuantityFound(int quantityFound) throws Exception {
-        TextView textViewMedicineQuantity = (TextView) findViewById(R.id.textViewMedicineQuantity);
+        final TextView textViewMedicineQuantity = (TextView) findViewById(R.id.textViewMedicineQuantity);
 
         if (textViewMedicineQuantity != null) {
             textViewMedicineQuantity.setText("Encontrado(s): " + quantityFound);
