@@ -221,17 +221,17 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
 
     //Keep track of the login task to ensure we can cancel it if requested.
     private UserLoginTask mAuthTask = null;
-    private TextView info;
-    private EditText mUsernameView;
-    private EditText mPasswordView;
-    private ProgressBar mProgressView;
-    private View mLoginFormView;
-    private View focusView = null;
-    private Button mUsernameSignInButton;
-    private Button mRegisterButton;
-    private LoginButton mFacebookButton;
-    private String errorMessageUsername = (String) "Ops! Campo de username esta vazio.";
-    private String errorMessagePassword = (String) "Ops! Campo do password esta vazio.";
+    private static TextView info;
+    private static EditText mUsernameView;
+    private static EditText mPasswordView;
+    private static ProgressBar mProgressView;
+    private static View mLoginFormView;
+    private static View focusView = null;
+    private static Button mUsernameSignInButton;
+    private static Button mRegisterButton;
+    private static LoginButton mFacebookButton;
+    private final String errorMessageUsername = (String) "Ops! Campo de username esta vazio.";
+    private final String errorMessagePassword = (String) "Ops! Campo do password esta vazio.";
     private CallbackManager callbackManager;
 
     /**
@@ -411,7 +411,7 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 ContactsContract.CommonDataKinds.Email.IS_PRIMARY,
         };
 
-        int ADDRESS = 0;
-        int IS_PRIMARY = 1;
+        final int ADDRESS = 0;
+        final int IS_PRIMARY = 1;
     }
 }
