@@ -48,6 +48,10 @@ public class Inform extends AppCompatActivity {
         // check the parameter value.
         assert(savedInstanceState != null);
 
+        final String SUCCESS_SEND_INFORMATION = (String) "Informação enviada com sucesso.";
+        final String ERROR_SEND_COMPLETE_ACTION = (String) "Não foi possível completar a ação.";
+
+
         try {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.inform);
@@ -66,10 +70,10 @@ public class Inform extends AppCompatActivity {
                 public void onClick(View view) {
                     if (validateInform()) {
                         attemptInform();
-                        Toast.makeText(view.getContext(), "Informação enviada com sucesso.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), SUCCESS_SEND_INFORMATION, Toast.LENGTH_LONG).show();
                         finish();
                     } else {
-                        Toast.makeText(view.getContext(), "Não foi possível completar a ação.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), ERROR_SEND_COMPLETE_ACTION, Toast.LENGTH_LONG).show();
                     }
                 }
             });
@@ -137,10 +141,13 @@ public class Inform extends AppCompatActivity {
      */
     private boolean validateInform() {
 
+        final String NOT_SELECTED_AVALIABLE =  (String) "Disponibilidade não selecionada";
+
         boolean returnValidate = (boolean) true;
+
         if (!radioButtonAvailable.isChecked() && !radioButtonNotAvailable.isChecked()) {
 
-            radioButtonAvailable.setError("Disponibilidade não selecionada");
+            radioButtonAvailable.setError(NOT_SELECTED_AVALIABLE);
 
             returnValidate = (boolean) false;
 
