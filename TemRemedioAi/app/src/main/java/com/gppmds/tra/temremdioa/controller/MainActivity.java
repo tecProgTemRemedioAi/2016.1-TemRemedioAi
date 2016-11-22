@@ -44,44 +44,6 @@ public class MainActivity extends AppCompatActivity {
      * Method:
      * Purpose:
      *
-     * @param savedInstanceState
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // check the parameter value.
-        assert (savedInstanceState != null);
-
-        try {
-            super.onCreate(savedInstanceState);
-            FacebookSdk.sdkInitialize(getApplicationContext());
-            setContentView(R.layout.activity_main);
-
-            overridePendingTransition(R.anim.activity_sun_enter, R.anim.activity_dad_exit);
-
-            TabsAdapter tabAdapter = new TabsAdapter(getSupportFragmentManager());
-            ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
-            mViewPager.setAdapter(tabAdapter);
-
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(mViewPager);
-
-            client = createClient();
-        } catch (Throwable e) {
-            // exception was caught.
-            e.printStackTrace();
-        }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    /**
-     * Method:
-     * Purpose:
-     *
      * @param menu
      * @return
      */
@@ -227,4 +189,43 @@ public class MainActivity extends AppCompatActivity {
         AppIndex.AppIndexApi.end(client2, getIndexApiAction());
         client2.disconnect();
     }
+
+    /**
+     * Method:
+     * Purpose:
+     *
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // check the parameter value.
+        assert (savedInstanceState != null);
+
+        try {
+            super.onCreate(savedInstanceState);
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            setContentView(R.layout.activity_main);
+
+            overridePendingTransition(R.anim.activity_sun_enter, R.anim.activity_dad_exit);
+
+            TabsAdapter tabAdapter = new TabsAdapter(getSupportFragmentManager());
+            ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+            mViewPager.setAdapter(tabAdapter);
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(mViewPager);
+
+            client = createClient();
+        } catch (Throwable e) {
+            // exception was caught.
+            e.printStackTrace();
+        }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+    
 }
