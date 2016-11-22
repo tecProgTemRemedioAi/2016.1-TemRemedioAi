@@ -18,7 +18,7 @@ import com.tra.gppmds.temremdioa.R;
 public class SignUpActivity extends AppCompatActivity {
 
     public boolean getSpecialCharacter(String word) {
-        Pattern pattern = (Pattern) Pattern.compile("[^A-Za-z0-9]");
+        final Pattern pattern = (Pattern) Pattern.compile("[^A-Za-z0-9]");
         Matcher matcher = (Matcher) pattern.matcher(word);
 
         return matcher.find();
@@ -37,18 +37,18 @@ public class SignUpActivity extends AppCompatActivity {
         setListener();
     }
 
-    /*Variaveis para o User*/
-    private EditText mEmailView;
-    private EditText mPasswordView;
-    private EditText mPasswordViewConfirmation;
-    private EditText mAgeView;
-    private EditText mNameView;
-    private EditText mUsernameView;
-    private RadioButton mGenreMaleView;
-    private RadioButton mGenreFemView;
-    private TextView mGenre;
-    private Button mRegisterButton;
-    private Button cancelButton;
+    /*Variables to User*/
+    private static EditText mEmailView;
+    private static EditText mPasswordView;
+    private static EditText mPasswordViewConfirmation;
+    private static EditText mAgeView;
+    private static EditText mNameView;
+    private static EditText mUsernameView;
+    private static RadioButton mGenreMaleView;
+    private static RadioButton mGenreFemView;
+    private static TextView mGenre;
+    private static Button mRegisterButton;
+    private static Button cancelButton;
 
     private void setValues() {
         mNameView = (EditText) findViewById(R.id.name);
@@ -221,7 +221,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private ParseUser user = new ParseUser();
+    private static ParseUser user = new ParseUser();
 
     private void mountUser(ParseUser user, String email, String password, String username, String name, int age, String genre){
         user.setEmail(email);
