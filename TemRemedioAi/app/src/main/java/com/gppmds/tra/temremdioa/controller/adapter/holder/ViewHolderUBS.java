@@ -244,7 +244,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @param notification
      * @return String
      */
-    private String generateTextNotification(Notification notification) {
+    private String generateTextNotification(Notification notification) throws AssertionError{
         String textOfNotification = "";
 
         if (notification.getAvailable()) {
@@ -260,6 +260,18 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         dayCalendar.setTime(notification.getDateInform());
         textOfNotification = textOfNotification + simpleDateFormat.format(dayCalendar.getTime());
+
+        // Verify numeric limits
+        // The maximum length of a String is the same as an integer
+        assert(textOfNotification.length() <= Integer.MAX_VALUE);
+
+        //Verify return value
+        assert(textOfNotification != null);
+        if (textOfNotification == null) {
+            throw new AssertionError("The String textOfNotification can't be null");
+        } else {
+            // Nothing to do.
+        }
 
         return textOfNotification;
     }
