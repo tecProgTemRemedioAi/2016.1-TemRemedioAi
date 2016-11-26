@@ -68,37 +68,9 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
      */
     @Override
     public void onBindViewHolder(ViewHolderMedicine holder, int position) {
-        Medicine rowData = this.dataMedicine.get(position);
-        holder.getTextViewMedicineName().setText(rowData.getMedicineDescription());
-        holder.getTextViewMedicineUnit().setText(rowData.getUnityMedicineFormatted());
-        holder.getTextViewMedicineDosage().setText(rowData.getMedicineDosage());
+        createMedicineRowData(holder, position);
+        validatingMedicineRowData(holder);
 
-        // this control structure refers to the  visibility and params of Button UBS.
-        if (!getShowButtonUBSs()) {
-            holder.getButtonSelectUbs().setVisibility(View.GONE);
-            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.getButtonMedicineInform().getLayoutParams();
-            params.addRule(RelativeLayout.ALIGN_PARENT_END);
-            holder.getButtonMedicineInform().setLayoutParams(params);
-        } else {
-            // Nothing to do
-        }
-
-        // this control structures refers verification of the UBS name to be saved.
-        if (!getUbsName().equalsIgnoreCase("")) {
-            holder.ubsSelectedName = getUbsName();
-            Log.i("LOG", "\n" + "Set the Ubs name on holder if exists, on onBindViewHolder, line  77 on CardListAdapterMedicine");
-        } else {
-            holder.ubsSelectedName = "";
-            Log.i("LOG", "\n" + "Set the Ubs name on holder if its empty, on onBindViewHolder, line 80 on CardListAdapterMedicine");
-        }
-
-        // this control structure refers to the visibility of Button Inform according to the state returned by the function getShowButtonInform().
-        if (!getShowButtonInform()) {
-            holder.buttonMedicineInform.setVisibility(View.GONE);
-            Log.i("LOG", "\n" + "Set the off visilibity of Button Medicine Inform ,on onBindViewHolder, line 85 on CardListAdapterMedicine");
-        } else {
-            // Nothing to do
-        }
     }
 
     /**
@@ -191,5 +163,42 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
      */
     private Boolean getShowButtonInform(){
         return this.showButtonInform;
+    }
+
+    private void createMedicineRowData(ViewHolderMedicine holder, int position){
+        Medicine rowData = this.dataMedicine.get(position);
+        holder.getTextViewMedicineName().setText(rowData.getMedicineDescription());
+        holder.getTextViewMedicineUnit().setText(rowData.getUnityMedicineFormatted());
+        holder.getTextViewMedicineDosage().setText(rowData.getMedicineDosage());
+
+    }
+
+    private void validatingMedicineRowData(ViewHolderMedicine holder){
+        // this control structure refers to the  visibility and params of Button UBS.
+        if (!getShowButtonUBSs()) {
+            holder.getButtonSelectUbs().setVisibility(View.GONE);
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.getButtonMedicineInform().getLayoutParams();
+            params.addRule(RelativeLayout.ALIGN_PARENT_END);
+            holder.getButtonMedicineInform().setLayoutParams(params);
+        } else {
+            // Nothing to do
+        }
+
+        // this control structures refers verification of the UBS name to be saved.
+        if (!getUbsName().equalsIgnoreCase("")) {
+            holder.ubsSelectedName = getUbsName();
+            Log.i("LOG", "\n" + "Set the Ubs name on holder if exists, on onBindViewHolder, line  77 on CardListAdapterMedicine");
+        } else {
+            holder.ubsSelectedName = "";
+            Log.i("LOG", "\n" + "Set the Ubs name on holder if its empty, on onBindViewHolder, line 80 on CardListAdapterMedicine");
+        }
+
+        // this control structure refers to the visibility of Button Inform according to the state returned by the function getShowButtonInform().
+        if (!getShowButtonInform()) {
+            holder.buttonMedicineInform.setVisibility(View.GONE);
+            Log.i("LOG", "\n" + "Set the off visilibity of Button Medicine Inform ,on onBindViewHolder, line 85 on CardListAdapterMedicine");
+        } else {
+            // Nothing to do
+        }
     }
 }
