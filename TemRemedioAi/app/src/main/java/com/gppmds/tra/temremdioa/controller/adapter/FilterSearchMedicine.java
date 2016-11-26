@@ -57,6 +57,17 @@ public class FilterSearchMedicine extends Filter{
             results.values = (Object) filterList;
         }
 
+        if(results == null){
+            Exception eventException = new Exception("Error on find results for perform filtering.");
+            try {
+                throw eventException;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        } else {
+            // nothing to do
+        }
+
         Log.d("LOG", "\n" + "Returning from performFiltering method");
         return results;
     }
