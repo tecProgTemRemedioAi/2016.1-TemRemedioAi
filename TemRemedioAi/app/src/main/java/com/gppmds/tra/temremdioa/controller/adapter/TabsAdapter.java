@@ -60,6 +60,28 @@ public class TabsAdapter extends FragmentPagerAdapter{
         final int DOWN_LIMIT = 0;   // this variable refers to the down limit positon to set name of tab.
         final int UP_LIMIT = 1;     // this variable refers to the up limit position to set name of tab.
 
+        if (DOWN_LIMIT != 0){
+            Exception eventException = new Exception ("Error on Down Limit value.");
+            try{
+                throw eventException;
+            } catch(Exception exception){
+                exception.printStackTrace();
+            }
+        } else {
+            //nothing to do
+        }
+
+        if (UP_LIMIT != 1){
+            Exception eventException = new Exception ("Error on Up Limit value.");
+            try{
+                throw eventException;
+            } catch(Exception exception){
+                exception.printStackTrace();
+            }
+        } else {
+            //nothing to do
+        }
+
         assert(position >= DOWN_LIMIT && position <= UP_LIMIT);
 
         try {
