@@ -23,14 +23,14 @@ import java.util.GregorianCalendar;
 
 public class Inform extends AppCompatActivity {
 
-    private TextView textViewInformedMedicine;
-    private TextView textViewInformedUbs;
-    private TextView textViewAvailableError;
-    private RadioButton radioButtonAvailable;
-    private RadioButton radioButtonNotAvailable;
-    private Button informButton;
-    private Button cancelButton;
-    private DatePicker datePickerInform;
+    private static TextView textViewInformedMedicine;
+    private static TextView textViewInformedUbs;
+    private static TextView textViewAvailableError;
+    private static RadioButton radioButtonAvailable;
+    private static RadioButton radioButtonNotAvailable;
+    private static Button informButton;
+    private static Button cancelButton;
+    private static DatePicker datePickerInform;
 
     private Boolean availability;
     private String ubsName;
