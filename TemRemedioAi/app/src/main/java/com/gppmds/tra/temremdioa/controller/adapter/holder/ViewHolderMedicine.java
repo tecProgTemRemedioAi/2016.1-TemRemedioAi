@@ -239,16 +239,11 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         this.buttonSelectUbs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(v.getContext(), SelectUBSActivity.class);
                 boolean running =  true;
 
                 try {
-                    Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
-                    intent.putExtra("medicineName", selectItem.getMedicineDescription());
-                    intent.putExtra("medicineLevelAttention", selectItem.getMedicineAttentionLevel());
-                    intent.putExtra("medicineDosage", selectItem.getMedicineDosage());
-
+                    createMedicineSelectedItemToShow(intent);
                     Exception eventException = new Exception ("Error on selected item from CardListAdapert.");
 
                     v.getContext().startActivity(intent);
@@ -277,11 +272,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                 boolean running =  true;
 
                 try {
-                    Medicine selectedItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
-                    intent.putExtra("medicineName", selectedItem.getMedicineDescription());
-                    intent.putExtra("medicineDosage", selectedItem.getMedicineDosage());
-                    intent.putExtra("ubsName",ubsSelectedName);
-
+                    createMedicineSelectedItemToInform(intent);
                     Exception eventException = new Exception ("Error on selected item to inform from CardListAdapert.");
 
                     view.getContext().startActivity(intent);
@@ -671,4 +662,18 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
         pieChart.setData(getDataPie(medicine));
     }
 
+    private void createMedicineSelectedItemToInform(Intent intent){
+        Medicine selectedItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
+        intent.putExtra("medicineName", selectedItem.getMedicineDescription());
+        intent.putExtra("medicineDosage", selectedItem.getMedicineDosage());
+        intent.putExtra("ubsName",ubsSelectedName);
+
+    }
+
+    private void createMedicineSelectedItemToShow(Intent intent) {
+    Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
+    intent.putExtra("medicineName", selectItem.getMedicineDescription());
+    intent.putExtra("medicineLevelAttention", selectItem.getMedicineAttentionLevel());
+    intent.putExtra("medicineDosage", selectItem.getMedicineDosage());
+    }
 }
