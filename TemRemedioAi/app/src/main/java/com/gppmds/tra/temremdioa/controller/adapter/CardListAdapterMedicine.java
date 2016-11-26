@@ -47,6 +47,16 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         CardView view = (CardView) inflater.inflate(R.layout.card_list_medicine, parent, false);
         Log.i("LOG", "\n" + "CardView was inflated on onCreateViewHolder, line 48 on CardListAdapterMedicine");
 
+        if (inflater == null){
+            Exception eventException = new Exception("Error on inflater of View Holder Medicine.");
+            try{
+                throw eventException;
+            } catch(Exception exception){
+                exception.printStackTrace();
+            }
+        } else {
+            //nothing to do
+        }
         return new ViewHolderMedicine(view);
     }
 
