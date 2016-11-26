@@ -56,6 +56,17 @@ public class FilterSearchUBS extends Filter {
             results.values = filterList;
         }
 
+        if(results == null){
+            Exception eventException = new Exception("Error! Impossible on find results for perform filtering on UBS class.");
+            try {
+                throw eventException;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        } else {
+            // nothing to do
+        }
+
         Log.d("LOG", "\n" + "Returning from performFiltering method");
         return results;
     }
@@ -87,6 +98,7 @@ public class FilterSearchUBS extends Filter {
     private List<UBS> createFilteredList(CharSequence constraint){
 
         constraint = (CharSequence) constraint.toString().toUpperCase();
+        
         List<UBS> filteredUBSs = new ArrayList<UBS>();
 
         // this paragraph should add UBS objects of a complete list of UBSs into a filtered list, to result the current search
