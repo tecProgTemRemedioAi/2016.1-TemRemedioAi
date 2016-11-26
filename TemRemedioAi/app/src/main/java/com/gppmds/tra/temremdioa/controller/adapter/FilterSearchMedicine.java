@@ -89,11 +89,11 @@ public class FilterSearchMedicine extends Filter{
     private List<Medicine> createFilteredMedicineList(CharSequence constraint) {
 
         constraint = (CharSequence) constraint.toString().toUpperCase();
-        List<Medicine> filteredMedicines = new ArrayList<>();
+        List<Medicine> filteredMedicines = new ArrayList<Medicine>();
 
         // this paragraph should add medicine objects of a complete list of medicines into a filtered list, to result the current search
         for (int i = 0; i < filterList.size(); i++) {
-            boolean checkingContains = (boolean) filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint); // checks the contains of constraints into filtered list
+            final boolean checkingContains = (boolean) filterList.get(i).getMedicineDescription().toUpperCase().contains(constraint); // checks the contains of constraints into filtered list
             //This control structure is used to check if current filterList element contains the constrains.
             if(checkingContains) {
                 try {
