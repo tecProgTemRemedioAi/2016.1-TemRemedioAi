@@ -31,9 +31,9 @@ public class TabsAdapter extends FragmentPagerAdapter{
         // this control structure check the position and instance a medicne fragment or a UBS  fragment.
         switch (position){
             case 0:
-                return MedicineFragment.newInstance();
+                return MedicineFragment.newInstance(); // Instance a new fragment on position 0, referring to medicines.
             case 1:
-                return UBSFragment.newInstance();
+                return UBSFragment.newInstance(); // Instance a new fragment on position 1, referring to UBSs.
             default:
                 /* Nothing to do */
                 break;
@@ -67,9 +67,9 @@ public class TabsAdapter extends FragmentPagerAdapter{
         try {
             switch (position) {
                 case 0:
-                    return "Remédio";
+                    return "Remédio"; // Define the name of tab on position 0.
                 case 1:
-                    return "UBS";
+                    return "UBS"; // Define the name of tab on position 1.
                 default:
                     /* Nothing to do */
                     break;
