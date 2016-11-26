@@ -103,9 +103,12 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     @Override
                     public boolean onPreDraw() {
                         expandLayout.getViewTreeObserver().removeOnPreDrawListener(this);
-                        expandLayout.setVisibility(View.GONE);
+                        expandLayout.setVisibility(View.GONE); // Defined visibility.
 
+                        // Size of the layout width when the card is expanded.
                         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+
+                        // Size of the layout height when the card is expanded.
                         final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
                         expandLayout.measure(widthSpec, heightSpec);
 
@@ -164,13 +167,14 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
 
                     List<Notification> notificationList = null;
-                    notificationList = getNotifications(selectItem);
+                    notificationList = getNotifications(selectItem); // Get a selected item and set on new list.
 
                     haveNotification = false;
 
                     // This control structure refers to one or more notifications sent by users.
                     if (notificationList.size() >= LATESTINFORMATION) {
                         haveNotification = true;
+                        // Get the first information about medicine made by users.
                         getTextViewLatestInformation().setText("1. " + generateTextNotification(notificationList.get(0)));
                         Log.i("LOG", "\n" + "Latest information was found");
                     } else {
@@ -180,6 +184,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
                     // This control structure refers to two or more notifications sent by users.
                     if (notificationList.size() >= PENULTIMATEINFORMATION) {
+                        // Get the second information about medicine made by users.
                         getTextViewPenultimateInformation().setText("2. " + generateTextNotification(notificationList.get(1)));
                         Log.i("LOG", "\n" + "Penultimate information was found");
                     } else {
@@ -189,6 +194,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
                     // This control structure refers to three or more notifications sent by users.
                     if (notificationList.size() >= ANTEPENULTIMATEINFORMATION) {
+                        // Get the third information about medicine made by users.
                         getTextViewAntepenultimateInformation().setText("3. " + generateTextNotification(notificationList.get(2)));
                         Log.i("LOG", "\n" + "Antepenultimate information was found");
                     } else {
@@ -312,6 +318,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
         // This control structure refers to check if the name of Ubs was empty or not in the search.
         if (ubsSelectedName != "") {
+            // Compares if the search name exists on data base of medicines.
             queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubsSelectedName);
             Log.i("LOG", "\n" + "\n" + "UBS name select is not empty");
         } else {
