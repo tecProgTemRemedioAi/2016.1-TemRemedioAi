@@ -42,6 +42,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import static junit.framework.Assert.assertFalse;
+
 /**
  * Class: ViewHolderMedicine
  * Purpose: this class set all things about medicine cards.
@@ -120,6 +122,39 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                 final Integer LATESTINFORMATION =  1;
                 final Integer PENULTIMATEINFORMATION = 2;
                 final Integer ANTEPENULTIMATEINFORMATION = 3;
+
+                if (LATESTINFORMATION != 1){
+                    Exception eventException = new Exception ("Error on Latest Information value.");
+                    try{
+                        throw eventException;
+                    } catch(Exception exception){
+                        exception.printStackTrace();
+                    }
+                } else {
+                    //nothing to do
+                }
+
+                if (PENULTIMATEINFORMATION != 2){
+                    Exception eventException = new Exception ("Error on Penultimate Information value.");
+                    try{
+                        throw eventException;
+                    } catch(Exception exception){
+                        exception.printStackTrace();
+                    }
+                } else {
+                    //nothing to do
+                }
+
+                if (ANTEPENULTIMATEINFORMATION != 3){
+                    Exception eventException = new Exception ("Error on Antepenultimate Information value.");
+                    try{
+                        throw eventException;
+                    } catch(Exception exception){
+                        exception.printStackTrace();
+                    }
+                } else {
+                    //nothing to do
+                }
 
                 Log.i("LOG", "\n" + "Clicked header");
 
@@ -206,14 +241,29 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             public void onClick(View v) {
 
                 Intent intent = new Intent(v.getContext(), SelectUBSActivity.class);
+                boolean running =  true;
 
-                Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
-                intent.putExtra("medicineName", selectItem.getMedicineDescription());
-                intent.putExtra("medicineLevelAttention", selectItem.getMedicineAttentionLevel());
-                intent.putExtra("medicineDosage", selectItem.getMedicineDosage());
+                try {
+                    Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
+                    intent.putExtra("medicineName", selectItem.getMedicineDescription());
+                    intent.putExtra("medicineLevelAttention", selectItem.getMedicineAttentionLevel());
+                    intent.putExtra("medicineDosage", selectItem.getMedicineDosage());
 
-                v.getContext().startActivity(intent);
-                Log.i("LOG", "\n" + "\n" + "Informations on expanded medicine card are setted");
+                    Exception eventException = new Exception ("Error on selected item from CardListAdapert.");
+
+                    v.getContext().startActivity(intent);
+                    Log.i("LOG", "\n" + "\n" + "Informations on expanded medicine card are setted");
+
+                    if(intent == null){
+                        throw eventException;
+                    } else {
+                        // Nothing to do.
+                    }
+                } catch  (Exception exception){
+                    running = false;
+                }
+                assertFalse(running);
+
             }
         });
 
@@ -224,14 +274,28 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
             public void onClick(View view) {
 
                 Intent intent = new Intent(view.getContext(), Inform.class);
+                boolean running =  true;
 
-                Medicine selectedItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
-                intent.putExtra("medicineName", selectedItem.getMedicineDescription());
-                intent.putExtra("medicineDosage", selectedItem.getMedicineDosage());
-                intent.putExtra("ubsName",ubsSelectedName);
+                try {
+                    Medicine selectedItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
+                    intent.putExtra("medicineName", selectedItem.getMedicineDescription());
+                    intent.putExtra("medicineDosage", selectedItem.getMedicineDosage());
+                    intent.putExtra("ubsName",ubsSelectedName);
 
-                view.getContext().startActivity(intent);
-                Log.i("LOG", "\n" + "\n" + "Informations about searched medicine are setted");
+                    Exception eventException = new Exception ("Error on selected item to inform from CardListAdapert.");
+
+                    view.getContext().startActivity(intent);
+                    Log.i("LOG", "\n" + "\n" + "Informations about searched medicine are setted");
+
+                    if(intent == null){
+                        throw eventException;
+                    } else {
+                        // Nothing to do.
+                    }
+                } catch  (Exception exception){
+                    running = false;
+                }
+                assertFalse(running);
             }
         });
     }
