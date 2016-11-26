@@ -44,44 +44,6 @@ public class MainActivity extends AppCompatActivity {
      * Method:
      * Purpose:
      *
-     * @param savedInstanceState
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        // check the parameter value.
-        assert (savedInstanceState != null);
-
-        try {
-            super.onCreate(savedInstanceState);
-            FacebookSdk.sdkInitialize(getApplicationContext());
-            setContentView(R.layout.activity_main);
-
-            overridePendingTransition(R.anim.activity_sun_enter, R.anim.activity_dad_exit);
-
-            TabsAdapter tabAdapter = new TabsAdapter(getSupportFragmentManager());
-            ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
-            mViewPager.setAdapter(tabAdapter);
-
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
-
-            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(mViewPager);
-
-            client = createClient();
-        } catch (Throwable e) {
-            // exception was caught.
-            e.printStackTrace();
-        }
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-    }
-
-    /**
-     * Method:
-     * Purpose:
-     *
      * @param menu
      * @return
      */
@@ -95,14 +57,46 @@ public class MainActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+
+                final boolean queryText = false;
+
+                if(queryText != false){
+                    Exception eventException = new Exception("Error on query text submit.");
+                    try {
+                        throw eventException;
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }else{
+                    // nothinhg to do
+                }
+
                 return false;
+
             }
 
             @Override
             public boolean onQueryTextChange(String query) {
+
                 UBSFragment.getUbsAdapter().getFilter().filter(query);
+
                 MedicineFragment.getMedicineAdapter().getFilter().filter(query);
+
+                final boolean queryText = false;
+
+                if(queryText != false){
+                    Exception eventException = new Exception("Error on query text change.");
+                    try {
+                        throw eventException;
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                    }
+                }else{
+                    // nothinhg to do
+                }
+
                 return false;
+
             }
         });
 
@@ -117,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
      * @return
      */
     public DialogInterface.OnClickListener logout() {
+
         return new DialogInterface.OnClickListener() {
 
             @Override
@@ -124,8 +119,10 @@ public class MainActivity extends AppCompatActivity {
 
                 ParseUser.logOut();
                 Toast.makeText(getApplicationContext(), "Deslogado com sucesso!", Toast.LENGTH_SHORT).show();
+
             }
         };
+
     }
 
     /**
@@ -137,8 +134,11 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
+
             case R.id.action_login:
+
                 ParseUser currentUser = ParseUser.getCurrentUser();
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -162,21 +162,29 @@ public class MainActivity extends AppCompatActivity {
                 // Nothing to do.
                 break;
         }
+
+        final boolean optionForItems = super.onOptionsItemSelected(item);
+
         return super.onOptionsItemSelected(item);
+
     }
 
     public void mountDialogWindow(ParseUser currentUser, AlertDialog.Builder builder) {
+
         builder.setTitle("Aviso");
         builder.setIcon(R.drawable.ic_warning_black_48dp);
         builder.setMessage("Usuario logado como " + currentUser.getUsername() + ", deseja sair dessa conta?");
         builder.setCancelable(true);
         builder.setNegativeButton("Cancelar", null);
         builder.setPositiveButton("Sair", logout());
+
     }
 
     public void mountAlertWindow(AlertDialog.Builder builder) {
+
         AlertDialog dialog = builder.create();
         dialog.show();
+
     }
 
     /**
@@ -188,6 +196,18 @@ public class MainActivity extends AppCompatActivity {
     public GoogleApiClient createClient() {
 
         GoogleApiClient apiClient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        if(apiClient == null){
+            Exception eventException = new Exception("Error on instantiate a API google client.");
+            try {
+                throw eventException;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }else{
+            // nothinhg to do
+        }
+
         return apiClient;
 
     }
@@ -197,34 +217,99 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     public Action getIndexApiAction() {
+
         Thing object = new Thing.Builder()
                 .setName("Main Page") // TODO: Define a title for the content shown.
                 // TODO: Make sure this auto-generated URL is correct.
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
-        return new Action.Builder(Action.TYPE_VIEW)
-                .setObject(object)
-                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
-                .build();
+
+        Action actionToBeReturned = new Action.Builder( Action.TYPE_VIEW)
+                                                        .setObject(object)
+                                                        .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                                                        .build();
+
+        if(actionToBeReturned == null){
+            Exception eventException = new Exception("Error on instantiate an action.");
+            try {
+                throw eventException;
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        }else{
+            // nothinhg to do
+        }
+
+        return actionToBeReturned;
     }
 
     @Override
     public void onStart() {
+
         super.onStart();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client2.connect();
+
         AppIndex.AppIndexApi.start(client2, getIndexApiAction());
+
     }
 
     @Override
     public void onStop() {
+
         super.onStop();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client2, getIndexApiAction());
+
         client2.disconnect();
+
     }
+
+    /**
+     * Method:
+     * Purpose:
+     *
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // check the parameter value.
+        assert (savedInstanceState != null);
+
+        try {
+
+            super.onCreate(savedInstanceState);
+
+            FacebookSdk.sdkInitialize(getApplicationContext());
+
+            setContentView(R.layout.activity_main);
+
+            overridePendingTransition(R.anim.activity_sun_enter, R.anim.activity_dad_exit);
+
+            TabsAdapter tabAdapter = new TabsAdapter(getSupportFragmentManager());
+            ViewPager mViewPager = (ViewPager) findViewById(R.id.container);
+            mViewPager.setAdapter(tabAdapter);
+
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+
+            TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(mViewPager);
+
+            client = createClient();
+
+        } catch (Throwable e) {
+            // exception was caught.
+            e.printStackTrace();
+        }
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client2 = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+    }
+    
 }

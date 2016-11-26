@@ -18,8 +18,8 @@ import com.tra.gppmds.temremdioa.R;
 public class SignUpActivity extends AppCompatActivity {
 
     public boolean getSpecialCharacter(String word) {
-        Pattern pattern = Pattern.compile("[^A-Za-z0-9]");
-        Matcher matcher = pattern.matcher(word);
+        final Pattern pattern = (Pattern) Pattern.compile("[^A-Za-z0-9]");
+        Matcher matcher = (Matcher) pattern.matcher(word);
 
         return matcher.find();
     }
@@ -37,18 +37,18 @@ public class SignUpActivity extends AppCompatActivity {
         setListener();
     }
 
-    /*Variaveis para o User*/
-    private EditText mEmailView;
-    private EditText mPasswordView;
-    private EditText mPasswordViewConfirmation;
-    private EditText mAgeView;
-    private EditText mNameView;
-    private EditText mUsernameView;
-    private RadioButton mGenreMaleView;
-    private RadioButton mGenreFemView;
-    private TextView mGenre;
-    private Button mRegisterButton;
-    private Button cancelButton;
+    /*Variables to User*/
+    private static EditText mEmailView;
+    private static EditText mPasswordView;
+    private static EditText mPasswordViewConfirmation;
+    private static EditText mAgeView;
+    private static EditText mNameView;
+    private static EditText mUsernameView;
+    private static RadioButton mGenreMaleView;
+    private static RadioButton mGenreFemView;
+    private static TextView mGenre;
+    private static Button mRegisterButton;
+    private static Button cancelButton;
 
     private void setValues() {
         mNameView = (EditText) findViewById(R.id.name);
@@ -98,15 +98,15 @@ public class SignUpActivity extends AppCompatActivity {
         // Store values at the time of the login attempt.
         /*Password*/
         String password = mPasswordView.getText().toString();
-        String passwordConfirmation = mPasswordViewConfirmation.getText().toString();
+        String passwordConfirmation = (String) mPasswordViewConfirmation.getText().toString();
         validatePassword(password, passwordConfirmation, cancel, focusView);
 
         /*Email*/
-        String email = mEmailView.getText().toString();
+        String email = (String) mEmailView.getText().toString();
         validateEmail(email, cancel, focusView);
 
         /*Name*/
-        String name = mNameView.getText().toString();
+        String name = (String) mNameView.getText().toString();
         validateName(name, cancel, focusView);
 
         /*Age*/
@@ -118,7 +118,7 @@ public class SignUpActivity extends AppCompatActivity {
         validateGenre(genre, cancel, focusView);
 
         /*Username*/
-        String username = mUsernameView.getText().toString();
+        String username = (String) mUsernameView.getText().toString();
         validateUsername(username, cancel, focusView);
 
         // When user press cancel button.
@@ -133,15 +133,15 @@ public class SignUpActivity extends AppCompatActivity {
         // conditions to validate the integrity of the password on register.
         if (TextUtils.isEmpty(password)) {
             mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
+            focusView = (View) mPasswordView;
             cancel = true;
         } else if (password.length() < 6){
             mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+            focusView = (View) mPasswordView;
             cancel = true;
         } else if (!password.equals(passwordConfirmation)) {
             mPasswordViewConfirmation.setError(getString(R.string.error_different_password));
-            focusView = mPasswordViewConfirmation;
+            focusView = (View) mPasswordViewConfirmation;
             cancel = true;
         }else {
             // Nothing to do.
@@ -152,11 +152,11 @@ public class SignUpActivity extends AppCompatActivity {
         // checking if the user's email is valid to register on database.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
+            focusView = (View) mEmailView;
             cancel = true;
         } else if (!isContainValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            focusView = (View) mEmailView;
             cancel = true;
         }else {
             // Nothing to do.
@@ -167,11 +167,11 @@ public class SignUpActivity extends AppCompatActivity {
         // checking if the user's name is valid to pursue a user registration.
         if (TextUtils.isEmpty(name)) {
             mNameView.setError(getString(R.string.error_field_required));
-            focusView = mNameView;
+            focusView = (View) mNameView;
             cancel = true;
         } else if (getSpecialCharacter(name)) {
             mNameView.setError(getString(R.string.error_character));
-            focusView = mNameView;
+            focusView = (View) mNameView;
             cancel = true;
         }else {
             // Nothing to do.
@@ -182,7 +182,7 @@ public class SignUpActivity extends AppCompatActivity {
         // conditions to validate the user's age to continue registration.
         if (TextUtils.isEmpty(mAgeView.getText().toString())) {
             mAgeView.setError(getString(R.string.error_field_required));
-            focusView = mAgeView;
+            focusView = (View) mAgeView;
             cancel = true;
         } else {
             age = Integer.parseInt(mAgeView.getText().toString());
@@ -197,14 +197,14 @@ public class SignUpActivity extends AppCompatActivity {
     private void validateGenre(String genre, boolean cancel, View focusView){
         if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
             mGenre.setError(getString(R.string.error_invalid_genre));
-            focusView = mGenre;
+            focusView = (View) mGenre;
             cancel = true;
         }
         else if (mGenreFemView.isChecked()){
-            genre = "Feminino";
+            genre = (String) "Feminino";
         }
         else if (mGenreMaleView.isChecked()){
-            genre = "Masculino";
+            genre = (String) "Masculino";
         } else {
             // Nothing to do.
         }
@@ -221,7 +221,7 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
-    private ParseUser user = new ParseUser();
+    private static ParseUser user = new ParseUser();
 
     private void mountUser(ParseUser user, String email, String password, String username, String name, int age, String genre){
         user.setEmail(email);

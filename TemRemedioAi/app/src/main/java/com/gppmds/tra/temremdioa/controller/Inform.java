@@ -5,6 +5,7 @@
 package com.gppmds.tra.temremdioa.controller;
 
 import android.os.Bundle;
+import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,14 +23,14 @@ import java.util.GregorianCalendar;
 
 public class Inform extends AppCompatActivity {
 
-    private TextView textViewInformedMedicine;
-    private TextView textViewInformedUbs;
-    private TextView textViewAvailableError;
-    private RadioButton radioButtonAvailable;
-    private RadioButton radioButtonNotAvailable;
-    private Button informButton;
-    private Button cancelButton;
-    private DatePicker datePickerInform;
+    private static TextView textViewInformedMedicine;
+    private static TextView textViewInformedUbs;
+    private static TextView textViewAvailableError;
+    private static RadioButton radioButtonAvailable;
+    private static RadioButton radioButtonNotAvailable;
+    private static Button informButton;
+    private static Button cancelButton;
+    private static DatePicker datePickerInform;
 
     private Boolean availability;
     private String ubsName;
@@ -46,6 +47,10 @@ public class Inform extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // check the parameter value.
         assert(savedInstanceState != null);
+
+        final String SUCCESS_SEND_INFORMATION = (String) "Informação enviada com sucesso.";
+        final String ERROR_SEND_COMPLETE_ACTION = (String) "Não foi possível completar a ação.";
+
 
         try {
             super.onCreate(savedInstanceState);
@@ -65,18 +70,18 @@ public class Inform extends AppCompatActivity {
                 public void onClick(View view) {
                     if (validateInform()) {
                         attemptInform();
-                        Toast.makeText(view.getContext(), "Informação enviada com sucesso.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), SUCCESS_SEND_INFORMATION, Toast.LENGTH_LONG).show();
                         finish();
                     } else {
-                        Toast.makeText(view.getContext(), "Não foi possível completar a ação.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext(), ERROR_SEND_COMPLETE_ACTION, Toast.LENGTH_LONG).show();
                     }
                 }
             });
 
             ubsName = getIntent().getStringExtra("UBSName");
 
-            medicineName = getIntent().getStringExtra("MedicineName");
-            medicineDos = getIntent().getStringExtra("MedicineDos");
+            medicineName = (String) getIntent().getStringExtra("MedicineName");
+            medicineDos = (String) getIntent().getStringExtra("MedicineDos");
 
             textViewInformedMedicine = (TextView) findViewById(R.id.informed_medicine);
             textViewInformedMedicine.setText(medicineName);
@@ -101,21 +106,21 @@ public class Inform extends AppCompatActivity {
     private void attemptInform() {
 
         if (radioButtonAvailable.isChecked()) {
-            availability = true;
+            availability = (boolean) true;
         } else if (radioButtonNotAvailable.isChecked()) {
-            availability = false;
+            availability = (boolean) false;
         } else {
-            availability = false;
+            availability = (boolean) false;
         }
 
-        Integer selectedYear = datePickerInform.getYear();
-        Integer selectedMonth = datePickerInform.getMonth();
-        Integer selectedDay = datePickerInform.getDayOfMonth();
+        Integer selectedYear = (Integer) datePickerInform.getYear();
+        Integer selectedMonth = (Integer) datePickerInform.getMonth();
+        Integer selectedDay = (Integer) datePickerInform.getDayOfMonth();
 
         Calendar calendar = new GregorianCalendar();
         calendar.set(selectedYear, selectedMonth, selectedDay);
 
-        ParseUser getCurrentUser = ParseUser.getCurrentUser();
+        ParseUser getCurrentUser = (ParseUser) ParseUser.getCurrentUser();
 
         Notification notification = new Notification();
         notification.setMedicineDosage(medicineDos);
@@ -136,14 +141,19 @@ public class Inform extends AppCompatActivity {
      */
     private boolean validateInform() {
 
-        boolean returnValidate = true;
+        final String NOT_SELECTED_AVALIABLE =  (String) "Disponibilidade não selecionada";
+
+        boolean returnValidate = (boolean) true;
+
         if (!radioButtonAvailable.isChecked() && !radioButtonNotAvailable.isChecked()) {
-            radioButtonAvailable.setError("Disponibilidade não selecionada");
-            returnValidate = false;
+
+            radioButtonAvailable.setError(NOT_SELECTED_AVALIABLE);
+
+            returnValidate = (boolean) false;
+
         } else {
             /* nothing to do */
         }
-        // Validar data;
 
         return returnValidate;
 
