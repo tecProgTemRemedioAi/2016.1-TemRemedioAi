@@ -87,12 +87,12 @@ public class FilterSearchUBS extends Filter {
     private List<UBS> createFilteredList(CharSequence constraint){
 
         constraint = (CharSequence) constraint.toString().toUpperCase();
-        List<UBS> filteredUBSs = new ArrayList<>();
+        List<UBS> filteredUBSs = new ArrayList<UBS>();
 
         // this paragraph should add UBS objects of a complete list of UBSs into a filtered list, to result the current search
         for (int i = 0; i < filterList.size(); i++) {
 
-            boolean findContains = (boolean) filterList.get(i).getUbsName().toUpperCase().contains(constraint);
+            final boolean findContains = (boolean) filterList.get(i).getUbsName().toUpperCase().contains(constraint);
 
             if(findContains) {
                 try {
@@ -105,7 +105,9 @@ public class FilterSearchUBS extends Filter {
                     /* Nothing to do */
             }
         }
+
         return filteredUBSs;
+        
     }
 
 }
