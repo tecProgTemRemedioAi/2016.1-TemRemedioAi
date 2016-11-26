@@ -25,6 +25,7 @@ public class SelectUBSActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        
         // check the parameter value.
         assert(savedInstanceState != null);
 
@@ -43,24 +44,8 @@ public class SelectUBSActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        createCardListAdapterForUBS();
 
-        CardListAdapterUBS claUbs = new CardListAdapterUBS(SelectUBSActivity.this, getListOfUbs(getFilterAttentionLevel()));
-        claUbs.setShowButtonMedicines(false);
-        claUbs.setShowButtonInform(true);
-        claUbs.setMedicineName(getMedicineName());
-        claUbs.setMedicineDosage(getMedicineDosage());
-
-        try {
-            createRecyclerView(claUbs);
-        } catch (Exception e) {
-            // exception was caught
-        }
-
-        try {
-            setTextViewUbsQuantityFound(claUbs.getItemCount());
-        } catch (Exception e) {
-            // exception was caught
-        }
     }
 
     /**
@@ -140,6 +125,32 @@ public class SelectUBSActivity extends AppCompatActivity {
     }
 
     /**
+     * Method: createCardListAdapterForUBS
+     * Purpose: this method create an card list for ubs adapter
+     */
+    private void createCardListAdapterForUBS() {
+
+        CardListAdapterUBS claUbs = new CardListAdapterUBS(SelectUBSActivity.this, getListOfUbs(getFilterAttentionLevel()));
+        claUbs.setShowButtonMedicines(false);
+        claUbs.setShowButtonInform(true);
+        claUbs.setMedicineName(getMedicineName());
+        claUbs.setMedicineDosage(getMedicineDosage());
+
+        try {
+            createRecyclerView(claUbs);
+        } catch (Exception e) {
+            // exception was caught
+        }
+
+        try {
+            setTextViewUbsQuantityFound(claUbs.getItemCount());
+        } catch (Exception e) {
+            // exception was caught
+        }
+
+    }
+
+    /**
      * Method: setTextViewSelectedMedicine.
      * Purpose: this method set name of selected medicine.
      * @param medicineSelected
@@ -150,7 +161,7 @@ public class SelectUBSActivity extends AppCompatActivity {
         assert(medicineSelected != null);
 
         TextView textViewMedicineSelected = (TextView) findViewById(R.id.textViewMedicineSelected);
-        
+
         if (textViewMedicineSelected != null) {
             textViewMedicineSelected.setText(medicineSelected);
         } else {
