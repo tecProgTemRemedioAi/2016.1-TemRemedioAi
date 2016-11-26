@@ -21,9 +21,9 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     List<Medicine> filterDataMedicine;          // This list refers to stores filtered data to fill in the cards.
     Context contextOpen;                        //
     FilterSearchMedicine filter;                // This filter refers to medicines searched by users.
-    private Boolean showButtonUBSs;             // This variable refers to UBS button visibility.
-    private Boolean showButtonInform;           // This variable refers to Inform button visibility.
-    private String ubsName;                     // This varaible refers to UBS name.
+    private static Boolean showButtonUBSs;             // This variable refers to UBS button visibility.
+    private static Boolean showButtonInform;           // This variable refers to Inform button visibility.
+    private static String ubsName;                     // This varaible refers to UBS name.
 
     public CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
         this.contextOpen = context;
@@ -170,7 +170,6 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
         holder.getTextViewMedicineName().setText(rowData.getMedicineDescription());
         holder.getTextViewMedicineUnit().setText(rowData.getUnityMedicineFormatted());
         holder.getTextViewMedicineDosage().setText(rowData.getMedicineDosage());
-
     }
 
     private void validatingMedicineRowData(ViewHolderMedicine holder){
