@@ -18,9 +18,9 @@ import java.util.List;
 
 public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedicine> implements Filterable{
     public static List<Medicine> dataMedicine =  null;          // This list refers to stores data to fill in the cards.
-    List<Medicine> filterDataMedicine = null;                   // This list refers to stores filtered data to fill in the cards.
-    Context contextOpen =  null;                                //
-    FilterSearchMedicine filter = null;                         // This filter refers to medicines searched by users.
+    private static List<Medicine> filterDataMedicine = null;                   // This list refers to stores filtered data to fill in the cards.
+    private static Context contextOpen =  null;                                //
+    private static FilterSearchMedicine filter = null;                         // This filter refers to medicines searched by users.
     private static Boolean showButtonUBSs =  true;              // This variable refers to UBS button visibility.
     private static Boolean showButtonInform =  true;            // This variable refers to Inform button visibility.
 
@@ -128,7 +128,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     public String getUbsName(){
         return this.ubsName;
     }
-    
+
     /**
      * Method: setUbsName.
      * Purpose: this method set the name of Ubs.
