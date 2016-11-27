@@ -67,7 +67,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     private static PieChart pieChart = null;                              // This chart is completed by information provided by users.
     public static Button buttonMedicineInform = null;                     // This button allows users to inform met any medication or not.
     public static String ubsSelectedName = null;                          // This variable says refers to the UBS name that was searched by the user.
-    public static Boolean haveNotification = true;                        // This variable tells whether or not notification made by users.
+
 
 
     /**
@@ -169,6 +169,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                     List<Notification> notificationList = null;
                     notificationList = getNotifications(selectItem); // Get a selected item and set on new list.
 
+                    Boolean haveNotification = true;                        // This variable tells whether or not notification made by users.
                     haveNotification = false;
 
                     // This control structure refers to one or more notifications sent by users.
