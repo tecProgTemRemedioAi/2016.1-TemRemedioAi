@@ -289,6 +289,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        mFacebookButton.finalize();
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -302,6 +304,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        mPasswordView.finalize();
+
         mUsernameSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -310,6 +314,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+        mUsernameSignInButton.finalize();
+
         mRegisterButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -317,6 +323,8 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(signUpActivity);
             }
         });
+
+        mRegisterButton.finalize();
     }
 
     /**
@@ -359,6 +367,9 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             });
         }
+
+        username.finalize();
+        password.finalize();
     }
 
     /**
