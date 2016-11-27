@@ -51,23 +51,23 @@ import static junit.framework.Assert.assertFalse;
 
 public class ViewHolderMedicine extends RecyclerView.ViewHolder {
 
-    private static TextView textViewMedicineName;                  // This variable refers to the name of the drug, the same existing in the system.
-    private static TextView textViewLatestInformation;             // This variable refers to latest information on availability of the drug, made by a users.
-    private static TextView textViewPenultimateInformation;        // This variable refers to the penultimate information on availability of the drug, made by a users.
-    private static TextView textViewAntepenultimateInformation;    // This variable refers to the antepenultimate information on availability of the drug, made by a users.
-    private static TextView textViewLatestInformationTitle;        // This variable refers to the title of the latest information, made by users.
-    private static TextView textViewWithoutNotification;           // This variable refers to the text that appears when there are no notifications made by users.
-    private static TextView textViewMedicineUnit;                  // This variable refers to the type of unit that the drug is distributed.
-    private static TextView textViewMedicineDosage;                // This variable refers to what kind of dosage that the drug is distributed.
-    private static RelativeLayout headerLayout;                    // This layout refers to the standard structure of the card when it is collapsed.
-    private static RelativeLayout expandLayout;                    // This layout refers to the standard structure of the card when it is expanded.
-    private static ValueAnimator cardAnimation;                    // This animator refers to the animation that occurs on the card when it is clicked.
-    private static Button buttonSelectUbs;                         // This button is for the user to select the desired UBS.
-    private static ImageView imageViewArrow;                       // This image refers to where the chart will be set.
-    private static PieChart pieChart;                              // This chart is completed by information provided by users.
-    public static Button buttonMedicineInform;                     // This button allows users to inform met any medication or not.
-    public static String ubsSelectedName;                          // This variable says refers to the UBS name that was searched by the user.
-    public static Boolean haveNotification;                        // This variable tells whether or not notification made by users.
+    private static TextView textViewMedicineName = null;                  // This variable refers to the name of the drug, the same existing in the system.
+    private static TextView textViewLatestInformation =  null;             // This variable refers to latest information on availability of the drug, made by a users.
+    private static TextView textViewPenultimateInformation = null;        // This variable refers to the penultimate information on availability of the drug, made by a users.
+    private static TextView textViewAntepenultimateInformation = null;    // This variable refers to the antepenultimate information on availability of the drug, made by a users.
+    private static TextView textViewLatestInformationTitle = null;        // This variable refers to the title of the latest information, made by users.
+    private static TextView textViewWithoutNotification = null;           // This variable refers to the text that appears when there are no notifications made by users.
+    private static TextView textViewMedicineUnit = null;                  // This variable refers to the type of unit that the drug is distributed.
+    private static TextView textViewMedicineDosage = null;                // This variable refers to what kind of dosage that the drug is distributed.
+    private static RelativeLayout headerLayout = null;                    // This layout refers to the standard structure of the card when it is collapsed.
+    private static RelativeLayout expandLayout = null;                    // This layout refers to the standard structure of the card when it is expanded.
+    private static ValueAnimator cardAnimation = null;                    // This animator refers to the animation that occurs on the card when it is clicked.
+    private static Button buttonSelectUbs = null;                         // This button is for the user to select the desired UBS.
+    private static ImageView imageViewArrow = null;                       // This image refers to where the chart will be set.
+    private static PieChart pieChart = null;                              // This chart is completed by information provided by users.
+    public static Button buttonMedicineInform = null;                     // This button allows users to inform met any medication or not.
+    public static String ubsSelectedName = null;                          // This variable says refers to the UBS name that was searched by the user.
+    public static Boolean haveNotification = true;                        // This variable tells whether or not notification made by users.
 
 
     /**
