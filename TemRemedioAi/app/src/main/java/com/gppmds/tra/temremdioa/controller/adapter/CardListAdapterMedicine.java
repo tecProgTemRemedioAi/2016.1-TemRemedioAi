@@ -23,7 +23,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
     FilterSearchMedicine filter = null;                         // This filter refers to medicines searched by users.
     private static Boolean showButtonUBSs =  true;              // This variable refers to UBS button visibility.
     private static Boolean showButtonInform =  true;            // This variable refers to Inform button visibility.
-    private static String ubsName =  null;                      // This varaible refers to UBS name.
+
 
     public CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
         this.contextOpen = context;
@@ -124,10 +124,11 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
      * Purpose: this method get the Ubs name.
      * @return
      */
+    private static String ubsName =  null;                      // This varaible refers to UBS name.
     public String getUbsName(){
         return this.ubsName;
     }
-
+    
     /**
      * Method: setUbsName.
      * Purpose: this method set the name of Ubs.
