@@ -239,4 +239,16 @@ public class Medicine extends ParseObject {
     public String toString() {
         return getString(getMedicineDescriptionTitle());
     }
+
+    @Override
+    protected void finalize() throws Throwable {
+        try{
+            System.out.println("Finalize of Sub Class");
+        }catch(Throwable throwable){
+            throw throwable;
+        }finally{
+            System.out.println("Calling finalize of Super Class");
+            super.finalize();
+        }
+    }
 }
