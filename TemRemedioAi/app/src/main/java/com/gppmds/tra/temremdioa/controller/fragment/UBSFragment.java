@@ -69,8 +69,7 @@ public class UBSFragment extends Fragment{
         List<UBS> ubsList = null;
 
         try {
-            ubsList = (List) LisqueryUBS.find();
-
+            ubsList = (List) queryUBS.find();
         } catch (ParseException e) {
             e.printStackTrace();
         }
