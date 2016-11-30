@@ -28,8 +28,6 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
 
     private static Boolean showButtonMedicines;    // This button is for the user to select the desired medicine.
     private static Boolean showButtonInform;       // This button allows users to inform medicine in a ubs or not.
-    private static String medicineName;            // This variable refers to the medicine name.
-    private static String medicineDosage;          // This variable refers to the medicine dosage.
 
     public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
         this.contextOpen = context;
@@ -203,6 +201,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * Purpose:
      * @return medicineName
      */
+    private static String medicineName = null;            // This variable refers to the medicine name.
     public String getMedicineName(){
         return this.medicineName;
     }
@@ -221,6 +220,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * Purpose:
      * @return medicineDosage
      */
+    private static String medicineDosage = null;          // This variable refers to the medicine dosage.
     public String getMedicineDosage(){
         return this.medicineDosage;
     }
