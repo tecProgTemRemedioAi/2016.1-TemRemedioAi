@@ -25,13 +25,13 @@ public class SplashScreenActivity extends Activity {
      */
     public boolean openMainActivity() {
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        Boolean valid = true;
+        Boolean valid = (Boolean)true;
 
         try {
             startActivity(intent);
-            valid =  true;
+            valid =  (Boolean) true;
         } catch (ActivityNotFoundException e) {
-            valid =  false;
+            valid =  (Boolean) false;
         }
 
         intent.finalize();
