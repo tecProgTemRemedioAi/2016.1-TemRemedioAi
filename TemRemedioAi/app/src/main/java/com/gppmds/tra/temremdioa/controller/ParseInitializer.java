@@ -15,14 +15,18 @@ public class ParseInitializer extends android.app.Application {
 
     @Override
     public void onCreate(){
-        super.onCreate();
+        try {
+            super.onCreate();
 
-        registerParserSubClasses();
-        inicializeParser();
+            registerParserSubClasses();
+            inicializeParser();
 
-        loadLocalDateBaseMedicine();
-        loadLocalDateBaseUBS();
-        loadLocalDateBaseNotification();
+            loadLocalDateBaseMedicine();
+            loadLocalDateBaseUBS();
+            loadLocalDateBaseNotification();
+        } catch (Throwable exception) {
+            exception.printStackTrace();
+        }
     }
 
     public boolean registerParserSubClasses() {
@@ -31,8 +35,8 @@ public class ParseInitializer extends android.app.Application {
             ParseObject.registerSubclass(Medicine.class);
             ParseObject.registerSubclass(Notification.class);
             return true;
-        } catch (Exception e) {
-            return false;
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -48,57 +52,68 @@ public class ParseInitializer extends android.app.Application {
             );
 
             return true;
-        } catch (Exception e) {
-            return false;
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
     public boolean loadLocalDateBaseMedicine() {
-        ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
-        queryMedicine.setLimit(1000);
-        queryMedicine.findInBackground(new FindCallback<Medicine>() {
-            @Override
-            public void done(List<Medicine> list, ParseException e) {
-                if (e != null) {
-                    // Nothing to do
-                } else {
-                    Medicine.pinAllInBackground(list);
+        try {
+            ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
+            queryMedicine.setLimit(1000);
+            queryMedicine.findInBackground(new FindCallback<Medicine>() {
+                @Override
+                public void done(List<Medicine> list, ParseException e) {
+                    if (e != null) {
+                        // Nothing to do
+                    } else {
+                        Medicine.pinAllInBackground(list);
+                    }
                 }
-            }
-        });
-        return true;
+            });
+            return true;
+        } catch (Throwable exception) {
+            exception.printStackTrace();
+        }
     }
 
     public boolean loadLocalDateBaseUBS() {
-        ParseQuery<UBS> queryUBS = UBS.getQuery();
-        queryUBS.setLimit(120);
-        queryUBS.findInBackground(new FindCallback<UBS>() {
-            @Override
-            public void done(List<UBS> list, ParseException e) {
-                if (e != null) {
-                    // Nothing to do
-                } else {
-                    UBS.pinAllInBackground(list);
+        try {
+            ParseQuery<UBS> queryUBS = UBS.getQuery();
+            queryUBS.setLimit(120);
+            queryUBS.findInBackground(new FindCallback<UBS>() {
+                @Override
+                public void done(List<UBS> list, ParseException e) {
+                    if (e != null) {
+                        // Nothing to do
+                    } else {
+                        UBS.pinAllInBackground(list);
+                    }
                 }
-            }
-        });
-        return true;
+            });
+            return true;
+        } catch (Throwable exception) {
+            exception.printStackTrace();
+        }
     }
 
     public boolean loadLocalDateBaseNotification() {
-        ParseQuery<Notification> queryNotification = Notification.getQuery();
-        queryNotification.setLimit(1000);
-        queryNotification.findInBackground(new FindCallback<Notification>() {
-            @Override
-            public void done(List<Notification> list, ParseException e) {
-                if (e != null) {
-                    // Nothing to do
-                } else {
-                    Notification.pinAllInBackground(list);
+        try {
+            ParseQuery<Notification> queryNotification = Notification.getQuery();
+            queryNotification.setLimit(1000);
+            queryNotification.findInBackground(new FindCallback<Notification>() {
+                @Override
+                public void done(List<Notification> list, ParseException e) {
+                    if (e != null) {
+                        // Nothing to do
+                    } else {
+                        Notification.pinAllInBackground(list);
+                    }
                 }
-            }
-        });
-
-        return true;
+            });
+            return true;
+        } catch (Throwable exception) {
+            exception.printStackTrace();
+        }
     }
 }
