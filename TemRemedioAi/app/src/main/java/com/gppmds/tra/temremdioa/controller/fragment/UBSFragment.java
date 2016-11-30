@@ -42,7 +42,7 @@ public class UBSFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_ubs, container, false);
+        View rootView = (View) inflater.inflate(R.layout.fragment_ubs, container, false);
 
         ubsAdapter = new CardListAdapterUBS(UBSFragment.this.getContext(), getListOfUBS());
         ubsAdapter.setShowButtonInform(false);
@@ -63,13 +63,13 @@ public class UBSFragment extends Fragment{
      * @return ubsList
      */
     public List<UBS> getListOfUBS(){
-        ParseQuery<UBS> queryUBS = UBS.getQuery();
+        ParseQuery<UBS> queryUBS = (ParseQuery) UBS.getQuery();
         queryUBS.fromLocalDatastore();
         queryUBS.orderByAscending(UBS.getUbsNameTitle());
         List<UBS> ubsList = null;
 
         try {
-            ubsList = queryUBS.find();
+            ubsList = (List) LisqueryUBS.find();
 
         } catch (ParseException e) {
             e.printStackTrace();
