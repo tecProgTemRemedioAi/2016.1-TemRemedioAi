@@ -20,16 +20,16 @@ import com.tra.gppmds.temremdioa.R;
 import java.util.List;
 
 public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> implements Filterable{
-    public static List<UBS> dataUBS;        // List of all ubs in database.
-    List<UBS> filterDataUBS = null;         // List of ubs filtered.
+    public static List<UBS> dataUBS;                // List of all ubs in database.
+    private static List<UBS> filterDataUBS = null;  // List of ubs filtered.
 
-    private static Context contextOpen;     // This context refers to activity that is open and calling this class.
-    FilterSearchUBS filter = null;          // This variable refers to class that make filter search on ubs.
+    private static Context contextOpen;             // This context refers to activity that is open and calling this class.
+    private static FilterSearchUBS filter = null;   // This variable refers to class that make filter search on ubs.
 
-    private Boolean showButtonMedicines;    // This button is for the user to select the desired medicine.
-    private Boolean showButtonInform;       // This button allows users to inform medicine in a ubs or not.
-    private String medicineName;            // This variable refers to the medicine name.
-    private String medicineDosage;          // This variable refers to the medicine dosage.
+    private static Boolean showButtonMedicines;    // This button is for the user to select the desired medicine.
+    private static Boolean showButtonInform;       // This button allows users to inform medicine in a ubs or not.
+    private static String medicineName;            // This variable refers to the medicine name.
+    private static String medicineDosage;          // This variable refers to the medicine dosage.
 
     public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
         this.contextOpen = context;
