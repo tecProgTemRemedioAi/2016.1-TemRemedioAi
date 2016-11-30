@@ -49,8 +49,22 @@ public class FilterSearchUBS extends Filter {
 
             List<UBS> filteredUBSs = (List<UBS>) createFilteredList(constraint);
 
-            results.count = (int) filteredUBSs.size();
-            results.values = (Object) filteredUBSs;
+            final int listUBSSize = filteredUBSs.size();
+
+            // checking list numeric interval
+            if((listUBSSize >= 0) && (listUBSSize <= filterList.size())){
+
+                results.count = (int) filteredUBSs.size();
+                results.values = (Object) filteredUBSs;
+
+            }else{
+                Exception eventException = new Exception("Invalid numbers to size of filtered List.");
+                try {
+                    throw eventException;
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
         } else {
             results.count = filterList.size();
             results.values = filterList;
