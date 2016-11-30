@@ -22,7 +22,7 @@ import java.util.List;
 
 public class UBSFragment extends Fragment{
 
-    private RecyclerView ubsRecyclerView;           // This component contains a list of ubs cards.
+    private static RecyclerView ubsRecyclerView;    // This component contains a list of ubs cards.
     private static CardListAdapterUBS ubsAdapter;   // This class makes the management of ubs cards.
 
     public static final  UBSFragment newInstance(){
