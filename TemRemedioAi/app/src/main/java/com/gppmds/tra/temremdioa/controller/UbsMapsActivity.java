@@ -29,10 +29,10 @@ import org.mockito.internal.matchers.Null;
 
 public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private GoogleMap mMap;     // This variable refers to the ubs map.
-    private Double latitude;    // This variable refers to the ubs latitude.
-    private Double longitude;   // This variable refers to the ubs longitude.
-    private String ubsName;     // This variable refers to the ubs name.
+    private static GoogleMap mMap;     // This variable refers to the ubs map.
+    private static Double latitude;    // This variable refers to the ubs latitude.
+    private static Double longitude;   // This variable refers to the ubs longitude.
+    private static String ubsName;     // This variable refers to the ubs name.
 
     private static final int LATLNGZOOM = 13;   // This variable refers to the map zoom that is showed on the screen.
 
@@ -57,6 +57,63 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
 
         // Ubs trajectory
         generateTrajectory();
+    }
+
+    /**
+     * Method: isGoogleMapsInstalled()
+     * Purpose:
+     * @return true or false
+     */
+    public boolean isGoogleMapsInstalled() {
+        try {
+            ApplicationInfo info = (ApplicationInfo) getPackageManager()
+                    .getApplicationInfo("com.google.android.apps.maps", 0);
+            return true;
+        } catch(PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Method: getGoogleMapsListener()
+     * Purpose:
+     * @return
+     */
+    public DialogInterface.OnClickListener getGoogleMapsListener() {
+        return new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=com.google.android.apps.maps"));
+                startActivity(intent);
+
+                // Finish the activity so they can't circumvent the check
+                finish();
+            }
+        };
+    }
+
+    /**
+     * Method: onMapReady(GoogleMap googleMap)
+     * Purpose:
+     * @return
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        assert(googleMap != null);
+
+        try {
+            mMap = (GoogleMap) googleMap;
+
+            // Get latitude and longitude to create a marker on map
+            LatLng latLngValues = new LatLng(latitude, longitude);
+            mMap.addMarker(new MarkerOptions().position(latLngValues).title(ubsName));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngValues, LATLNGZOOM));
+
+        } catch (Throwable exception){
+            exception.printStackTrace();
+        }
     }
 
     /**
@@ -203,60 +260,4 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
         }
     }
 
-    /**
-     * Method: isGoogleMapsInstalled()
-     * Purpose:
-     * @return true or false
-     */
-    public boolean isGoogleMapsInstalled() {
-        try {
-            ApplicationInfo info = (ApplicationInfo) getPackageManager()
-                    .getApplicationInfo("com.google.android.apps.maps", 0);
-            return true;
-        } catch(PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Method: getGoogleMapsListener()
-     * Purpose:
-     * @return
-     */
-    public DialogInterface.OnClickListener getGoogleMapsListener() {
-        return new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("market://details?id=com.google.android.apps.maps"));
-                startActivity(intent);
-
-                // Finish the activity so they can't circumvent the check
-                finish();
-            }
-        };
-    }
-
-    /**
-     * Method: onMapReady(GoogleMap googleMap)
-     * Purpose:
-     * @return
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        assert(googleMap != null);
-
-        try {
-            mMap = (GoogleMap) googleMap;
-
-            // Get latitude and longitude to create a marker on map
-            LatLng latLngValues = new LatLng(latitude, longitude);
-            mMap.addMarker(new MarkerOptions().position(latLngValues).title(ubsName));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLngValues, LATLNGZOOM));
-
-        } catch (Throwable exception){
-            exception.printStackTrace();
-        }
-    }
 }
