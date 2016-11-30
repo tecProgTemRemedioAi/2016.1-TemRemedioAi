@@ -50,12 +50,11 @@ import static junit.framework.Assert.assertFalse;
  * Purpose: this class set all things about ubs cards;
  */
 public class ViewHolderUBS extends RecyclerView.ViewHolder{
-    public final ImageView IMAGE_VIEW_ARROW;               // This image refers to where the chart will be set.
+    private final ImageView IMAGE_VIEW_ARROW;               // This image refers to where the chart will be set.
 
-    public static Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
-    public static String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
-    public static String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
-
+    private static Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
+    private static String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
+    private static String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
     private static TextView textViewUbsName;               // This variable refers to the ubs name, the same existing in the system.
     private static TextView textViewUbsNeighborhood;       // This variable refers to ubs neighborhood.
     private static TextView textViewLastInformation1;      // This variable refers to latest information on availability of the drug, made by a users.

@@ -211,13 +211,10 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     private static String medicineDosage = null;          // This variable refers to the medicine dosage.
     public String getMedicineDosage(){
-
         return this.medicineDosage;
-
     }
 
     private void createUbsRowData(ViewHolderUBS holder, int position) {
-
         UBS rowData = this.dataUBS.get(position);
         holder.getTextViewUbsName().setText(rowData.getUbsName());
         holder.getTextViewUbsNeighborhood().setText(rowData.getUbsNeighborhood());
@@ -225,7 +222,6 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     }
 
     private void validatingUbsRowData(ViewHolderUBS holder) {
-
         // this control structure refers to the  visibility and params of Button Medicine.
         if (!getShowButtonMedicines()) {
             holder.getBUTTON_SELECT_MEDICINE().setVisibility(View.GONE);
