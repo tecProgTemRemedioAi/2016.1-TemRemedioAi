@@ -67,7 +67,6 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     public String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
     public final ImageView imageViewArrow;                // This image refers to where the chart will be set.
     private final PieChart pieChart;                      // This chart is completed by information provided by users.
-    public Boolean haveNotification;                // This variable tells whether or not notification made by users.
 
      /**
      * Method: ViewHolderUBS
@@ -127,6 +126,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     List<Notification> notificationList = null;
                     notificationList = getNotifications(selectItem);
 
+                    Boolean haveNotification;                // This variable tells whether or not notification made by users.
                     haveNotification = false;
 
                     if (notificationList.size() >= 1) {
