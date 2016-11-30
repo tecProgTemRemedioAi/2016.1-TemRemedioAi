@@ -43,12 +43,15 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import static junit.framework.Assert.assertFalse;
+
 /**
  * Class: ViewHolderUBS
  * Purpose: this class set all things about ubs cards;
  */
 public class ViewHolderUBS extends RecyclerView.ViewHolder{
     public final ImageView IMAGE_VIEW_ARROW;               // This image refers to where the chart will be set.
+
     public static Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
     public static String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
     public static String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
@@ -82,6 +85,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.textViewLastInformation3 = (TextView) card.findViewById(R.id.textViewLastInformation3);
         this.textViewLastInformationTitle = (TextView) card.findViewById(R.id.textViewLastInformationTitle);
         this.textViewWithoutNotification = (TextView) card.findViewById(R.id.textViewWithoutNotification);
+
         this.IMAGE_VIEW_ARROW = (ImageView) card.findViewById(R.id.imageViewArrow);
         this.BUTTON_SELECT_MEDICINE = (Button) card.findViewById(R.id.buttonSelectMedicine);
         this.BUTTON_VIEW_UBS_DESCRIPTION = (Button) card.findViewById(R.id.buttonUbsDescription);
@@ -196,12 +200,28 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SelectMedicineActivity.class);
-                UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
-                        .getAdapterPosition());
-                intent.putExtra("UbsName", selectItem.getUbsName());
-                intent.putExtra("UbsAttentionLevel", selectItem.getUbsAttentionLevel());
-                v.getContext().startActivity(intent);
-            }
+                boolean running = true;
+
+                try {
+                    createUbsSelectedItemToShow(intent);
+                    Exception eventException = new Exception ("Error on selected item from CardListAdapert.");
+
+                    v.getContext().startActivity(intent);
+                    Log.i("LOG", "\n" + "\n" + "Informations on expanded ubs card are setted");
+
+                    if(intent == null){
+                        throw eventException;
+                    } else {
+                        // Nothing to do.
+                    }
+                } catch  (Exception exception){
+                    running = false;
+                }
+                assertFalse(running);
+                }
+
+
+
         });
 
         // Here we set description about ubs.
@@ -227,12 +247,25 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Inform.class);
-                UBS selectItem = (UBS) CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
-                intent.putExtra("UbsName", selectItem.getUbsName());
-                intent.putExtra("medicineName", medicineSelectedName);
-                intent.putExtra("medicineDosage", medicineSelectedDosage);
+                boolean running =  true;
 
-                view.getContext().startActivity(intent);
+                try {
+                    createUbsSelectedItemToInform(intent);
+                    Exception eventException = new Exception ("Error on selected item to inform from CardListAdapert.");
+
+                    view.getContext().startActivity(intent);
+                    Log.i("LOG", "\n" + "\n" + "Informations about searched medicine are setted");
+
+                    if(intent == null){
+                        throw eventException;
+                    } else {
+                        // Nothing to do.
+                    }
+                } catch  (Exception exception){
+                    running = false;
+                }
+                assertFalse(running);
+
             }
         });
     }
@@ -392,6 +425,20 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     public Button getButtonUbsInform() {
         Button newButtonUbsInform = this.buttonUbsInform;
         return newButtonUbsInform;
+    }
+
+    private void createUbsSelectedItemToShow(Intent intent) {
+        UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
+                .getAdapterPosition());
+        intent.putExtra("UbsName", selectItem.getUbsName());
+        intent.putExtra("UbsAttentionLevel", selectItem.getUbsAttentionLevel());
+    }
+
+    private void createUbsSelectedItemToInform(Intent intent){
+        UBS selectItem = (UBS) CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
+        intent.putExtra("UbsName", selectItem.getUbsName());
+        intent.putExtra("medicineName", medicineSelectedName);
+        intent.putExtra("medicineDosage", medicineSelectedDosage);
     }
 
     /**
