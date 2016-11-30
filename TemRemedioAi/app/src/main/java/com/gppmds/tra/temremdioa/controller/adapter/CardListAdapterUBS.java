@@ -68,6 +68,17 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         CardView view = (CardView) inflater.inflate(R.layout.card_list_ubs, parent, false);
         Log.i("LOG", "\n" + "Event of view holder ubs creation");
 
+        if (inflater == null){
+            Exception eventException = new Exception("Error on inflater of View Holder UBS.");
+            try{
+                throw eventException;
+            } catch(Exception exception){
+                exception.printStackTrace();
+            }
+        } else {
+            //nothing to do
+        }
+
         return new ViewHolderUBS(view);
     }
 
