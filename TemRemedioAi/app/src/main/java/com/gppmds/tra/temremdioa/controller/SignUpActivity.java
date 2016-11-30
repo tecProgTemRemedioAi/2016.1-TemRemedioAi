@@ -130,117 +130,146 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void validatePassword(String password, String passwordConfirmation, boolean cancel, View focusView){
-        // conditions to validate the integrity of the password on register.
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = (View) mPasswordView;
-            cancel = true;
-        } else if (password.length() < 6){
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = (View) mPasswordView;
-            cancel = true;
-        } else if (!password.equals(passwordConfirmation)) {
-            mPasswordViewConfirmation.setError(getString(R.string.error_different_password));
-            focusView = (View) mPasswordViewConfirmation;
-            cancel = true;
-        }else {
-            // Nothing to do.
+        try{
+            // conditions to validate the integrity of the password on register.
+            if (TextUtils.isEmpty(password)) {
+                mPasswordView.setError(getString(R.string.error_field_required));
+                focusView = (View) mPasswordView;
+                cancel = true;
+            } else if (password.length() < 6){
+                mPasswordView.setError(getString(R.string.error_invalid_password));
+                focusView = (View) mPasswordView;
+                cancel = true;
+            } else if (!password.equals(passwordConfirmation)) {
+                mPasswordViewConfirmation.setError(getString(R.string.error_different_password));
+                focusView = (View) mPasswordViewConfirmation;
+                cancel = true;
+            }else {
+                // Nothing to do.
+            }
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
     private void validateEmail(String email, boolean cancel, View focusView){
-        // checking if the user's email is valid to register on database.
-        if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = (View) mEmailView;
-            cancel = true;
-        } else if (!isContainValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = (View) mEmailView;
-            cancel = true;
-        }else {
-            // Nothing to do.
+        try{
+            // checking if the user's email is valid to register on database.
+            if (TextUtils.isEmpty(email)) {
+                mEmailView.setError(getString(R.string.error_field_required));
+                focusView = (View) mEmailView;
+                cancel = true;
+            } else if (!isContainValid(email)) {
+                mEmailView.setError(getString(R.string.error_invalid_email));
+                focusView = (View) mEmailView;
+                cancel = true;
+            }else {
+                // Nothing to do.
+            }
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
     private void validateName(String name, boolean cancel, View focusView){
-        // checking if the user's name is valid to pursue a user registration.
-        if (TextUtils.isEmpty(name)) {
-            mNameView.setError(getString(R.string.error_field_required));
-            focusView = (View) mNameView;
-            cancel = true;
-        } else if (getSpecialCharacter(name)) {
-            mNameView.setError(getString(R.string.error_character));
-            focusView = (View) mNameView;
-            cancel = true;
-        }else {
-            // Nothing to do.
+        try{
+            // checking if the user's name is valid to pursue a user registration.
+            if (TextUtils.isEmpty(name)) {
+                mNameView.setError(getString(R.string.error_field_required));
+                focusView = (View) mNameView;
+                cancel = true;
+            } else if (getSpecialCharacter(name)) {
+                mNameView.setError(getString(R.string.error_character));
+                focusView = (View) mNameView;
+                cancel = true;
+            }else {
+                // Nothing to do.
+            }
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
     private void validateAge(int age, boolean cancel, View focusView){
-        // conditions to validate the user's age to continue registration.
-        if (TextUtils.isEmpty(mAgeView.getText().toString())) {
-            mAgeView.setError(getString(R.string.error_field_required));
-            focusView = (View) mAgeView;
-            cancel = true;
-        } else {
-            age = Integer.parseInt(mAgeView.getText().toString());
-            if (age < 0 || age > 100) {
-                mAgeView.setError(getString(R.string.error_invalid_age));
+        try{
+            // conditions to validate the user's age to continue registration.
+            if (TextUtils.isEmpty(mAgeView.getText().toString())) {
+                mAgeView.setError(getString(R.string.error_field_required));
+                focusView = (View) mAgeView;
+                cancel = true;
             } else {
-                // Nothing to do.
+                age = Integer.parseInt(mAgeView.getText().toString());
+                if (age < 0 || age > 100) {
+                    mAgeView.setError(getString(R.string.error_invalid_age));
+                } else {
+                    // Nothing to do.
+                }
             }
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
     private void validateGenre(String genre, boolean cancel, View focusView){
-        if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
-            mGenre.setError(getString(R.string.error_invalid_genre));
-            focusView = (View) mGenre;
-            cancel = true;
-        }
-        else if (mGenreFemView.isChecked()){
-            genre = (String) "Feminino";
-        }
-        else if (mGenreMaleView.isChecked()){
-            genre = (String) "Masculino";
-        } else {
-            // Nothing to do.
+        try{
+            if (!mGenreMaleView.isChecked() && !mGenreFemView.isChecked()) {
+                mGenre.setError(getString(R.string.error_invalid_genre));
+                focusView = (View) mGenre;
+                cancel = true;
+            }
+            else if (mGenreFemView.isChecked()){
+                genre = (String) "Feminino";
+            }
+            else if (mGenreMaleView.isChecked()){
+                genre = (String) "Masculino";
+            } else {
+                // Nothing to do.
+            }
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
     private void validateUsername(String username, boolean cancel, View focusView){
-        // conditions to validate the user name and proceed to registration.
-        if (TextUtils.isEmpty(username)) {
-            mUsernameView.setError(getString(R.string.error_field_required));
-            focusView = mUsernameView;
-            cancel = true;
-        } else {
-            // Nothing to do.
+        try{
+            // conditions to validate the user name and proceed to registration.
+            if (TextUtils.isEmpty(username)) {
+                mUsernameView.setError(getString(R.string.error_field_required));
+                focusView = mUsernameView;
+                cancel = true;
+            } else {
+                // Nothing to do.
+            }
+
+        } catch (Throwable exception) {
+            exception.printStackTrace();
         }
     }
 
     private static ParseUser user = new ParseUser();
 
     private void mountUser(ParseUser user, String email, String password, String username, String name, int age, String genre){
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setUsername(username);
-        user.put("Name", name);
-        user.put("Age" , age);
-        user.put("Genre" , genre);
-        user.signUpInBackground(new SignUpCallback() {
-            @Override
-            public void done(com.parse.ParseException e) {
-                if (e == null) {
-                    Toast.makeText(getApplicationContext(), "Cadastrado efetuado com sucesso", Toast.LENGTH_SHORT).show();
-                    finish();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Erro no cadastro, tente novamente!", Toast.LENGTH_SHORT).show();
+        try{
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setUsername(username);
+            user.put("Name", name);
+            user.put("Age" , age);
+            user.put("Genre" , genre);
+            user.signUpInBackground(new SignUpCallback() {
+                @Override
+                public void done(com.parse.ParseException e) {
+                    if (e == null) {
+                        Toast.makeText(getApplicationContext(), "Cadastrado efetuado com sucesso", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Erro no cadastro, tente novamente!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
-        finish();
+            });
+            finish();
+        } catch (Throwable exception) {
+            exception.printStackTrace();
+        }
     }
 }
