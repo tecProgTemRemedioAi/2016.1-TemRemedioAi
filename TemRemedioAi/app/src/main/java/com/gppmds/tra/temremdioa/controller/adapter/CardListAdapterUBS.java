@@ -29,9 +29,11 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     private static Boolean showButtonInform;       // This button allows users to inform medicine in a ubs or not.
 
     public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
-        this.contextOpen = context;
-        this.dataUBS = dataUBS;
-        this.filterDataUBS = dataUBS;
+        this.contextOpen = (Context) context;
+        this.dataUBS = (List<UBS>) dataUBS;
+        this.filterDataUBS = (List<UBS>) dataUBS;
+        this.contextOpen = (Context) context;
+
         setShowButtonMedicines(true);
         setShowButtonInform(false);
         setMedicineName("");
@@ -98,7 +100,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return
      */
     public void setShowButtonMedicines(Boolean showButtonMedicines) {
-        this.showButtonMedicines = showButtonMedicines;
+        this.showButtonMedicines = (Boolean) showButtonMedicines;
     }
 
     /**
@@ -126,7 +128,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return
      */
     public void setShowButtonInform(boolean showButtonInform) {
-        this.showButtonInform = showButtonInform;
+        this.showButtonInform = (Boolean) showButtonInform;
     }
 
     /**
