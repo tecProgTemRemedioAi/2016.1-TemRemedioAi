@@ -26,11 +26,15 @@ public class UBSFragment extends Fragment{
     private static CardListAdapterUBS ubsAdapter;   // This class makes the management of ubs cards.
 
     public static final  UBSFragment newInstance(){
+
         return new UBSFragment();
+
     }
 
     public static final CardListAdapterUBS getUbsAdapter() {
+
         return ubsAdapter;
+
     }
 
     /**
@@ -63,11 +67,12 @@ public class UBSFragment extends Fragment{
      * @return ubsList
      */
     public List<UBS> getListOfUBS(){
+
         ParseQuery<UBS> queryUBS = (ParseQuery) UBS.getQuery();
         queryUBS.fromLocalDatastore();
         queryUBS.orderByAscending(UBS.getUbsNameTitle());
-        List<UBS> ubsList = null;
 
+        List<UBS> ubsList = null;
         try {
             ubsList = (List) queryUBS.find();
         } catch (ParseException e) {
