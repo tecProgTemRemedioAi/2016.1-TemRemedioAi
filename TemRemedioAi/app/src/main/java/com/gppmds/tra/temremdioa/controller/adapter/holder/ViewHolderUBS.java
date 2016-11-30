@@ -77,6 +77,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @param card
      */
     public ViewHolderUBS(CardView card) {
+
         super(card);
         this.textViewUbsName = (TextView) card.findViewById(R.id.textViewUbsName);
         this.textViewUbsNeighborhood = (TextView) card.findViewById(R.id.textViewUbsNeighborhood);
@@ -220,8 +221,6 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 assertFalse(running);
                 }
 
-
-
         });
 
         // Here we set description about ubs.
@@ -277,6 +276,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return pieData
      */
     public PieData getDataPie(UBS ubs) {
+
         PieData pieData = null;
 
         Integer countNotificationAvailable = 0;
@@ -336,6 +336,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         pieData = new PieData(valuesLegend, pieDataSet);
 
         return pieData;
+
     }
 
     /**
@@ -344,8 +345,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewUbsName
      */
     public TextView getTextViewUbsName(){
+
         TextView newViewUbsName = this.textViewUbsName;
         return newViewUbsName;
+
     }
 
     /**
@@ -354,7 +357,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewUbsNeighborhood
      */
     public TextView getTextViewUbsNeighborhood(){
+
         return this.textViewUbsNeighborhood;
+
     }
 
     /**
@@ -363,8 +368,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewWithoutNotification
      */
     public TextView getTextViewWithoutNotification(){
+
         TextView newViewNotification = this.textViewWithoutNotification;
         return newViewNotification;
+
     }
 
     /**
@@ -373,8 +380,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformationTitle
      */
     public TextView getTextViewLastInformationTitle() {
+
         TextView newViewLatestInformationTitle = this.textViewLastInformationTitle;
         return newViewLatestInformationTitle;
+
     }
 
     /**
@@ -383,8 +392,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformation1
      */
     public TextView getTextViewLastInformation1() {
+
         TextView newViewLastInformation1 = this.textViewLastInformation1;
         return newViewLastInformation1;
+
     }
 
     /**
@@ -393,8 +404,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformation2
      */
     public TextView getTextViewLastInformation2() {
+
         TextView newViewLastInformation2 = this.textViewLastInformation2;
         return newViewLastInformation2;
+
     }
 
     /**
@@ -403,8 +416,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return textViewLastInformation3
      */
     public TextView getTextViewLastInformation3() {
+
         TextView newViewLastInformation3 = this.textViewLastInformation3;
         return newViewLastInformation3;
+
     }
 
     /**
@@ -413,8 +428,10 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return BUTTON_SELECT_MEDICINE
      */
     public Button getBUTTON_SELECT_MEDICINE(){
+
         Button newButtonSelectMedicine = this.BUTTON_SELECT_MEDICINE;
         return newButtonSelectMedicine;
+
     }
 
     /**
@@ -423,22 +440,28 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return buttonUbsInform
      */
     public Button getButtonUbsInform() {
+
         Button newButtonUbsInform = this.buttonUbsInform;
         return newButtonUbsInform;
+
     }
 
     private void createUbsSelectedItemToShow(Intent intent) {
+
         UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
                 .getAdapterPosition());
         intent.putExtra("UbsName", selectItem.getUbsName());
         intent.putExtra("UbsAttentionLevel", selectItem.getUbsAttentionLevel());
+
     }
 
     private void createUbsSelectedItemToInform(Intent intent){
+
         UBS selectItem = (UBS) CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
         intent.putExtra("UbsName", selectItem.getUbsName());
         intent.putExtra("medicineName", medicineSelectedName);
         intent.putExtra("medicineDosage", medicineSelectedDosage);
+
     }
 
     /**
@@ -449,6 +472,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return String
      */
     private String generateTextNotification(Notification notification) throws AssertionError{
+
         String textOfNotification = "";
 
         if (notification.getAvailable()) {
@@ -478,6 +502,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         }
 
         return textOfNotification;
+
     }
 
     /**
@@ -487,6 +512,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return listNotification
      */
     private List<Notification> getNotifications(UBS ubs) {
+
         List<Notification> listNotification = null;
 
         ParseQuery<Notification> queryNotification = Notification.getQuery();
@@ -518,6 +544,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         }
 
         return listNotification;
+
     }
 
     /**
@@ -525,6 +552,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * Purpose: this method get the notifications about ubs that doenst have medicines.
      */
     private void setInformationOfChartWithoutNotification() {
+
         PIE_CHART.setDescription("");
         PIE_CHART.setDrawHoleEnabled(true);
         PIE_CHART.setHoleRadius(0);
@@ -557,6 +585,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             set.setDrawValues(!set.isDrawValuesEnabled());
 
         PIE_CHART.setData(pieData);
+
     }
 
     /**
@@ -565,6 +594,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @param ubs
      */
     private void setInformationOfChart(UBS ubs) {
+
         PIE_CHART.setDescription("");
         PIE_CHART.setDrawHoleEnabled(true);
         PIE_CHART.setHoleRadius(0);
@@ -580,6 +610,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
 
         PIE_CHART.setNoDataTextDescription("Sem notificações encontradas.");
         PIE_CHART.setData(getDataPie(ubs));
+
     }
 
     /**
@@ -587,10 +618,12 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * Purpose: this method set card visible.
      */
     private void expand() {
+
         Log.i("LOG", "expand() enter. Status: visible. Line: 440");
         EXPAND_LAYOUT.setVisibility(View.VISIBLE);
         cardAnimation.start();
         IMAGE_VIEW_ARROW.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
+
     }
 
     /**
@@ -598,6 +631,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * Purpose: this method set card 'not' visible.
      */
     private void collapse() {
+
         int finalHeight = (int) EXPAND_LAYOUT.getHeight();
 
         ValueAnimator cardAnimationCollapse = (ValueAnimator) slideAnimator(finalHeight, 0);
@@ -625,6 +659,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         });
         cardAnimationCollapse.start();
         IMAGE_VIEW_ARROW.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
+
     }
 
     /**
@@ -635,6 +670,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return animator
      */
     private ValueAnimator slideAnimator(int start, int end) {
+
         ValueAnimator animator = (ValueAnimator) ValueAnimator.ofInt(start, end);
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -649,6 +685,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             }
         });
         return animator;
+
     }
 
 }
