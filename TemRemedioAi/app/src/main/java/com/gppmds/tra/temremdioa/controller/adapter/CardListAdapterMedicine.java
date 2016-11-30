@@ -26,9 +26,9 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
 
 
     public CardListAdapterMedicine(Context context, List<Medicine> dataMedicine) {
-        this.contextOpen = context;
-        this.dataMedicine = dataMedicine;
-        this.filterDataMedicine = dataMedicine;
+        this.contextOpen = (Context) context;
+        this.dataMedicine = (List<Medicine>) dataMedicine;
+        this.filterDataMedicine = (List<Medicine>) dataMedicine;
         setShowButtonUBSs(true);
         setShowButtonInform(false);
         setUbsName("");
@@ -107,7 +107,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
      * @param showButtonUBSs
      */
     public void setShowButtonUBSs(Boolean showButtonUBSs) {
-        this.showButtonUBSs = showButtonUBSs;
+        this.showButtonUBSs = (Boolean) showButtonUBSs;
     }
 
     /**
@@ -116,7 +116,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
      * @param showButtonInform
      */
     public void setShowButtonInform(Boolean showButtonInform){
-        this.showButtonInform = showButtonInform;
+        this.showButtonInform = (Boolean) showButtonInform;
     }
 
     /**
@@ -135,7 +135,7 @@ public class CardListAdapterMedicine extends RecyclerView.Adapter<ViewHolderMedi
      * @param ubsName
      */
     public void setUbsName(String ubsName){
-        this.ubsName = ubsName;
+        this.ubsName = (String) ubsName;
     }
 
     /**
