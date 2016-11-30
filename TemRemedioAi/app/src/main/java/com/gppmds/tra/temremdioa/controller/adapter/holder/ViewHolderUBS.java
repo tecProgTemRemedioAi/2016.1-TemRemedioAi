@@ -37,8 +37,6 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.tra.gppmds.temremdioa.R;
 
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,23 +48,25 @@ import java.util.Locale;
  * Purpose: this class set all things about ubs cards;
  */
 public class ViewHolderUBS extends RecyclerView.ViewHolder{
-    private TextView textViewUbsName;               // This variable refers to the ubs name, the same existing in the system.
-    private TextView textViewUbsNeighborhood;       // This variable refers to ubs neighborhood.
-    private TextView textViewLastInformation1;      // This variable refers to latest information on availability of the drug, made by a users.
-    private TextView textViewLastInformation2;      // This variable refers to penultimate information on availability of the drug, made by a users.
-    private TextView textViewLastInformation3;      // This variable refers to antepenultimate information on availability of the drug, made by a users.
-    private TextView textViewLastInformationTitle;  // This variable refers to the title of the latest information, made by users.
-    private TextView textViewWithoutNotification;   // This variable refers to the text that appears when there are no notifications made by users.
-    private final RelativeLayout headerLayout;            // This layout refers to the standard structure of the card when it is collapsed.
-    private final RelativeLayout expandLayout;            // This layout refers to the standard structure of the card when it is expanded.
-    private ValueAnimator cardAnimation;            // This animator refers to the animation that occurs on the card when it is clicked.
-    private final Button buttonSelectMedicine;            // This button is for the user to select the desired medicine.
-    private final Button buttonViewUbsDescription;        // This button is for the user to keep more information about one ubs.
-    public Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
-    public String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
-    public String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
-    public final ImageView imageViewArrow;                // This image refers to where the chart will be set.
-    private final PieChart pieChart;                      // This chart is completed by information provided by users.
+    private static TextView textViewUbsName;               // This variable refers to the ubs name, the same existing in the system.
+    private static TextView textViewUbsNeighborhood;       // This variable refers to ubs neighborhood.
+    private static TextView textViewLastInformation1;      // This variable refers to latest information on availability of the drug, made by a users.
+    private static TextView textViewLastInformation2;      // This variable refers to penultimate information on availability of the drug, made by a users.
+    private static TextView textViewLastInformation3;      // This variable refers to antepenultimate information on availability of the drug, made by a users.
+    private static TextView textViewLastInformationTitle;  // This variable refers to the title of the latest information, made by users.
+    private static TextView textViewWithoutNotification;   // This variable refers to the text that appears when there are no notifications made by users.
+    private static ValueAnimator cardAnimation;            // This animator refers to the animation that occurs on the card when it is clicked.
+
+    private final Button BUTTON_VIEW_UBS_DESCRIPTION;      // This button is for the user to keep more information about one ubs.
+    private final Button BUTTON_SELECT_MEDICINE;           // This button is for the user to select the desired medicine.
+    private final RelativeLayout HEADER_LAYOUT;            // This layout refers to the standard structure of the card when it is collapsed.
+    private final RelativeLayout EXPAND_LAYOUT;            // This layout refers to the standard structure of the card when it is expanded.
+    private final PieChart PIE_CHART;                      // This chart is completed by information provided by users.
+
+    public final ImageView IMAGE_VIEW_ARROW;               // This image refers to where the chart will be set.
+    public static Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
+    public static String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
+    public static String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
 
      /**
      * Method: ViewHolderUBS
@@ -82,45 +82,45 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         this.textViewLastInformation3 = (TextView) card.findViewById(R.id.textViewLastInformation3);
         this.textViewLastInformationTitle = (TextView) card.findViewById(R.id.textViewLastInformationTitle);
         this.textViewWithoutNotification = (TextView) card.findViewById(R.id.textViewWithoutNotification);
-        this.imageViewArrow = (ImageView) card.findViewById(R.id.imageViewArrow);
-        this.buttonSelectMedicine = (Button) card.findViewById(R.id.buttonSelectMedicine);
-        this.buttonViewUbsDescription = (Button) card.findViewById(R.id.buttonUbsDescription);
+        this.IMAGE_VIEW_ARROW = (ImageView) card.findViewById(R.id.imageViewArrow);
+        this.BUTTON_SELECT_MEDICINE = (Button) card.findViewById(R.id.buttonSelectMedicine);
+        this.BUTTON_VIEW_UBS_DESCRIPTION = (Button) card.findViewById(R.id.buttonUbsDescription);
         this.buttonUbsInform = (Button) card.findViewById(R.id.buttonInformUbs);
-        this.expandLayout = (RelativeLayout) card.findViewById(R.id.expandable);
-        this.headerLayout = (RelativeLayout) card.findViewById(R.id.header);
-        this.pieChart = (PieChart) card.findViewById(R.id.pie_chart_ubs);
+        this.EXPAND_LAYOUT = (RelativeLayout) card.findViewById(R.id.expandable);
+        this.HEADER_LAYOUT = (RelativeLayout) card.findViewById(R.id.header);
+        this.PIE_CHART = (PieChart) card.findViewById(R.id.pie_chart_ubs);
 
         // Here the card is not expanded, it is collapsed.
-        this.expandLayout.setVisibility(View.GONE);
+        this.EXPAND_LAYOUT.setVisibility(View.GONE);
 
         // getViewTreeObserver returns the notifications about global events, in this case
         // returns information about the card state, if it is expand or collapse.
-        this.expandLayout.getViewTreeObserver().addOnPreDrawListener(
+        this.EXPAND_LAYOUT.getViewTreeObserver().addOnPreDrawListener(
                 new ViewTreeObserver.OnPreDrawListener() {
 
                     @Override
                     public boolean onPreDraw() {
-                        expandLayout.getViewTreeObserver().removeOnPreDrawListener(this);
-                        expandLayout.setVisibility(View.GONE);
+                        EXPAND_LAYOUT.getViewTreeObserver().removeOnPreDrawListener(this);
+                        EXPAND_LAYOUT.setVisibility(View.GONE);
 
                         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0,
                                 View.MeasureSpec.UNSPECIFIED);
                         final int heightSpec = View.MeasureSpec.makeMeasureSpec(0,
                                 View.MeasureSpec.UNSPECIFIED);
-                        expandLayout.measure(widthSpec, heightSpec);
+                        EXPAND_LAYOUT.measure(widthSpec, heightSpec);
 
-                        cardAnimation = slideAnimator(0, expandLayout.getMeasuredHeight());
+                        cardAnimation = slideAnimator(0, EXPAND_LAYOUT.getMeasuredHeight());
                         return true;
                     }
                 });
 
         // Here we check the card visibility and set users notifications about the last time they get
         // medicine in UBS.
-        this.headerLayout.setOnClickListener(new View.OnClickListener() {
+        this.HEADER_LAYOUT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("LOG", "\n" + "onClick() listener call of headerLayout. Status: clicked. Line: 121");
-                if (expandLayout.getVisibility() == View.GONE) {
+                Log.i("LOG", "\n" + "onClick() listener call of HEADER_LAYOUT. Status: clicked. Line: 121");
+                if (EXPAND_LAYOUT.getVisibility() == View.GONE) {
                     UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
 
                     List<Notification> notificationList = null;
@@ -185,14 +185,14 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                     expand();
 
                 } else {
-                    Log.i("LOG", "\n" + "onClick() listener call of headerLayout. Status: collapse. Line: 188");
+                    Log.i("LOG", "\n" + "onClick() listener call of HEADER_LAYOUT. Status: collapse. Line: 188");
                     collapse();
                 }
             }
         });
 
         // Here we set the itens that will be showed on ubs card when user click on card.
-        this.buttonSelectMedicine.setOnClickListener(new View.OnClickListener() {
+        this.BUTTON_SELECT_MEDICINE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), SelectMedicineActivity.class);
@@ -205,7 +205,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         });
 
         // Here we set description about ubs.
-        this.buttonViewUbsDescription.setOnClickListener(new View.OnClickListener() {
+        this.BUTTON_VIEW_UBS_DESCRIPTION.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), UbsMapsActivity.class);
@@ -321,20 +321,20 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * Purpose: this method get the notifications about ubs that doenst have medicines.
      */
     private void setInformationOfChartWithoutNotification() {
-        pieChart.setDescription("");
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleRadius(0);
-        pieChart.setTransparentCircleRadius(40);
-        pieChart.setDrawSliceText(false);
-        pieChart.setRotationAngle(0);
-        pieChart.setRotationEnabled(true);
-        pieChart.animateY(1000);
+        PIE_CHART.setDescription("");
+        PIE_CHART.setDrawHoleEnabled(true);
+        PIE_CHART.setHoleRadius(0);
+        PIE_CHART.setTransparentCircleRadius(40);
+        PIE_CHART.setDrawSliceText(false);
+        PIE_CHART.setRotationAngle(0);
+        PIE_CHART.setRotationEnabled(true);
+        PIE_CHART.animateY(1000);
 
-        pieChart.getLegend().setEnabled(true);
-        pieChart.getLegend().setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        pieChart.getLegend().setTextSize(12);
+        PIE_CHART.getLegend().setEnabled(true);
+        PIE_CHART.getLegend().setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        PIE_CHART.getLegend().setTextSize(12);
 
-        pieChart.setNoDataTextDescription("Sem notificações encontradas.");
+        PIE_CHART.setNoDataTextDescription("Sem notificações encontradas.");
 
         ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
         ArrayList<String> valuesLegend = new ArrayList<String>();
@@ -352,7 +352,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         for (IDataSet<?> set : pieData.getDataSets())
             set.setDrawValues(!set.isDrawValuesEnabled());
 
-        pieChart.setData(pieData);
+        PIE_CHART.setData(pieData);
     }
 
     /**
@@ -361,21 +361,21 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @param ubs
      */
     private void setInformationOfChart(UBS ubs) {
-        pieChart.setDescription("");
-        pieChart.setDrawHoleEnabled(true);
-        pieChart.setHoleRadius(0);
-        pieChart.setTransparentCircleRadius(40);
-        pieChart.setDrawSliceText(false);
-        pieChart.setRotationAngle(0);
-        pieChart.setRotationEnabled(true);
-        pieChart.animateY(1000);
+        PIE_CHART.setDescription("");
+        PIE_CHART.setDrawHoleEnabled(true);
+        PIE_CHART.setHoleRadius(0);
+        PIE_CHART.setTransparentCircleRadius(40);
+        PIE_CHART.setDrawSliceText(false);
+        PIE_CHART.setRotationAngle(0);
+        PIE_CHART.setRotationEnabled(true);
+        PIE_CHART.animateY(1000);
 
-        pieChart.getLegend().setEnabled(true);
-        pieChart.getLegend().setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
-        pieChart.getLegend().setTextSize(12);
+        PIE_CHART.getLegend().setEnabled(true);
+        PIE_CHART.getLegend().setPosition(Legend.LegendPosition.BELOW_CHART_CENTER);
+        PIE_CHART.getLegend().setTextSize(12);
 
-        pieChart.setNoDataTextDescription("Sem notificações encontradas.");
-        pieChart.setData(getDataPie(ubs));
+        PIE_CHART.setNoDataTextDescription("Sem notificações encontradas.");
+        PIE_CHART.setData(getDataPie(ubs));
     }
 
     /**
@@ -452,9 +452,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      */
     private void expand() {
         Log.i("LOG", "expand() enter. Status: visible. Line: 440");
-        expandLayout.setVisibility(View.VISIBLE);
+        EXPAND_LAYOUT.setVisibility(View.VISIBLE);
         cardAnimation.start();
-        imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
+        IMAGE_VIEW_ARROW.setBackgroundResource(R.drawable.ic_keyboard_arrow_up);
     }
 
     /**
@@ -462,14 +462,14 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * Purpose: this method set card 'not' visible.
      */
     private void collapse() {
-        int finalHeight = expandLayout.getHeight();
+        int finalHeight = EXPAND_LAYOUT.getHeight();
 
         ValueAnimator cardAnimationCollapse = slideAnimator(finalHeight, 0);
         cardAnimationCollapse.addListener(new Animator.AnimatorListener(){
             @Override
             public void onAnimationEnd(Animator animator) {
                 Log.i("LOG", "collapse onAnimationEnd() enter, Status: gone. Line 457");
-                expandLayout.setVisibility(View.GONE);
+                EXPAND_LAYOUT.setVisibility(View.GONE);
             }
 
             @Override
@@ -488,7 +488,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             }
         });
         cardAnimationCollapse.start();
-        imageViewArrow.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
+        IMAGE_VIEW_ARROW.setBackgroundResource(R.drawable.ic_keyboard_arrow_down);
     }
 
     /**
@@ -507,9 +507,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                 /* Update Height */
                 int value = (Integer) valueAnimator.getAnimatedValue();
 
-                ViewGroup.LayoutParams layoutParams = expandLayout.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams = EXPAND_LAYOUT.getLayoutParams();
                 layoutParams.height = value;
-                expandLayout.setLayoutParams(layoutParams);
+                EXPAND_LAYOUT.setLayoutParams(layoutParams);
             }
         });
         return animator;
@@ -585,12 +585,12 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     }
 
     /**
-     * Method: getButtonSelectMedicine()
+     * Method: getBUTTON_SELECT_MEDICINE()
      * Purpose: set on view medicine button.
-     * @return buttonSelectMedicine
+     * @return BUTTON_SELECT_MEDICINE
      */
-    public Button getButtonSelectMedicine(){
-        Button newButtonSelectMedicine = this.buttonSelectMedicine;
+    public Button getBUTTON_SELECT_MEDICINE(){
+        Button newButtonSelectMedicine = this.BUTTON_SELECT_MEDICINE;
         return newButtonSelectMedicine;
     }
 
