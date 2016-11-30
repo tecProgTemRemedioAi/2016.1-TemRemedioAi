@@ -59,6 +59,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     private static TextView textViewWithoutNotification = null;           // This variable refers to the text that appears when there are no notifications made by users.
     private static TextView textViewMedicineUnit = null;                  // This variable refers to the type of unit that the drug is distributed.
     private static TextView textViewMedicineDosage = null;                // This variable refers to what kind of dosage that the drug is distributed.
+
     private static RelativeLayout headerLayout = null;                    // This layout refers to the standard structure of the card when it is collapsed.
     private static RelativeLayout expandLayout = null;                    // This layout refers to the standard structure of the card when it is expanded.
     private static ValueAnimator cardAnimation = null;                    // This animator refers to the animation that occurs on the card when it is clicked.
@@ -164,10 +165,10 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
                 // This control structure refers to visibility of card when it expanded.
                 if (expandLayout.getVisibility() == View.GONE) {
                     Log.i("LOG", "\n" + "Card expanded");
-                    Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
+                    Medicine selectItem = (Medicine) CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
 
                     List<Notification> notificationList = null;
-                    notificationList = getNotifications(selectItem); // Get a selected item and set on new list.
+                    notificationList = (List<Notification>)getNotifications(selectItem); // Get a selected item and set on new list.
 
                     Boolean haveNotification = true;                        // This variable tells whether or not notification made by users.
                     haveNotification = false;
@@ -380,7 +381,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewWithoutNotification.
      */
     public TextView getTextViewWithoutNotification(){
-        TextView newViewNotification = this.textViewWithoutNotification;
+        TextView newViewNotification = (TextView) this.textViewWithoutNotification;
         return newViewNotification;
     }
 
@@ -390,7 +391,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewMedicineName.
      */
     public TextView getTextViewMedicineName(){
-        TextView newViewMedicineName = this.textViewMedicineName;
+        TextView newViewMedicineName = (TextView) this.textViewMedicineName;
         return newViewMedicineName;
     }
 
@@ -400,7 +401,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewMedicineUnit.
      */
     public TextView getTextViewMedicineUnit() {
-        TextView newViewMedicineUnit = this.textViewMedicineUnit;
+        TextView newViewMedicineUnit = (TextView) this.textViewMedicineUnit;
         return newViewMedicineUnit;
     }
 
@@ -410,7 +411,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewLatestInformationTitle.
      */
     public TextView getTextViewLatestInformationTitle() {
-        TextView newViewLatestInformationTitle = this.textViewLatestInformationTitle;
+        TextView newViewLatestInformationTitle = (TextView) this.textViewLatestInformationTitle;
         return newViewLatestInformationTitle;
     }
 
@@ -420,7 +421,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return extViewLatestInformation.
      */
     public TextView getTextViewLatestInformation() {
-        TextView newViewLatestInformation = this.textViewLatestInformation;
+        TextView newViewLatestInformation = (TextView) this.textViewLatestInformation;
         return newViewLatestInformation;
     }
 
@@ -430,7 +431,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewPenultimateInformation.
      */
     public TextView getTextViewPenultimateInformation() {
-        TextView newViewPenultimateInformation = this.textViewPenultimateInformation;
+        TextView newViewPenultimateInformation = (TextView) this.textViewPenultimateInformation;
         return newViewPenultimateInformation;
     }
 
@@ -440,7 +441,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewAntepenultimateInformation.
      */
     public TextView getTextViewAntepenultimateInformation() {
-        TextView newViewAntepenultimateInformation = this.textViewAntepenultimateInformation;
+        TextView newViewAntepenultimateInformation = (TextView) this.textViewAntepenultimateInformation;
         return newViewAntepenultimateInformation;
     }
 
@@ -450,7 +451,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return textViewMedicineDosage.
      */
     public TextView getTextViewMedicineDosage() {
-        TextView newViewMedicineDosage = this.textViewMedicineDosage;
+        TextView newViewMedicineDosage = (TextView) this.textViewMedicineDosage;
         return newViewMedicineDosage;
     }
 
@@ -460,7 +461,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return buttonMedicineInform.
      */
     public Button getButtonMedicineInform() {
-        Button newButtonMedicineInform =this.buttonMedicineInform;
+        Button newButtonMedicineInform = (Button) this.buttonMedicineInform;
         return newButtonMedicineInform;
     }
 
@@ -470,7 +471,7 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
      * @return buttonSelectUbs.
      */
     public Button getButtonSelectUbs() {
-        Button newButtonSelectUbs = this.buttonSelectUbs;
+        Button newButtonSelectUbs = (Button) this.buttonSelectUbs;
         return newButtonSelectUbs;
     }
 
@@ -679,9 +680,9 @@ public class ViewHolderMedicine extends RecyclerView.ViewHolder {
     }
 
     private void createMedicineSelectedItemToShow(Intent intent) {
-    Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
-    intent.putExtra("medicineName", selectItem.getMedicineDescription());
-    intent.putExtra("medicineLevelAttention", selectItem.getMedicineAttentionLevel());
-    intent.putExtra("medicineDosage", selectItem.getMedicineDosage());
+        Medicine selectItem = CardListAdapterMedicine.dataMedicine.get(ViewHolderMedicine.this.getAdapterPosition());
+        intent.putExtra("medicineName", selectItem.getMedicineDescription());
+        intent.putExtra("medicineLevelAttention", selectItem.getMedicineAttentionLevel());
+        intent.putExtra("medicineDosage", selectItem.getMedicineDosage());
     }
 }
