@@ -29,6 +29,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     private static Boolean showButtonInform;       // This button allows users to inform medicine in a ubs or not.
 
     public CardListAdapterUBS(Context context, List<UBS> dataUBS) {
+
         this.contextOpen = (Context) context;
         this.dataUBS = (List<UBS>) dataUBS;
         this.filterDataUBS = (List<UBS>) dataUBS;
@@ -38,6 +39,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         setShowButtonInform(false);
         setMedicineName("");
         setMedicineDosage("");
+
     }
 
     /**
@@ -47,6 +49,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     @Override
     public FilterSearchUBS getFilter() {
+
         if(filter == null) {
             Log.i("LOG", "\n" + "UBS filter is null");
             filter = new FilterSearchUBS(filterDataUBS, this);
@@ -55,6 +58,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         }
 
         return filter;
+
     }
 
     /**
@@ -64,6 +68,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     @Override
     public ViewHolderUBS onCreateViewHolder(ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         CardView view = (CardView) inflater.inflate(R.layout.card_list_ubs, parent, false);
         Log.i("LOG", "\n" + "Event of view holder ubs creation");
@@ -80,6 +85,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
         }
 
         return new ViewHolderUBS(view);
+
     }
 
     /**
@@ -89,6 +95,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     @Override
     public void onBindViewHolder(ViewHolderUBS holder, int position) {
+
         createUbsRowData(holder, position);
         validatingUbsRowData(holder);
 
@@ -101,8 +108,10 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     @Override
     public int getItemCount() {
+
         Log.i("LOG", "\n" + "Counting how many UBS are in database");
         return dataUBS.size();
+
     }
 
     /**
@@ -111,7 +120,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return
      */
     public void setShowButtonMedicines(Boolean showButtonMedicines) {
+
         this.showButtonMedicines = (Boolean) showButtonMedicines;
+
     }
 
     /**
@@ -120,7 +131,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return showButtonMedicines
      */
     private Boolean getShowButtonMedicines() {
+
         return this.showButtonMedicines;
+
     }
 
     /**
@@ -129,8 +142,10 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return
      */
     public void createFilter() {
+
         filter = new FilterSearchUBS(filterDataUBS, this);
         Boolean test = getShowButtonMedicines();
+
     }
 
     /**
@@ -139,7 +154,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return
      */
     public void setShowButtonInform(boolean showButtonInform) {
+
         this.showButtonInform = (Boolean) showButtonInform;
+
     }
 
     /**
@@ -148,7 +165,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return showButtonInform
      */
     public boolean getShowButtonInform(){
+
         return this.showButtonInform;
+
     }
 
     /**
@@ -157,7 +176,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return
      */
     public void setMedicineName(String medicineName) {
+
         this.medicineName = medicineName;
+
     }
 
     /**
@@ -167,7 +188,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     private static String medicineName = null;            // This variable refers to the medicine name.
     public String getMedicineName(){
+
         return this.medicineName;
+
     }
 
     /**
@@ -176,7 +199,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      * @return
      */
     public void setMedicineDosage(String medicineDosage) {
+
         this.medicineDosage = medicineDosage;
+
     }
 
     /**
@@ -186,10 +211,13 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     private static String medicineDosage = null;          // This variable refers to the medicine dosage.
     public String getMedicineDosage(){
+
         return this.medicineDosage;
+
     }
 
     private void createUbsRowData(ViewHolderUBS holder, int position) {
+
         UBS rowData = this.dataUBS.get(position);
         holder.getTextViewUbsName().setText(rowData.getUbsName());
         holder.getTextViewUbsNeighborhood().setText(rowData.getUbsNeighborhood());
@@ -197,6 +225,7 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     }
 
     private void validatingUbsRowData(ViewHolderUBS holder) {
+
         // this control structure refers to the  visibility and params of Button Medicine.
         if (!getShowButtonMedicines()) {
             holder.getBUTTON_SELECT_MEDICINE().setVisibility(View.GONE);
