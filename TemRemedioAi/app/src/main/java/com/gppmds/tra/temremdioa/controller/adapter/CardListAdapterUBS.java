@@ -20,8 +20,7 @@ import com.tra.gppmds.temremdioa.R;
 import java.util.List;
 
 public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> implements Filterable{
-    public static List<UBS> dataUBS;                // List of all ubs in database.
-
+    private static List<UBS> dataUBS;                // List of all ubs in database.
     private static List<UBS> filterDataUBS = null;  // List of ubs filtered.
     private static Context contextOpen;             // This context refers to activity that is open and calling this class.
     private static FilterSearchUBS filter = null;   // This variable refers to class that make filter search on ubs.
