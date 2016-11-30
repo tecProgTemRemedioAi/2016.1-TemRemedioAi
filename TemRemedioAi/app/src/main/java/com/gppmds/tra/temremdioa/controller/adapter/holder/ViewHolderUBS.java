@@ -48,6 +48,11 @@ import java.util.Locale;
  * Purpose: this class set all things about ubs cards;
  */
 public class ViewHolderUBS extends RecyclerView.ViewHolder{
+    public final ImageView IMAGE_VIEW_ARROW;               // This image refers to where the chart will be set.
+    public static Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
+    public static String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
+    public static String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
+
     private static TextView textViewUbsName;               // This variable refers to the ubs name, the same existing in the system.
     private static TextView textViewUbsNeighborhood;       // This variable refers to ubs neighborhood.
     private static TextView textViewLastInformation1;      // This variable refers to latest information on availability of the drug, made by a users.
@@ -62,11 +67,6 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     private final RelativeLayout HEADER_LAYOUT;            // This layout refers to the standard structure of the card when it is collapsed.
     private final RelativeLayout EXPAND_LAYOUT;            // This layout refers to the standard structure of the card when it is expanded.
     private final PieChart PIE_CHART;                      // This chart is completed by information provided by users.
-
-    public final ImageView IMAGE_VIEW_ARROW;               // This image refers to where the chart will be set.
-    public static Button buttonUbsInform;                  // This button allows users to inform medicine in a ubs or not.
-    public static String medicineSelectedName;             // This variable says refers to the medicine name that was searched by the user.
-    public static String medicineSelectedDosage;           // his variable says refers to medicine dosage that was searched by the user.
 
      /**
      * Method: ViewHolderUBS
@@ -238,6 +238,163 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     }
 
     /**
+     * Method: getDataPie()
+     * Purpose: this method set ubs information in data pie (update).
+     * @param ubs
+     * @return pieData
+     */
+    public PieData getDataPie(UBS ubs) {
+        PieData pieData = null;
+
+        Integer countNotificationAvailable = 0;
+        Integer countNotificationNotAvailable = 0;
+
+        ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
+        queryNotificationAvailable.fromLocalDatastore();
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
+        queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
+
+        if (medicineSelectedName != "") {
+            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
+            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
+        } else {
+            // Nothing to do
+        }
+
+        try {
+            countNotificationAvailable = queryNotificationAvailable.count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ParseQuery<Notification> queryNotificationNotAvailable = Notification.getQuery();
+        queryNotificationNotAvailable.fromLocalDatastore();
+        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
+        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleAvailable(), false);
+
+        if (medicineSelectedName != "") {
+            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
+            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
+        } else {
+            // Nothing to do
+        }
+
+        try {
+            countNotificationNotAvailable = queryNotificationNotAvailable.count();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
+        ArrayList<String> valuesLegend = new ArrayList<String>();
+
+        valuesLegend.add("Sim");
+        valuesLegend.add("Não");
+
+        valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
+        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
+
+        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
+        int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
+        pieDataSet.setColors(color);
+        pieDataSet.setSliceSpace(5);
+        pieDataSet.setValueTextSize(10);
+
+        pieData = new PieData(valuesLegend, pieDataSet);
+
+        return pieData;
+    }
+
+    /**
+     * Method: getTextViewUbsName()
+     * Purpose: set on view ubs name.
+     * @return textViewUbsName
+     */
+    public TextView getTextViewUbsName(){
+        TextView newViewUbsName = this.textViewUbsName;
+        return newViewUbsName;
+    }
+
+    /**
+     * Method: getTextViewUbsNeighborhood()
+     * Purpose: set on view ubs neighborhood.
+     * @return textViewUbsNeighborhood
+     */
+    public TextView getTextViewUbsNeighborhood(){
+        return this.textViewUbsNeighborhood;
+    }
+
+    /**
+     * Method: getTextViewWithoutNotification()
+     * Purpose: set on view.
+     * @return textViewWithoutNotification
+     */
+    public TextView getTextViewWithoutNotification(){
+        TextView newViewNotification = this.textViewWithoutNotification;
+        return newViewNotification;
+    }
+
+    /**
+     * Method: getTextViewLastInformationTitle()
+     * Purpose: set on view.
+     * @return textViewLastInformationTitle
+     */
+    public TextView getTextViewLastInformationTitle() {
+        TextView newViewLatestInformationTitle = this.textViewLastInformationTitle;
+        return newViewLatestInformationTitle;
+    }
+
+    /**
+     * Method: getTextViewLastInformation1()
+     * Purpose: set on view.
+     * @return textViewLastInformation1
+     */
+    public TextView getTextViewLastInformation1() {
+        TextView newViewLastInformation1 = this.textViewLastInformation1;
+        return newViewLastInformation1;
+    }
+
+    /**
+     * Method: getTextViewLastInformation2()
+     * Purpose: set on view.
+     * @return textViewLastInformation2
+     */
+    public TextView getTextViewLastInformation2() {
+        TextView newViewLastInformation2 = this.textViewLastInformation2;
+        return newViewLastInformation2;
+    }
+
+    /**
+     * Method: getTextViewLastInformation3()
+     * Purpose: set on view.
+     * @return textViewLastInformation3
+     */
+    public TextView getTextViewLastInformation3() {
+        TextView newViewLastInformation3 = this.textViewLastInformation3;
+        return newViewLastInformation3;
+    }
+
+    /**
+     * Method: getBUTTON_SELECT_MEDICINE()
+     * Purpose: set on view medicine button.
+     * @return BUTTON_SELECT_MEDICINE
+     */
+    public Button getBUTTON_SELECT_MEDICINE(){
+        Button newButtonSelectMedicine = this.BUTTON_SELECT_MEDICINE;
+        return newButtonSelectMedicine;
+    }
+
+    /**
+     * Method: getButtonUbsInform()
+     * Purpose: set on view inform ubs button.
+     * @return buttonUbsInform
+     */
+    public Button getButtonUbsInform() {
+        Button newButtonUbsInform = this.buttonUbsInform;
+        return newButtonUbsInform;
+    }
+
+    /**
      * Method: generateTextNotification
      * Purpose: this method check the notification about medicine availabity and set the information
      *          about which ubs the medicine is available.
@@ -379,74 +536,6 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
     }
 
     /**
-     * Method: getDataPie()
-     * Purpose: this method set ubs information in data pie (update).
-     * @param ubs
-     * @return pieData
-     */
-    public PieData getDataPie(UBS ubs) {
-        PieData pieData = null;
-
-        Integer countNotificationAvailable = 0;
-        Integer countNotificationNotAvailable = 0;
-
-        ParseQuery<Notification> queryNotificationAvailable = Notification.getQuery();
-        queryNotificationAvailable.fromLocalDatastore();
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
-        queryNotificationAvailable.whereEqualTo(Notification.getTitleAvailable(), true);
-
-        if (medicineSelectedName != "") {
-            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
-            queryNotificationAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
-        } else {
-            // Nothing to do
-        }
-
-        try {
-            countNotificationAvailable = queryNotificationAvailable.count();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        ParseQuery<Notification> queryNotificationNotAvailable = Notification.getQuery();
-        queryNotificationNotAvailable.fromLocalDatastore();
-        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleUBSName(), ubs.getUbsName());
-        queryNotificationNotAvailable.whereEqualTo(Notification.getTitleAvailable(), false);
-
-        if (medicineSelectedName != "") {
-            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineDosage(), medicineSelectedDosage);
-            queryNotificationNotAvailable.whereEqualTo(Notification.getTitleMedicineName(), medicineSelectedName);
-        } else {
-            // Nothing to do
-        }
-
-        try {
-            countNotificationNotAvailable = queryNotificationNotAvailable.count();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        ArrayList<Entry> valuesAvailable = new ArrayList<Entry>();
-        ArrayList<String> valuesLegend = new ArrayList<String>();
-
-        valuesLegend.add("Sim");
-        valuesLegend.add("Não");
-
-        valuesAvailable.add(new Entry((float) countNotificationAvailable, 0));
-        valuesAvailable.add(new Entry((float) countNotificationNotAvailable, 1));
-
-        PieDataSet pieDataSet = new PieDataSet(valuesAvailable, "");
-        int color [] = {Color.parseColor("#00BEED"), Color.parseColor("#FFED4F")};
-        pieDataSet.setColors(color);
-        pieDataSet.setSliceSpace(5);
-        pieDataSet.setValueTextSize(10);
-
-        pieData = new PieData(valuesLegend, pieDataSet);
-
-        return pieData;
-    }
-
-    /**
      * Method: expand()
      * Purpose: this method set card visible.
      */
@@ -515,92 +604,4 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
         return animator;
     }
 
-    /**
-     * Method: getTextViewUbsName()
-     * Purpose: set on view ubs name.
-     * @return textViewUbsName
-     */
-    public TextView getTextViewUbsName(){
-        TextView newViewUbsName = this.textViewUbsName;
-        return newViewUbsName;
-    }
-
-    /**
-     * Method: getTextViewUbsNeighborhood()
-     * Purpose: set on view ubs neighborhood.
-     * @return textViewUbsNeighborhood
-     */
-    public TextView getTextViewUbsNeighborhood(){
-        return this.textViewUbsNeighborhood;
-    }
-
-    /**
-     * Method: getTextViewWithoutNotification()
-     * Purpose: set on view.
-     * @return textViewWithoutNotification
-     */
-    public TextView getTextViewWithoutNotification(){
-        TextView newViewNotification = this.textViewWithoutNotification;
-        return newViewNotification;
-    }
-
-    /**
-     * Method: getTextViewLastInformationTitle()
-     * Purpose: set on view.
-     * @return textViewLastInformationTitle
-     */
-    public TextView getTextViewLastInformationTitle() {
-        TextView newViewLatestInformationTitle = this.textViewLastInformationTitle;
-        return newViewLatestInformationTitle;
-    }
-
-    /**
-     * Method: getTextViewLastInformation1()
-     * Purpose: set on view.
-     * @return textViewLastInformation1
-     */
-    public TextView getTextViewLastInformation1() {
-        TextView newViewLastInformation1 = this.textViewLastInformation1;
-        return newViewLastInformation1;
-    }
-
-    /**
-     * Method: getTextViewLastInformation2()
-     * Purpose: set on view.
-     * @return textViewLastInformation2
-     */
-    public TextView getTextViewLastInformation2() {
-        TextView newViewLastInformation2 = this.textViewLastInformation2;
-        return newViewLastInformation2;
-    }
-
-    /**
-     * Method: getTextViewLastInformation3()
-     * Purpose: set on view.
-     * @return textViewLastInformation3
-     */
-    public TextView getTextViewLastInformation3() {
-        TextView newViewLastInformation3 = this.textViewLastInformation3;
-        return newViewLastInformation3;
-    }
-
-    /**
-     * Method: getBUTTON_SELECT_MEDICINE()
-     * Purpose: set on view medicine button.
-     * @return BUTTON_SELECT_MEDICINE
-     */
-    public Button getBUTTON_SELECT_MEDICINE(){
-        Button newButtonSelectMedicine = this.BUTTON_SELECT_MEDICINE;
-        return newButtonSelectMedicine;
-    }
-
-    /**
-     * Method: getButtonUbsInform()
-     * Purpose: set on view inform ubs button.
-     * @return buttonUbsInform
-     */
-    public Button getButtonUbsInform() {
-        Button newButtonUbsInform = this.buttonUbsInform;
-        return newButtonUbsInform;
-    }
 }
