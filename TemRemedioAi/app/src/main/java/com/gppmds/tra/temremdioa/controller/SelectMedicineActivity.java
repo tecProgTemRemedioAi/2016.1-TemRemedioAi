@@ -65,6 +65,16 @@ public class SelectMedicineActivity extends AppCompatActivity {
      * @return medicines
      */
     public List<Medicine> getListOfMedicine(ArrayList<String> filterAttentionLevel) {
+
+        /* Verify the integrity of data structure List */
+        assert(filterAttentionLevel != null): "The ArrayList filter can't be null";
+
+        if (filterAttentionLevel == null) {
+            throw new AssertionError("The ArrayList filter can't be null");
+        } else {
+            // Nothing to do.
+        }
+
         ParseQuery<Medicine> queryMedicine = Medicine.getQuery();
         queryMedicine.setLimit(1000);
         queryMedicine.whereContainedIn(Medicine.getMedicineAttentionLevelTitle(), filterAttentionLevel);
@@ -76,6 +86,15 @@ public class SelectMedicineActivity extends AppCompatActivity {
             medicines = queryMedicine.find();
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+
+        /* Checking return value */
+        assert(medicines != null);
+
+        if (filterAttentionLevel == null) {
+            throw new AssertionError("The List ubsList can't be null");
+        } else {
+            // Nothing to do.
         }
 
         return medicines;
