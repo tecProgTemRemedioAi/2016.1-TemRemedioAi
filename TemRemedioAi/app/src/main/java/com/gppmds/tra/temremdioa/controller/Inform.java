@@ -5,7 +5,6 @@
 package com.gppmds.tra.temremdioa.controller;
 
 import android.os.Bundle;
-import android.support.annotation.IntegerRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -32,11 +31,10 @@ public class Inform extends AppCompatActivity {
     private static Button cancelButton;
     private static DatePicker datePickerInform;
 
-    private Boolean availability;
-    private String ubsName;
-    private String medicineName;
-    private String medicineDos;
-
+    private Boolean availability;                       // This variable refers to avaiability of medicines.
+    private String ubsName;                             // This variable refers to ubs name.
+    private String medicineName;                        // This variable refers to medicina name.
+    private String medicineDosage;                      // This variable refers to medicine dosage.
 
     /**
      * Name: onCreate
@@ -50,7 +48,6 @@ public class Inform extends AppCompatActivity {
 
         final String SUCCESS_SEND_INFORMATION = (String) "Informação enviada com sucesso.";
         final String ERROR_SEND_COMPLETE_ACTION = (String) "Não foi possível completar a ação.";
-
 
         try {
             super.onCreate(savedInstanceState);
@@ -69,10 +66,12 @@ public class Inform extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (validateInform()) {
+                        // When information is sent successfully
                         attemptInform();
                         Toast.makeText(view.getContext(), SUCCESS_SEND_INFORMATION, Toast.LENGTH_LONG).show();
                         finish();
                     } else {
+                        //When it is not possible to send the information
                         Toast.makeText(view.getContext(), ERROR_SEND_COMPLETE_ACTION, Toast.LENGTH_LONG).show();
                     }
                 }
@@ -81,7 +80,7 @@ public class Inform extends AppCompatActivity {
             ubsName = getIntent().getStringExtra("UBSName");
 
             medicineName = (String) getIntent().getStringExtra("MedicineName");
-            medicineDos = (String) getIntent().getStringExtra("MedicineDos");
+            medicineDosage = (String) getIntent().getStringExtra("MedicineDosage");
 
             textViewInformedMedicine = (TextView) findViewById(R.id.informed_medicine);
             textViewInformedMedicine.setText(medicineName);
@@ -123,7 +122,7 @@ public class Inform extends AppCompatActivity {
         ParseUser getCurrentUser = (ParseUser) ParseUser.getCurrentUser();
 
         Notification notification = new Notification();
-        notification.setMedicineDosage(medicineDos);
+        notification.setMedicineDosage(medicineDosage);
         notification.setMedicineName(medicineName);
         notification.setUBSName(ubsName);
         notification.setAvailable(availability);
@@ -131,6 +130,8 @@ public class Inform extends AppCompatActivity {
         notification.setUserInform(getCurrentUser.getUsername());
         notification.pinInBackground();
         notification.saveInBackground();
+
+        calendar.finalize();
 
     }
 
@@ -150,7 +151,6 @@ public class Inform extends AppCompatActivity {
             radioButtonAvailable.setError(NOT_SELECTED_AVALIABLE);
 
             returnValidate = (boolean) false;
-
         } else {
             /* nothing to do */
         }
