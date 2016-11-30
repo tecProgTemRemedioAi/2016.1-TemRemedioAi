@@ -121,7 +121,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             public void onClick(View v) {
                 Log.i("LOG", "\n" + "onClick() listener call of HEADER_LAYOUT. Status: clicked. Line: 121");
                 if (EXPAND_LAYOUT.getVisibility() == View.GONE) {
-                    UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
+                    UBS selectItem = (UBS) CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
 
                     List<Notification> notificationList = null;
                     notificationList = getNotifications(selectItem);
@@ -172,7 +172,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
                         Log.i("LOG", "\n" + "\n" + "Graphic setted as empty. Line 171");
                     }
 
-                    ParseUser getCurrentUser = ParseUser.getCurrentUser();
+                    ParseUser getCurrentUser = (ParseUser) ParseUser.getCurrentUser();
 
                     if (getCurrentUser != null && getButtonUbsInform().getVisibility() == View.VISIBLE) {
                         getButtonUbsInform().setVisibility(View.VISIBLE);
@@ -209,7 +209,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), UbsMapsActivity.class);
-                UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
+                UBS selectItem = (UBS) CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this
                         .getAdapterPosition());
                 intent.putExtra("latitude", selectItem.getUbsLatitude());
                 intent.putExtra("longitude", selectItem.getUbsLongitude());
@@ -227,7 +227,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), Inform.class);
-                UBS selectItem = CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
+                UBS selectItem = (UBS) CardListAdapterUBS.dataUBS.get(ViewHolderUBS.this.getAdapterPosition());
                 intent.putExtra("UbsName", selectItem.getUbsName());
                 intent.putExtra("medicineName", medicineSelectedName);
                 intent.putExtra("medicineDosage", medicineSelectedDosage);
@@ -551,9 +551,9 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * Purpose: this method set card 'not' visible.
      */
     private void collapse() {
-        int finalHeight = EXPAND_LAYOUT.getHeight();
+        int finalHeight = (int) EXPAND_LAYOUT.getHeight();
 
-        ValueAnimator cardAnimationCollapse = slideAnimator(finalHeight, 0);
+        ValueAnimator cardAnimationCollapse = (ValueAnimator) slideAnimator(finalHeight, 0);
         cardAnimationCollapse.addListener(new Animator.AnimatorListener(){
             @Override
             public void onAnimationEnd(Animator animator) {
@@ -588,7 +588,7 @@ public class ViewHolderUBS extends RecyclerView.ViewHolder{
      * @return animator
      */
     private ValueAnimator slideAnimator(int start, int end) {
-        ValueAnimator animator = ValueAnimator.ofInt(start, end);
+        ValueAnimator animator = (ValueAnimator) ValueAnimator.ofInt(start, end);
 
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
