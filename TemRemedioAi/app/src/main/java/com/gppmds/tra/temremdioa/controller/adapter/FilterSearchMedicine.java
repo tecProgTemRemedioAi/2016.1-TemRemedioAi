@@ -49,8 +49,22 @@ public class FilterSearchMedicine extends Filter{
 
             List<Medicine> filteredMedicines = (List<Medicine>) createFilteredMedicineList(constraint);
 
-            results.count = (int) filteredMedicines.size();
-            results.values = (Object) filteredMedicines;
+            final int listMedicinesSize = filteredMedicines.size();
+
+            // checking list numeric interval
+            if((listMedicinesSize >= 0) && (listMedicinesSize <= filterList.size())){
+
+                results.count = (int) filteredMedicines.size();
+                results.values = (Object) filteredMedicines;
+
+            }else{
+                Exception eventException = new Exception("Invalid numbers to size of filtered List.");
+                try {
+                    throw eventException;
+                } catch (Exception exception) {
+                    exception.printStackTrace();
+                }
+            }
 
         } else {
             results.count = (int) filterList.size();
