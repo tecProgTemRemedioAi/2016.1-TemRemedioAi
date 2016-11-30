@@ -101,6 +101,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      */
     private void gettingUbsName() {
         ubsName = (String) getIntent().getStringExtra("nomeUBS");
+        assert(ubsName.length() <= Integer.MAX_VALUE);
         TextView editName = (TextView) findViewById(R.id.textViewUbsName);
         editName.setText(ubsName);
         Log.i("LOG", "\n" + "gettingUbsName(). Status: Ubs name that was selected. Line 104");
@@ -113,6 +114,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      */
     private void gettingUbsAddress () {
         String descUbsAddress = (String) getIntent().getStringExtra("descEnderecoUBS");
+        assert(descUbsAddress.length() <= Integer.MAX_VALUE);
         TextView editDscAddress = (TextView) findViewById(R.id.textViewUbsAddress);
         editDscAddress.setText(descUbsAddress);
         Log.i("LOG", "\n" + "gettingUbsAddress(). Status: Ubs address that was selected. Line 116");
@@ -125,6 +127,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      */
     private void gettingUbsNeighborhood() {
         String descUbsNeighborhood = (String) getIntent().getStringExtra("descBairroUBS");
+        assert(descUbsNeighborhood.length() <= Integer.MAX_VALUE);
         TextView editDscNeighborhood = (TextView) findViewById(R.id.textViewUbsNeighborhood);
         editDscNeighborhood.setText(descUbsNeighborhood);
         Log.i("LOG", "\n" + "gettingUbsNeighborhood(). Status: Ubs neighborhood that was selected. Line 128");
@@ -137,6 +140,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      */
     private void gettingUbsCity() {
         String descUbsCity = (String) getIntent().getStringExtra("descCidadeUBS");
+        assert(descUbsCity.length() <= Integer.MAX_VALUE);
         TextView editDscCity = (TextView) findViewById(R.id.textViewCityUbs);
         editDscCity.setText(descUbsCity);
         Log.i("LOG", "\n" + "gettingUbsCity(). Status: Ubs city that was selected. Line 140");
@@ -149,6 +153,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
      */
     private void gettingUbsPhone() {
         String descUbsPhone = (String) getIntent().getStringExtra("telefoneUBS");
+        assert(descUbsPhone.length() <= Integer.MAX_VALUE);
         TextView editDscPhone = (TextView) findViewById(R.id.textViewPhoneUbs);
         editDscPhone.setText(descUbsPhone);
         Log.i("LOG", "\n" + "gettingUbsPhone(). Status: Ubs phone that was selected. Line 152");
