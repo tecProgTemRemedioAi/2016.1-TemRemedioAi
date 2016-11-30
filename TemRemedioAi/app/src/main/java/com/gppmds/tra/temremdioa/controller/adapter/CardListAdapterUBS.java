@@ -77,57 +77,9 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
      */
     @Override
     public void onBindViewHolder(ViewHolderUBS holder, int position) {
-        UBS rowData = this.dataUBS.get(position);
-        holder.getTextViewUbsName().setText(rowData.getUbsName());
-        holder.getTextViewUbsNeighborhood().setText(rowData.getUbsNeighborhood());
+        createUbsRowData(holder, position);
+        validatingUbsRowData(holder);
 
-        if (!getShowButtonMedicines()) {
-            holder.getButtonSelectMedicine().setVisibility(View.GONE);
-            Log.i("LOG", "\n" + "Medicine button is not visible");
-        } else {
-            Log.i("LOG", "\n" + "Medicine button is visible");
-        }
-
-        boolean nameMedicineValid = true;
-
-        if(getMedicineName().length() > 0){
-            nameMedicineValid = true;
-        }
-        else{
-            nameMedicineValid = false;
-        }
-
-        if(nameMedicineValid){
-            holder.medicineSelectedName = getMedicineName();
-            Log.i("LOG", "\n" + "Medicine selected name is not empty");
-        } else {
-            holder.medicineSelectedName = "";
-            Log.i("LOG", "\n" + "Medicine selected name is empty");
-        }
-
-        boolean medicineDosageValid = true;
-
-        if(getMedicineDosage().length() > 0){
-            medicineDosageValid = true;
-        }
-        else{
-            medicineDosageValid = false;
-        }
-
-        if(medicineDosageValid){
-            holder.medicineSelectedDosage = getMedicineDosage();
-            Log.i("LOG", "\n" + "Medicine selected dosage is not empty");
-        } else {
-            holder.medicineSelectedDosage = "";
-            Log.i("LOG", "\n" + "Medicine selected dosage is empty");
-        }
-
-        if(!getShowButtonInform()){
-            holder.buttonUbsInform.setVisibility(View.GONE);
-            Log.i("LOG", "\n" + "UBS inform button is not visible");
-        } else {
-            Log.i("LOG", "\n" + "UBS inform button is visible");
-        }
     }
 
     /**
@@ -223,6 +175,68 @@ public class CardListAdapterUBS extends RecyclerView.Adapter<ViewHolderUBS> impl
     private static String medicineDosage = null;          // This variable refers to the medicine dosage.
     public String getMedicineDosage(){
         return this.medicineDosage;
+    }
+
+    private void createUbsRowData(ViewHolderUBS holder, int position) {
+        UBS rowData = this.dataUBS.get(position);
+        holder.getTextViewUbsName().setText(rowData.getUbsName());
+        holder.getTextViewUbsNeighborhood().setText(rowData.getUbsNeighborhood());
+
+    }
+
+    private void validatingUbsRowData(ViewHolderUBS holder) {
+        // this control structure refers to the  visibility and params of Button Medicine.
+        if (!getShowButtonMedicines()) {
+            holder.getBUTTON_SELECT_MEDICINE().setVisibility(View.GONE);
+            Log.i("LOG", "\n" + "Medicine button is not visible");
+        } else {
+            Log.i("LOG", "\n" + "Medicine button is visible");
+        }
+
+        boolean nameMedicineValid = true;
+        // this control structures refers verification of the medicine name to be saved.
+        if(getMedicineName().length() > 0){
+            nameMedicineValid = true;
+        }
+        else{
+            nameMedicineValid = false;
+        }
+
+        // this control if the medicine name is valid
+        if(nameMedicineValid){
+            holder.medicineSelectedName = getMedicineName();
+            Log.i("LOG", "\n" + "Medicine selected name is not empty");
+        } else {
+            holder.medicineSelectedName = "";
+            Log.i("LOG", "\n" + "Medicine selected name is empty");
+        }
+
+        boolean medicineDosageValid = true;
+        // this control if the medicine dosage is bigger than zero
+        if(getMedicineDosage().length() > 0){
+            medicineDosageValid = true;
+        }
+        else{
+            medicineDosageValid = false;
+        }
+
+        // this control if the medicine dosage is valid
+        if(medicineDosageValid){
+            holder.medicineSelectedDosage = getMedicineDosage();
+            Log.i("LOG", "\n" + "Medicine selected dosage is not empty");
+        } else {
+            holder.medicineSelectedDosage = "";
+            Log.i("LOG", "\n" + "Medicine selected dosage is empty");
+        }
+
+        // this control structure refers to the visibility of Button Inform according to the state returned by the function getShowButtonInform().
+        if(!getShowButtonInform()){
+            holder.buttonUbsInform.setVisibility(View.GONE);
+            Log.i("LOG", "\n" + "UBS inform button is not visible");
+        } else {
+            Log.i("LOG", "\n" + "UBS inform button is visible");
+        }
+
     }
 
 }
