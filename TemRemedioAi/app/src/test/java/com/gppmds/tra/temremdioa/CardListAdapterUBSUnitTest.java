@@ -85,7 +85,7 @@ public class CardListAdapterUBSUnitTest {
         Mockito.when(viewHolderUBS.getTextViewUbsNeighborhood()).thenReturn(textView);
         Mockito.when(viewHolderUBS.getTextViewUbsCity()).thenReturn(textView);
         Mockito.when(viewHolderUBS.getTextViewUbsAttentionLevel()).thenReturn(textView);
-        Mockito.when(viewHolderUBS.getButtonSelectMedicine()).thenReturn(Mockito.mock(Button.class));
+        Mockito.when(viewHolderUBS.getBUTTON_SELECT_MEDICINE()).thenReturn(Mockito.mock(Button.class));
 
         cardListAdapterUBS.onBindViewHolder(viewHolderUBS, 0);
 

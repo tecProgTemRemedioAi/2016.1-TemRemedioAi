@@ -184,13 +184,15 @@ public class LogInActivity extends AppCompatActivity implements LoaderCallbacks<
          */
         @Override
         protected void onPostExecute(final Boolean success) {
+            final String INCORRECT_PASSWORD =  (String) "Senha incorreta";
+
             mAuthTask = null;
             showProgress(false);
 
             if (success) {
                 finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError(INCORRECT_PASSWORD);
                 mPasswordView.requestFocus();
             }
         }

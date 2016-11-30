@@ -185,6 +185,7 @@ public class UbsMapsActivity extends AppCompatActivity implements OnMapReadyCall
                     "com.google.android.maps.MapsActivity");
             startActivity(intent);
         } else {
+            // When GoogleMaps is not installed on your phone, it is redirected to install
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Maps");
             builder.setIcon(R.drawable.google_maps_icon);

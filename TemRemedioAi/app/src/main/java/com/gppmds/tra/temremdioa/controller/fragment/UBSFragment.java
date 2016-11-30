@@ -40,7 +40,7 @@ public class UBSFragment extends Fragment{
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState) throws AssertionError{
 
         View rootView = inflater.inflate(R.layout.fragment_ubs, container, false);
 
